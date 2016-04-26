@@ -1,161 +1,90 @@
-form#create
+select
 {
-  width:960px;
+  float:left;
 }
-input.hidden
-{
-  display:none;
-}
-input.create_submit
-{
-  width:960px;
-  height:50px;
-  color:#fff;
-  line-height:50px;
-  background-color:#6CB6F5;
-  border:none;
-  padding:0px;
-  margin:0px;
-  border-bottom:5px solid #5BA2E0;
-  font-family: 'Roboto', sans-serif;
-  font-size:20px;
-}
-div#functions,div#functionholder
-{
-  width:960px;
-  height:244px;
-  background-color:#fff;
-}
-div#functions
-{
-  width:940px;
-  height:203px;
-  padding:20px 0px 20px 20px;
-  background-color:#fff;
-  position:fixed;
-}
-div.functionheader
+div#tools
 {
   width:920px;
-  height:40px;
-  margin-right:20px;
-  margin-bottom:20px;
-  line-height:40px;
-  border-bottom:5px solid #444;
-  background-color:#555;
-  color:#fff;
-}
-div.button
-{
-  width:175px;
+  height:50px;
   padding:20px;
+  margin-bottom:20px;
+  background-color:#fff;
+}
+div.tool-item
+{
+  width:200px;
+  height:50px;
+  margin-right:20px;
+  background-color:#2ecc71;
   color:#fff;
   cursor:pointer;
-  margin-right:20px;
-  margin-bottom:20px;
-  background-color:#6CB6F5;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
+  line-height:50px;
+  -webkit-touch-callout:none; /* iOS Safari */
+  -webkit-user-select:none;   /* Chrome/Safari/Opera */
+  -khtml-user-select:none;    /* Konqueror */
+  -moz-user-select:none;      /* Firefox */
+  -ms-user-select:none;       /* Internet Explorer/Edge */
+  user-select:none;
 }
 div#display
 {
+  width:960px;
+}
+div.display-item
+{
   width:920px;
-  float:left;
   padding:20px;
-  margin-bottom:20px;
   background-color:#fff;
+  text-align:left;
+  margin-bottom:20px;
+  padding-bottom:0px;
 }
-div#display table
+input.display-item-input,select.display-item-input,div.display-item-label
 {
-  width:100%;
-  background-color:#eee;
-  padding:20px;
-  border-spacing:0px;
-}
-td.remove_button,td.edit_button
-{
-  width:30px;
-  float:right;
-  color:#fff;
-  text-align:center;
-}
-td.remove_button
-{
-  background-color:#E84C3D;
-}
-td.edit_button
-{
-  background-color:#5BA2E0;
-}
-div#display table tr td
-{
-  border:none;
-  padding:5px 20px;
-}
-div#display table tr
-{
+  width:210px;
+  height:30px;
+  text-indent:7px;
+  line-height:30px;
   padding:0px;
   margin:0px;
   border:none;
+  outline:none;
+  margin-bottom:20px;
+  background-color:#eee;
+  text-align:left;
+  float:left;
 }
-div.displayheader
+div.display-item-delete
+{
+  width:60px;
+  height:30px;
+  line-height:30px;
+  margin-left:20px;
+  background-color:#e74c3c;
+  color:#fff;
+  cursor:pointer;
+  -webkit-touch-callout:none; /* iOS Safari */
+  -webkit-user-select:none;   /* Chrome/Safari/Opera */
+  -khtml-user-select:none;    /* Konqueror */
+  -moz-user-select:none;      /* Firefox */
+  -ms-user-select:none;       /* Internet Explorer/Edge */
+  user-select:none;
+}
+div.display-item-label
+{
+  background-color:#fff;
+}
+div.create-new-subitem,div.display-delete-group
 {
   width:920px;
   height:40px;
-  margin-bottom:20px;
+  background-color:#2ecc71;
+  color:#fff;
   line-height:40px;
-  border-bottom:5px solid #444;
-  background-color:#555;
-  color:#fff;
-}
-div.displaybarfunction
-{
-  width:840px;
-  height:30px;
-  line-height:30px;
-  padding:20px;
-  margin-top:20px;
-}
-td.value
-{
-  cusor:pointer;
-  background-color:#fff;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-}
-td.name
-{
-  cusor:pointer;
-  color:#fff;
-  background-color:#6CB6F5;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-}
-div.tablefunctionbarholder
-{
-  width:920px;
-  line-height:30px;
   margin-bottom:20px;
 }
-div.tablefunctionbar
+div.display-delete-group
 {
-  width:920px;
-  height:30px;
-  background-color:#6CB6F5;
+  background-color:#e74c3c;
   color:#fff;
-  cursor:pointer;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
 }
