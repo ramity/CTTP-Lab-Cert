@@ -1,0 +1,197 @@
+table.list
+{
+  width:960px;
+  color:#fff;
+  border-spacing:0px;
+  text-align:left;
+  margin-bottom:20px;
+}
+table.list tbody
+{
+  text-align:center;
+}
+tr.item
+{
+  background-color:#fff;
+}
+tr.item:hover
+{
+  background-color:#fafafa;
+}
+table.list th, td
+{
+  padding:10px;
+}
+table.list th
+{
+  background-color:#555;
+}
+table.list td
+{
+  color:#000;
+  border-bottom:1px solid #eaeaea;
+}
+table.list td a
+{
+  color:#6CB6F5;
+}
+table.list caption
+{
+  background-color:#6CB6F5;
+  text-align:left;
+  padding:20px;
+}
+table.list td.pass
+{
+  color:#fff;
+  background-color:#27AE61;
+}
+table.list td.fail
+{
+  background-color:#E84C3D;
+  color:#fff;
+}
+table.list td.due_safe
+{
+  background-color:#27AE61;
+  color:#fff;
+}
+table.list td.due_warning
+{
+  background-color:#F1C40F;
+  color:#fff;
+}
+table.list td.due_late
+{
+  background-color:#E84C3D;
+  color:#fff;
+}
+div.noticemessage
+{
+  width:960px;
+  height:50px;
+  line-height:50px;
+  background-color:#2FCC71;
+  color:#fff;
+}
+table.viewermodule
+{
+  width:960px;
+  border-spacing:0px;
+  border-collapse:collapse!important;
+}
+table.viewermodule tr
+{
+  border-bottom:1px solid #555;
+  background-color:#fff;
+}
+table.viewermodule tr:hover
+{
+  background-color:#ddd;
+}
+table.viewermodule td,table.viewermodule th
+{
+  padding:10px;
+  color:#000;
+  text-align: left;
+  border:1px solid #333;
+}
+table.viewermodule th
+{
+  background-color:#6CB6F5;
+  color:#fff;
+}
+div.viewermodulenav
+{
+  width:960px;
+  height:60px;
+  line-height:60px;
+  margin-bottom:20px;
+  background-color:#fff;
+  border-bottom:2px solid #ddd;
+}
+div.viewermodulenavitem,div.viewermodulenavitemdelete
+{
+  width:240px;
+  height:60px;
+  line-height:60px;
+  cursor:pointer;
+}
+div.viewermodulenavitemmain
+{
+  width:220px;
+  height:40px;
+  margin:10px;
+  line-height:40px;
+  background-color:#6cb6f5;
+  color:#fff;
+  border-radius:5px;
+}
+div.viewermodulenavitemdelete:hover
+{
+  border-bottom:2px solid #E84C3D;
+  color:#E84C3D;
+}
+div.viewermodulenavitem:hover
+{
+  border-bottom:2px solid #6cb6f5;
+  color:#6cb6f5;
+}
+table.dataTable
+{
+  margin:10px 0px;
+}
+div.dt-buttons
+{
+  margin-bottom:10px;
+}
+div.dataTables_filter
+{
+  margin:10px 0px;
+}
+div.page
+{
+  margin-right:480px;
+}
+body
+{
+  overflow-x:hidden;
+}
+div#toolbarpagenumber
+{
+  width:100px;
+  height:50px;
+  line-height:50px;
+  color:#fff;
+  font-size:20px;
+  background-color:#6CB6F5;
+  position:fixed;
+  bottom:0px;
+  right:0px;
+}
+div#toolbarnavleft,div#toolbarnavright
+{
+  width:75px;
+  height:50px;
+  cursor:pointer;
+  background-color:#6CB6F5;
+  color:#fff;
+  line-height:50px;
+  font-size:20px;
+  position:fixed;
+  bottom:0px;
+}
+div#toolbarnavleft
+{
+  top:50%;
+  left:0px;
+}
+div#toolbarnavright
+{
+  top:50%;
+  right:0px;
+}
+div#toolbarnavleft:hover,div#toolbarnavright:hover
+{
+  background-color:#5BA2E0;
+}

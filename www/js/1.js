@@ -1,0 +1,145 @@
+window.values=new Array();
+window.onload=function()
+{
+  if(document.getElementsByName('data_i')[0].value)
+  {
+    values['i']=document.getElementsByName('data_i')[0].value.replace('%','')/100;
+  }
+
+  document.getElementsByName('data_a')[0].onkeydown=function()
+  {
+    values['a']=document.getElementsByName('data_a')[0].value;
+    calculate_all(window.values);
+  };
+  document.getElementsByName('data_b')[0].onkeydown=function()
+  {
+    values['b']=document.getElementsByName('data_b')[0].value;
+    calculate('data_b');
+  };
+  document.getElementsByName('data_c')[0].onkeydown=function()
+  {
+    values['c']=document.getElementsByName('data_c')[0].value;
+    calculate('data_c');
+  };
+  document.getElementsByName('data_d')[0].onkeydown=function()
+  {
+    values['d']=document.getElementsByName('data_d')[0].value;
+    calculate('data_d');
+  };
+  document.getElementsByName('data_e')[0].onkeydown=function()
+  {
+    values['e']=document.getElementsByName('data_e')[0].value;
+    calculate('data_e');
+  };
+  document.getElementsByName('data_f')[0].onkeydown=function()
+  {
+    values['f']=document.getElementsByName('data_f')[0].value;
+    calculate('data_f');
+  };
+  document.getElementsByName('data_g')[0].onkeydown=function()
+  {
+    values['g']=document.getElementsByName('data_g')[0].value;
+    calculate('data_g');
+  };
+  document.getElementsByName('data_h')[0].onkeydown=function()
+  {
+    values['h']=document.getElementsByName('data_h')[0].value;
+    calculate('data_h');
+  };
+  document.getElementsByName('data_i')[0].onkeydown=function()
+  {
+    values['i']=document.getElementsByName('data_i')[0].value.replace('%','')/100;
+    calculate_all(window.values);
+  };
+
+  document.getElementsByName('data_a')[0].onkeyup=function()
+  {
+    values['a']=document.getElementsByName('data_a')[0].value;
+    calculate_all(window.values);
+  };
+  document.getElementsByName('data_b')[0].onkeyup=function()
+  {
+    values['b']=document.getElementsByName('data_b')[0].value;
+    calculate('data_b');
+  };
+  document.getElementsByName('data_c')[0].onkeyup=function()
+  {
+    values['c']=document.getElementsByName('data_c')[0].value;
+    calculate('data_c');
+  };
+  document.getElementsByName('data_d')[0].onkeyup=function()
+  {
+    values['d']=document.getElementsByName('data_d')[0].value;
+    calculate('data_d');
+  };
+  document.getElementsByName('data_e')[0].onkeyup=function()
+  {
+    values['e']=document.getElementsByName('data_e')[0].value;
+    calculate('data_e');
+  };
+  document.getElementsByName('data_f')[0].onkeyup=function()
+  {
+    values['f']=document.getElementsByName('data_f')[0].value;
+    calculate('data_f');
+  };
+  document.getElementsByName('data_g')[0].onkeyup=function()
+  {
+    values['g']=document.getElementsByName('data_g')[0].value;
+    calculate('data_g');
+  };
+  document.getElementsByName('data_h')[0].onkeyup=function()
+  {
+    values['h']=document.getElementsByName('data_h')[0].value;
+    calculate('data_h');
+  };
+  document.getElementsByName('data_i')[0].onkeyup=function()
+  {
+    values['i']=document.getElementsByName('data_i')[0].value.replace('%','')/100;
+    calculate_all(window.values);
+  };
+};
+function round(input,place)
+{
+  return Number(Math.round(input+'e'+place)+'e-'+place);
+}
+function calculate_all(array)
+{
+  for(z=1;z<Object.keys(array).length-1;z++)
+  {
+    letter=String.fromCharCode((97+z));
+    if(array[z]!='')
+      calculate('data_'+letter);
+  }
+}
+function calculate(input)
+{
+  if(values['a']!='')
+  {
+    if(values['i']!='')
+    {
+      data=document.getElementsByName(input)[0].value;
+      if((data/values['a'])>values['i'])
+      {
+        box=document.getElementsByName(input)[0].nextSibling;
+        box.style.background='#e74c3c';
+        box.style.borderColor='#c0392b';
+        box.innerHTML="Failed - %P = "+round((data/values['a'])*100,2);
+      }
+      else
+      {
+        box=document.getElementsByName(input)[0].nextSibling;
+        box.style.background='#2ecc71';
+        box.style.borderColor='#27ae60';
+        box.innerHTML="Passed";
+      }
+    }
+    else
+    {
+      console.log('No tolerance value defined for calculation');
+    }
+  }
+  else
+  {
+    console.log('No mass value defined for calculation');
+  }
+}

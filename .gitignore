@@ -1,0 +1,11 @@
+alias/
+apps/
+bin/
+gitroot/
+lang/
+logs/
+scripts/
+tmp/
+tools/
+vhosts/
+bend/filestorage/

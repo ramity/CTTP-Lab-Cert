@@ -1,0 +1,42 @@
+.Form_MainHeader {
+	FONT-WEIGHT: bold
+}
+.Form_SubHeader {
+	FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.Form_SubHeaderCell {
+	TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 1px; BACKGROUND-COLOR: #c0c0c0; BORDER-TOP-WIDTH: 1px; BORDER-BOTTOM-WIDTH: 1px; HEIGHT: 20px; BORDER-LEFT-WIDTH: 1px; FONT-WEIGHT: bold
+}
+.Form_SubHeaderLabel {
+	FONT-WEIGHT: bold; TEXT-DECORATION: underline
+}
+.Form_Label {
+	FONT-WEIGHT: bold
+}
+.Form_InputCell {
+	WIDTH: 70%
+}
+.FormInput_HalfColumn {
+	WIDTH: 40%
+}
+.FormInput_FourthColumn {
+	WIDTH: 26%
+}
+.FormInput_ThirdColumn {
+	WIDTH: 26%
+}
+.Form_Input {
+	WIDTH: 97%
+}
+.Form_Table {
+	WIDTH: 750px; FONT-SIZE: 12px
+}
+.Form_HeaderTable {
+	WIDTH: 98%
+}
+.RepeatControl_NameCell {
+	WIDTH: 88%
+}
+.RepeatControl_YearCell {
+	WIDTH: 35%
+}

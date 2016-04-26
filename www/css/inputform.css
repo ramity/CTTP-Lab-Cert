@@ -1,0 +1,147 @@
+div#backbutton
+{
+  width:960px;
+  height:65px;
+  background-color:#6cb6f5;
+  color:#fff;
+  line-height:65px;
+  margin-bottom:20px;
+  cursor:pointer;
+  border-bottom:5px solid #5BA2E0;
+}
+div#backbutton:hover
+{
+  border-top:5px solid #5BA2E0;
+  border-bottom:none;
+}
+form#input
+{
+  width:960px;
+  height:auto;
+  margin:0px;
+}
+div.containerheader
+{
+  height:70px;
+  text-align:center;
+  line-height:70px;
+  font-size:25px;
+  color:#000;
+  margin-bottom:20px;
+  background-color:#fff;
+}
+div.containerobj
+{
+  background-color:#fff;
+}
+div.inputrow,div.inputrowerror
+{
+  width:940px;
+  line-height:40px;
+  padding:10px;
+  border-bottom:1px solid #eee;
+}
+div.inputrowerror div.inputlabel
+{
+  border-color:#FF443F;
+  background-color:#FF6A66;
+  color:#fff;
+}
+div.errormessage
+{
+  width:940px;
+  height:25px;
+  line-height:25px;
+  margin-bottom:10px;
+  background-color:#F2DEDF;
+  color:#B94A48;
+}
+div.inputlabel,div.selectionlabel
+{
+  width:250px;
+  height:40px;
+  margin-right:10px;
+  text-align:left;
+  border-left:5px solid #6CB6F5;
+  padding-left:10px;
+}
+div.selectionlabel
+{
+  width:925px;
+  cursor:pointer;
+}
+div.selectionlabel:hover
+{
+  background-color:#eee;
+}
+input.inputtext,select.inputselect
+{
+  width:320px;
+  height:40px;
+  float:left;
+  border:none;
+  outline:none;
+  text-indent:10px;
+  padding:0px;
+  background-color:#eee;
+}
+input.inputsubmit
+{
+  width:960px;
+  height:60px;
+  color:#fff;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  background-color:#6CB6F5;
+  border-bottom:5px solid #5BA2E0;
+  text-align:center;
+  font-size:25px;
+  margin-bottom:20px;
+}
+div.inputdesc
+{
+  width:320px;
+  height:40px;
+  border-left:5px solid #5BA2E0;
+  text-align:left;
+  font-size:11px;
+  padding-left:10px;
+  background-color:#6CB6F5;
+  color:#fff;
+  margin-left:10px;
+}
+div.inputrowbigheader
+{
+  width:960px;
+  height:60px;
+  line-height:60px;
+  font-size:25px;
+  color:#fff;
+  background-color:#555;
+  border-bottom:5px solid #444;
+}
+div.inputrowgroup
+{
+  width:945px;
+  margin:10px 0px 0px 10px;
+  border-left:5px solid #6CB6F5;
+}
+div.inputrowgroup div.inputrow
+{
+  width:925px;
+}
+div.inputrowgroup div.selectionlabel
+{
+  width:910px;
+}
+div.inputrowgroupheader
+{
+  width:925px;
+  height:40px;
+  line-height:40px;
+  text-align:left;
+  color:#fff;
+  padding-left:10px;
+  background-color:#6CB6F5;
+}

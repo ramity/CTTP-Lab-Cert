@@ -1,0 +1,226 @@
+body {
+    margin: 0px;
+    background-color: #eee;
+    font-family: 'Roboto', sans-serif;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+div {
+    float: left;
+    text-align: center;
+}
+
+div#sidebar {
+    width: 300px;
+    height: 100%;
+    background-color: #555;
+    color:#fff;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+div#sidebarpadding {
+    width: 300px;
+    height: 100px;
+}
+
+div.sidebarheader {
+    width: 290px;
+    height: 40px;
+    background-color:#444;
+    line-height: 40px;
+    padding-left: 10px;
+    text-align: left;
+}
+div.sidebaritem {
+    width: 280px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+div#banner {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #6CB6F5;
+    z-index:1;
+}
+
+div#bannerinr {
+    width: 960px;
+    height: 100px;
+    float: none;
+    margin: 0px auto;
+}
+
+div#bannerlogo {
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    color: #fff;
+    font-size: 30px;
+}
+
+div#bannerlogin {
+    width: 175px;
+    height: 50px;
+    float: right;
+    background-color: #5BA2E0;
+    color: #fff;
+    line-height: 50px;
+}
+
+div#container {
+    width: 100%;
+    margin-top: 120px;
+}
+
+div#containerinr {
+    width: 960px;
+    float: none;
+    margin: 0px auto;
+}
+
+div.containerobj {
+    width:960px;
+    margin-bottom:20px;
+}
+div.containerheader {
+    width: 940px;
+    height: 50px;
+    padding: 0px 10px;
+    line-height: 50px;
+    text-align: left;
+}
+div.containeritem {
+    width:900px;
+    height:40px;
+    margin: 0px 20px;
+    padding: 0px 10px;
+    line-height: 40px;
+    text-align: left;
+    cursor: pointer;
+    background-color:#eee;
+    box-shadow: 0px -1px 0px #fff;
+}
+div.containerlist {
+    width:960px;
+    line-height:40px;
+    background-color:#fff;
+}
+div.containerlistheader {
+    background-color:#fafafa;
+    font-size:16px;
+}
+div.containerlistrow {
+    width: 960px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0px -1px 0px #eee;
+}
+div.containerlistrow:hover {
+    color:#6CB6F5;
+}
+div.containerlistitemname {
+    width: 450px;
+    text-indent: 10px;
+    text-align: left;
+}
+div.containerlistitemdesc {
+    width: 310px;
+}
+div.containerlistitemdate {
+    width: 200px;
+}
+div.containerlistitemthird {
+    width:320px;
+    height:40px;
+}
+form#viewsearch
+{
+    width:960px;
+    height:50px;
+    margin:0px;
+}
+input.viewsearch
+{
+    width:610px;
+    height:50px;
+    outline:none;
+    border:none;
+    text-indent:10px;
+    float:left;
+}
+input.viewsubmit
+{
+    width:350px;
+    height:50px;
+    outline:none;
+    border:none;
+    float:left;
+    cursor:pointer;
+    background-color:#6CBCF5;
+    color:#fff;
+}
+@media all and (max-width: 1560px) {
+    div#sidebar {
+        display:none;
+    }
+}
+form#uploadmodule {
+    width:920px;
+    padding:20px;
+    margin:0px;
+    background-color:#fff;
+    text-align:left;
+}
+div#uploadheader
+{
+    width:920px;
+    height:50px;
+    line-height: 50px;
+    font-size:30px;
+    margin-bottom:20px;
+}
+form#login
+{
+    width:660px;
+    height:250px;
+    margin:0px 150px;
+    padding-top:20px;
+    background-color:#fff;
+}
+input.logininput
+{
+    width:620px;
+    height:50px;
+    border:none;
+    text-indent:20px;
+    background-color:#fafafa;
+    outline:none;
+    margin:0px 20px 20px 20px;
+}
+div.loginrow
+{
+    width:620px;
+    margin:0px 20px 20px 20px;
+    text-align:left;
+}
+input.loginsubmit
+{
+    width:620px;
+    height:50px;
+    border:none;
+    outline:none;
+    background-color:#6CBCF5;
+    color:#fff;
+    margin:0px 20px 20px 20px;
+}
