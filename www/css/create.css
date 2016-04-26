@@ -39,7 +39,22 @@ div.display-item
   margin-bottom:20px;
   padding-bottom:0px;
 }
-input.display-item-input,select.display-item-input,div.display-item-label
+div.display-item-label
+{
+  width:110px;
+  height:30px;
+  text-indent:7px;
+  line-height:30px;
+  padding:0px;
+  margin:0px;
+  border:none;
+  outline:none;
+  margin-bottom:20px;
+  background-color:#eee;
+  text-align:left;
+  float:left;
+}
+input.display-item-input,select.display-item-input
 {
   width:210px;
   height:30px;
@@ -53,6 +68,10 @@ input.display-item-input,select.display-item-input,div.display-item-label
   background-color:#eee;
   text-align:left;
   float:left;
+}
+input.display-item-input
+{
+  width:410px;
 }
 div.display-item-delete
 {
