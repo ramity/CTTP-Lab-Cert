@@ -15,9 +15,11 @@ images_off.bmp
 images_on.bmp
 license.txt
 unins000.dat
-unins000
-unistall_services.bat
+unins000.exe
+uninstall_services.bat
 wampmanager.conf
-wampmanager
+wampmanager.exe
 wampmanager.conf
 wampmanager.tpl
+wampmanager.exe
+wampmanager.ini
