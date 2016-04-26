@@ -1,13 +1,13 @@
 form=[];
 
-$(document).ready(function(){
-
-});
-
 $(document).on('click','div#create-new-item',function(){
   form.push([]);
   form[form.length-1].push([]);
   render();
+});
+
+$(document).on('click','div#output-php',function(){
+  output();
 });
 
 $(document).on('click','div.create-new-subitem',function(){
@@ -50,6 +50,11 @@ $(document).on('click','div.display-delete-group',function(){
   x=bits[1];
   form.splice(x,1);
   render();
+});
+
+$(document).on('click','div#hide-code',function(){
+  $('div#output').empty();
+  $('div#output').toggle();
 });
 
 function render()
@@ -122,4 +127,30 @@ function explode(delimiter,string,limit=null)
   {
       console.log('Supplied delimiter does not exist in string');
   }
+}
+
+function output()
+{
+  $('div#output').empty();
+  $('div#output').show();
+  $('div#output').append('<div id="hide-code">Hide PHP code</div>');
+  $('div#output').append('<div class="output-line">[</div>');
+  for(z=0;z<form.length;z++)
+  {
+    $('div#output').append('<div class="output-line-st">[</div>');
+    for(x=0;x<form[z].length;x++)
+    {
+      $('div#output').append('<div class="output-line-dt" id="line-'+z+'-'+x+'"></div>');
+      if(x!=form[z].length-1)
+        $('div#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"',");
+      else
+        $('div#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"'");
+    }
+    if(z!=form.length-1)
+      $('div#output').append('<div class="output-line-st">],</div>');
+    else {
+      $('div#output').append('<div class="output-line-st">]</div>');
+    }
+  }
+  $('div#output').append('<div class="output-line">]</div>');
 }

@@ -88,3 +88,55 @@ div.display-delete-group
   background-color:#e74c3c;
   color:#fff;
 }
+div#output
+{
+  width:920px;
+  display:none;
+  padding:20px;
+  background-color:#fff;
+  margin-bottom:20px;
+}
+div.output-line
+{
+  width:920px;
+  height:20px;
+  line-height:20px;
+  text-align:left;
+}
+div.output-line-st
+{
+  width:900px;
+  height:20px;
+  line-height:20px;
+  padding-left:20px;
+  text-align:left;
+}
+div.output-line-dt
+{
+  width:880px;
+  height:20px;
+  line-height:20px;
+  padding-left:40px;
+  text-align:left;
+}
+div.output-line:hover,div.output-line-st:hover,div.output-line-dt:hover
+{
+  background-color:#ecf0f1;
+}
+div#hide-code
+{
+  width:920px;
+  height:40px;
+  line-height:40px;
+  margin-bottom:20px;
+  background-color:#3498db;
+  color:#fff;
+  cursor:pointer;
+  -webkit-touch-callout:none; /* iOS Safari */
+  -webkit-user-select:none;   /* Chrome/Safari/Opera */
+  -khtml-user-select:none;    /* Konqueror */
+  -moz-user-select:none;      /* Firefox */
+  -ms-user-select:none;       /* Internet Explorer/Edge */
+  user-select:none;
+  border-bottom:5px solid #2980b9;
+}
