@@ -3,7 +3,7 @@ $form['1']=[
   [
     'tag'=>'div',
     'class'=>'inputrowbigheader',
-    'value'=>'Sieve Shaker Designation Information',
+    'value'=>'Designation Information',
     'required'=>0
   ],
   [
@@ -356,7 +356,7 @@ $form['2']=[
   [
     'tag'=>'div',
     'class'=>'inputrowbigheader',
-    'value'=>'Mechanical Splitter Designation Information',
+    'value'=>'Designation Information',
     'required'=>0
   ],
   [

@@ -133,13 +133,13 @@ des_inf=
   ]
 ];
 
-$(document).on('click','div#create-new-item',function(){
+$(document).on('click','div#create-new-item, div#fixed-create-new-item',function(){
   form.push([]);
   form[form.length-1].push([]);
   render();
 });
 
-$(document).on('click','div#output-php',function(){
+$(document).on('click','div#output-php, div#fixed-output-php',function(){
   output();
 });
 
@@ -190,8 +190,16 @@ $(document).on('click','div#hide-code',function(){
   $('div#output').toggle();
 });
 
-$(document).on('click','div#add-designation',function(){
-  form=des_inf;
+$(document).on('click','div#add-designation,div#fixed-add-designation',function(){
+  //10:20AM - 4/28/2016 : concat does not work in this case as the des_inf variable may be too large.
+  //10:24AM - 4/28/2016 : further investigation has not yielded any additional results.
+  //10:25AM - 4/28/2016 : forloop utilizing form.push(des_inf[z]) simularly breaks the page.
+  //10:58AM - 4/28/2016 : giving up and adding an issue.
+  //11:09AM - 4/28/2016 : fixed - stress tests indicate around form.length=100 may be around max value.
+  for(z=0;z<des_inf.length;z++)
+  {
+    form.push(des_inf[z]);
+  }
   render();
 });
 

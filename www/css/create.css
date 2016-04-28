@@ -5,7 +5,7 @@ select
 div#tools
 {
   width:920px;
-  height:50px;
+  height:55px;
   padding:20px;
   margin-bottom:20px;
   background-color:#fff;
@@ -19,6 +19,7 @@ div.tool-item
   color:#fff;
   cursor:pointer;
   line-height:50px;
+  border-bottom:5px solid #27ae60;
   -webkit-touch-callout:none; /* iOS Safari */
   -webkit-user-select:none;   /* Chrome/Safari/Opera */
   -khtml-user-select:none;    /* Konqueror */
@@ -158,4 +159,33 @@ div#hide-code
   -ms-user-select:none;       /* Internet Explorer/Edge */
   user-select:none;
   border-bottom:5px solid #2980b9;
+}
+div#fixedtoolbar
+{
+  width:195px;
+  height:55px;
+  position:fixed;
+  right:10px;
+  bottom:10px;
+}
+div.fixedtoolbaritem
+{
+  width:35px;
+  height:35px;
+  line-height:35px;
+  float:right;
+  border-top:10px solid #8e44ad;
+  border-right:10px solid #8e44ad;
+  border-bottom:10px solid #BD85D3;
+  border-left:10px solid #BD85D3;
+  background-color:#9b59b6;
+  margin-left:10px;
+  color:#fff;
+  cursor:pointer;
+  -webkit-touch-callout:none; /* iOS Safari */
+  -webkit-user-select:none;   /* Chrome/Safari/Opera */
+  -khtml-user-select:none;    /* Konqueror */
+  -moz-user-select:none;      /* Firefox */
+  -ms-user-select:none;       /* Internet Explorer/Edge */
+  user-select:none;
 }
