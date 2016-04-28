@@ -166,6 +166,13 @@ $(document).on('click','div.create-new-subitem',function(){
   $(document).scrollTop($('div#elm-'+bits[1]).offset().top-120);
 });
 
+$(document).on('click','div.duplicate-item',function(){
+  bits=explode('duplicate-item-',$(this).attr('id'));
+  form.push(form[bits[1]]);//TODO
+  render();
+  $(document).scrollTop($('div#elm-'+bits[1]).offset().top-120);
+});
+
 $(document).on('click','div.create-new-subitem-group',function(){
   bits=explode('create-subitem-group-',$(this).attr('id'));
   form[bits[1]]=[];
@@ -265,6 +272,7 @@ function render()
       }
       $('div#elm-'+z).append('<div class="create-new-subitem" id="create-subitem-'+z+'">Create new subitem</div>');
       $('div#elm-'+z).append('<div class="create-new-subitem-group" id="create-subitem-group-'+z+'">Create all subitems</div>');
+      $('div#elm-'+z).append('<div class="duplicate-item" id="duplicate-item-'+z+'">Duplicate this to a new item</div>');
       $('div#elm-'+z).append('<div class="display-delete-group" id="delete-group-'+z+'">Delete item</div>');
     $('div#display').append('</div>');
   }

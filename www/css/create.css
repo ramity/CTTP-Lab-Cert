@@ -99,7 +99,7 @@ div.display-item-label
 {
   background-color:#fff;
 }
-div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group
+div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group,div.duplicate-item
 {
   width:920px;
   height:40px;
