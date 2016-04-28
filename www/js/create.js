@@ -169,12 +169,6 @@ $(document).on('change','input.display-item-input',function(){
   render();
 });
 
-$(document).on('change','input.display-item-input',function(){
-  $(this).stop().animate({backgroundColor:'#4E1402'}, 300);
-  }, function () {
-  $(this).stop().animate({backgroundColor:'#943D20'}, 100);
-});
-
 $(document).on('click','div.display-item-delete',function(){
   bits=explode('delete-',$(this).attr('id'));
   moarbits=explode('-',bits[1]);
@@ -239,7 +233,7 @@ function render()
         $('div#elm-'+z).append('<div class="display-item-delete" id="delete-'+z+'-'+x+'">delete</div>');
       }
       $('div#elm-'+z).append('<div class="create-new-subitem" id="create-subitem-'+z+'">Create new subitem</div>');
-      $('div#elm-'+z).append('<div class="display-delete-group" id="delete-group-'+z+'">Create new subitem</div>');
+      $('div#elm-'+z).append('<div class="display-delete-group" id="delete-group-'+z+'">Delete item</div>');
     $('div#display').append('</div>');
   }
 }
