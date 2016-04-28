@@ -2,16 +2,16 @@ div#backbutton
 {
   width:960px;
   height:65px;
-  background-color:#6cb6f5;
+  background-color:#3498db;
   color:#fff;
   line-height:65px;
   margin-bottom:20px;
   cursor:pointer;
-  border-bottom:5px solid #5BA2E0;
+  border-bottom:5px solid #2980b9;
 }
 div#backbutton:hover
 {
-  border-top:5px solid #5BA2E0;
+  border-top:5px solid #2980b9;
   border-bottom:none;
 }
 form#input
@@ -32,6 +32,7 @@ div.containerheader
 }
 div.containerobj
 {
+  padding-top:10px;
   background-color:#fff;
 }
 div.inputrow,div.inputrowerror
@@ -62,7 +63,7 @@ div.inputlabel,div.selectionlabel
   height:40px;
   margin-right:10px;
   text-align:left;
-  border-left:5px solid #6CB6F5;
+  border-left:5px solid #3498db;
   padding-left:10px;
 }
 div.selectionlabel
@@ -93,8 +94,8 @@ input.inputsubmit
   border:none;
   outline:none;
   cursor:pointer;
-  background-color:#6CB6F5;
-  border-bottom:5px solid #5BA2E0;
+  background-color:#3498db;
+  border-bottom:5px solid #2980b9;
   text-align:center;
   font-size:25px;
   margin-bottom:20px;
@@ -103,11 +104,11 @@ div.inputdesc
 {
   width:320px;
   height:40px;
-  border-left:5px solid #5BA2E0;
+  border-left:5px solid #2980b9;
   text-align:left;
   font-size:11px;
   padding-left:10px;
-  background-color:#6CB6F5;
+  background-color:#3498db;
   color:#fff;
   margin-left:10px;
 }
@@ -124,8 +125,8 @@ div.inputrowbigheader
 div.inputrowgroup
 {
   width:945px;
-  margin:10px 0px 0px 10px;
-  border-left:5px solid #6CB6F5;
+  margin:0px 0px 10px 10px;
+  border-left:5px solid #3498db;
 }
 div.inputrowgroup div.inputrow
 {
@@ -143,5 +144,5 @@ div.inputrowgroupheader
   text-align:left;
   color:#fff;
   padding-left:10px;
-  background-color:#6CB6F5;
+  background-color:#3498db;
 }

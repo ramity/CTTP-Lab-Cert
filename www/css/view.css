@@ -37,23 +37,23 @@ table.list td a
 }
 table.list caption
 {
-  background-color:#6CB6F5;
+  background-color:#3498db;
   text-align:left;
   padding:20px;
 }
 table.list td.pass
 {
   color:#fff;
-  background-color:#27AE61;
+  background-color:#2ecc71;
 }
 table.list td.fail
 {
-  background-color:#E84C3D;
+  background-color:#e74c3c;
   color:#fff;
 }
 table.list td.due_safe
 {
-  background-color:#27AE61;
+  background-color:#2ecc71;
   color:#fff;
 }
 table.list td.due_warning
@@ -98,7 +98,7 @@ table.viewermodule td,table.viewermodule th
 }
 table.viewermodule th
 {
-  background-color:#6CB6F5;
+  background-color:#3498db;
   color:#fff;
 }
 div.viewermodulenav
@@ -123,19 +123,19 @@ div.viewermodulenavitemmain
   height:40px;
   margin:10px;
   line-height:40px;
-  background-color:#6cb6f5;
+  background-color:#3498db;
   color:#fff;
   border-radius:5px;
 }
 div.viewermodulenavitemdelete:hover
 {
-  border-bottom:2px solid #E84C3D;
-  color:#E84C3D;
+  border-bottom:2px solid #e74c3c;
+  color:#e74c3c;
 }
 div.viewermodulenavitem:hover
 {
-  border-bottom:2px solid #6cb6f5;
-  color:#6cb6f5;
+  border-bottom:2px solid #3498db;
+  color:#3498db;
 }
 table.dataTable
 {

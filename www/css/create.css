@@ -5,20 +5,21 @@ select
 div#tools
 {
   width:920px;
-  height:55px;
+  height:45px;
   padding:20px;
   margin-bottom:20px;
   background-color:#fff;
+  padding-right:0px;
 }
 div.tool-item
 {
-  width:200px;
-  height:50px;
+  width:210px;
+  height:40px;
   margin-right:20px;
   background-color:#2ecc71;
   color:#fff;
   cursor:pointer;
-  line-height:50px;
+  line-height:40px;
   border-bottom:5px solid #27ae60;
   -webkit-touch-callout:none; /* iOS Safari */
   -webkit-user-select:none;   /* Chrome/Safari/Opera */
@@ -26,6 +27,10 @@ div.tool-item
   -moz-user-select:none;      /* Firefox */
   -ms-user-select:none;       /* Internet Explorer/Edge */
   user-select:none;
+}
+div#clear
+{
+  background-color:#e74c3c;
 }
 div#display
 {
@@ -148,7 +153,7 @@ div#hide-code
 }
 div#fixedtoolbar
 {
-  width:195px;
+  width:260px;
   height:55px;
   position:fixed;
   right:10px;

@@ -151,16 +151,19 @@ $(document).on('click','div#create-new-item, div#fixed-create-new-item',function
   form.push([]);
   form[form.length-1].push([]);
   render();
+  $(document).scrollTop($('div#elm-'+(form.length-1)).offset().top-120);
 });
 
-$(document).on('click','div#output-php, div#fixed-output-php',function(){
+$(document).on('click','div#output-php,div#fixed-output-php',function(){
   output();
+  $(document).scrollTop($('div#containerinr').offset().top-120);
 });
 
 $(document).on('click','div.create-new-subitem',function(){
   bits=explode('create-subitem-',$(this).attr('id'));
   form[bits[1]].push([]);
   render();
+  $(document).scrollTop($('div#elm-'+bits[1]).offset().top-120);
 });
 
 $(document).on('click','div.create-new-subitem-group',function(){
@@ -215,17 +218,18 @@ $(document).on('click','div#hide-code',function(){
   $('div#hide-code').remove();
 });
 
+$(document).on('click','div#clear-form,div#fixed-clear-form',function(){
+  form=[];
+  render();
+});
+
 $(document).on('click','div#add-designation,div#fixed-add-designation',function(){
-  //10:20AM - 4/28/2016 : concat does not work in this case as the des_inf variable may be too large.
-  //10:24AM - 4/28/2016 : further investigation has not yielded any additional results.
-  //10:25AM - 4/28/2016 : forloop utilizing form.push(des_inf[z]) simularly breaks the page.
-  //10:58AM - 4/28/2016 : giving up and adding an issue.
-  //11:09AM - 4/28/2016 : fixed - stress tests indicate around form.length=100 may be around max value.
   for(z=0;z<des_inf.length;z++)
   {
     form.push(des_inf[z]);
   }
   render();
+  $(document).scrollTop($('div#elm-'+(form.length-1)).offset().top-120);
 });
 
 function render()
@@ -301,7 +305,10 @@ function output()
 {
   $('table#output').empty();
   $('table#output').show();
-  $('div#containerinr').prepend('<div id="hide-code">Hide PHP code</div>');
+  if(!$('div#hide-code').length)
+  {
+    $('div#containerinr').prepend('<div id="hide-code">Hide PHP code</div>');
+  }
   $('table#output').append('<tr><td class="output-line">[</td></tr>');
   for(z=0;z<form.length;z++)
   {
