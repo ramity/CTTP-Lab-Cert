@@ -29,10 +29,13 @@ require_once('C:/wamp/bend/modules/input_functions.php');
           <div class="tool-item" id="create-new-item">Create item</div>
           <div class="tool-item" id="add-designation">Add designation</div>
           <div class="tool-item" id="output-php">Output to php array</div>
+          <div id="fixedtoolbar">
+            <div class="fixedtoolbaritem" id="fixed-output-php">^</div>
+            <div class="fixedtoolbaritem" id="fixed-add-designation">D</div>
+            <div class="fixedtoolbaritem" id="fixed-create-new-item">+</div>
+          </div>
         </div>
-        <div id="display">
-
-        </div>
+        <div id="display"></div>
       </div>
     </div>
   </body>
