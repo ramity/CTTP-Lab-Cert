@@ -22,9 +22,9 @@ require_once('C:/wamp/bend/modules/input_functions.php');
     <?php require_once('C:/wamp/bend/blocks/banner.php');?>
     <div id="container">
       <div id="containerinr">
-        <div id="output">
+        <table id="output">
 
-        </div>
+        </table>
         <div id="tools">
           <div class="tool-item" id="create-new-item">Create item</div>
           <div class="tool-item" id="add-designation">Add designation</div>

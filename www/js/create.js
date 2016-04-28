@@ -133,6 +133,20 @@ des_inf=
   ]
 ];
 
+options=
+[
+  'label',
+  'class',
+  'description',
+  'tag',
+  'value',
+  'input_placeholder',
+  'name',
+  'sql',
+  'required',
+  'xl'
+];
+
 $(document).on('click','div#create-new-item, div#fixed-create-new-item',function(){
   form.push([]);
   form[form.length-1].push([]);
@@ -146,6 +160,16 @@ $(document).on('click','div#output-php, div#fixed-output-php',function(){
 $(document).on('click','div.create-new-subitem',function(){
   bits=explode('create-subitem-',$(this).attr('id'));
   form[bits[1]].push([]);
+  render();
+});
+
+$(document).on('click','div.create-new-subitem-group',function(){
+  bits=explode('create-subitem-group-',$(this).attr('id'));
+  form[bits[1]]=[];
+  for(c=0;c<options.length;c++)
+  {
+    form[bits[1]].push([options[c]]);
+  }
   render();
 });
 
@@ -186,8 +210,9 @@ $(document).on('click','div.display-delete-group',function(){
 });
 
 $(document).on('click','div#hide-code',function(){
-  $('div#output').empty();
-  $('div#output').toggle();
+  $('table#output').empty();
+  $('table#output').toggle();
+  $('div#hide-code').remove();
 });
 
 $(document).on('click','div#add-designation,div#fixed-add-designation',function(){
@@ -214,16 +239,10 @@ function render()
         $('div#elm-'+z).append('<div class="display-item-label">Name:</div>');
         $('div#elm-'+z).append('<select class="display-item-input" id="select-name-'+z+'-'+x+'-0">');
           $('select#select-name-'+z+'-'+x+'-0').append('<option disabled selected value>select an option</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="label">label</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="class">class</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="description">description</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="tag">tag</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="value">value</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="input_placeholder">input_placeholder</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="name">name</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="sql">sql</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="required">required</option>');
-          $('select#select-name-'+z+'-'+x+'-0').append('<option value="xl">xl</option>');
+          for(c=0;c<options.length;c++)
+          {
+            $('select#select-name-'+z+'-'+x+'-0').append('<option value="'+options[c]+'">'+options[c]+'</option>');
+          }
           if(form[z][x][0] != null)
           {
             $('select#select-name-'+z+'-'+x+'-0').val(form[z][x][0]);
@@ -241,6 +260,7 @@ function render()
         $('div#elm-'+z).append('<div class="display-item-delete" id="delete-'+z+'-'+x+'">delete</div>');
       }
       $('div#elm-'+z).append('<div class="create-new-subitem" id="create-subitem-'+z+'">Create new subitem</div>');
+      $('div#elm-'+z).append('<div class="create-new-subitem-group" id="create-subitem-group-'+z+'">Create all subitems</div>');
       $('div#elm-'+z).append('<div class="display-delete-group" id="delete-group-'+z+'">Delete item</div>');
     $('div#display').append('</div>');
   }
@@ -279,26 +299,26 @@ function explode(delimiter,string,limit=null)
 
 function output()
 {
-  $('div#output').empty();
-  $('div#output').show();
-  $('div#output').append('<div id="hide-code">Hide PHP code</div>');
-  $('div#output').append('<div class="output-line">[</div>');
+  $('table#output').empty();
+  $('table#output').show();
+  $('div#containerinr').prepend('<div id="hide-code">Hide PHP code</div>');
+  $('table#output').append('<tr><td class="output-line">[</td></tr>');
   for(z=0;z<form.length;z++)
   {
-    $('div#output').append('<div class="output-line-st">[</div>');
+    $('table#output').append('<tr><td class="output-line">&nbsp;&nbsp;[</td></tr>');
     for(x=0;x<form[z].length;x++)
     {
-      $('div#output').append('<div class="output-line-dt" id="line-'+z+'-'+x+'"></div>');
+      $('table#output').append('<tr><td class="output-line" id="line-'+z+'-'+x+'">&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>');
       if(x!=form[z].length-1)
-        $('div#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"',");
+        $('td#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"',");
       else
-        $('div#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"'");
+        $('td#line-'+z+'-'+x).append("'"+form[z][x][0]+"'=>'"+form[z][x][1]+"'");
     }
     if(z!=form.length-1)
-      $('div#output').append('<div class="output-line-st">],</div>');
+      $('table#output').append('<tr><td class="output-line">&nbsp;&nbsp;],</td></tr>');
     else {
-      $('div#output').append('<div class="output-line-st">]</div>');
+      $('table#output').append('<tr><td class="output-line">&nbsp;&nbsp;]</td></tr>');
     }
   }
-  $('div#output').append('<div class="output-line">]</div>');
+  $('table#output').append('<tr><td class="output-line">]</td></tr>');
 }

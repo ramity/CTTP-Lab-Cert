@@ -94,7 +94,7 @@ div.display-item-label
 {
   background-color:#fff;
 }
-div.create-new-subitem,div.display-delete-group
+div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group
 {
   width:920px;
   height:40px;
@@ -108,7 +108,11 @@ div.display-delete-group
   background-color:#e74c3c;
   color:#fff;
 }
-div#output
+div.create-new-subitem-group
+{
+  background-color:#9b59b6;
+}
+table#output
 {
   width:920px;
   display:none;
@@ -116,30 +120,13 @@ div#output
   background-color:#fff;
   margin-bottom:20px;
 }
-div.output-line
+td.output-line
 {
-  width:920px;
   height:20px;
   line-height:20px;
   text-align:left;
 }
-div.output-line-st
-{
-  width:900px;
-  height:20px;
-  line-height:20px;
-  padding-left:20px;
-  text-align:left;
-}
-div.output-line-dt
-{
-  width:880px;
-  height:20px;
-  line-height:20px;
-  padding-left:40px;
-  text-align:left;
-}
-div.output-line:hover,div.output-line-st:hover,div.output-line-dt:hover
+td.output-line:hover,
 {
   background-color:#ecf0f1;
 }
@@ -148,7 +135,6 @@ div#hide-code
   width:920px;
   height:40px;
   line-height:40px;
-  margin-bottom:20px;
   background-color:#3498db;
   color:#fff;
   cursor:pointer;
