@@ -193,7 +193,7 @@ $(document).on('change','input.display-item-input',function(){
   y=bits[1];
   z=bits[2];
   form[x][y][z]=$(this).val();
-  render();
+  //render();
 });
 
 $(document).on('click','div.display-item-delete',function(){
