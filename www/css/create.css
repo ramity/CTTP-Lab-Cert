@@ -4,16 +4,15 @@ select
 }
 div#tools
 {
-  width:920px;
+  width:940px;
   height:45px;
-  padding:20px;
+  padding:20px 0px 20px 20px;
   margin-bottom:20px;
   background-color:#fff;
-  padding-right:0px;
 }
 div.tool-item
 {
-  width:210px;
+  width:215px;
   height:40px;
   margin-right:20px;
   background-color:#2ecc71;
@@ -38,8 +37,8 @@ div#display
 }
 div.display-item
 {
-  width:920px;
-  padding:20px;
+  width:940px;
+  padding:20px 0px 20px 20px;
   background-color:#fff;
   text-align:left;
   margin-bottom:20px;
@@ -62,7 +61,7 @@ div.display-item-label
 }
 input.display-item-input,select.display-item-input
 {
-  width:210px;
+  width:190px;
   height:30px;
   text-indent:7px;
   line-height:30px;
@@ -77,14 +76,14 @@ input.display-item-input,select.display-item-input
 }
 input.display-item-input
 {
-  width:410px;
+  width:430px;
 }
 div.display-item-delete
 {
   width:60px;
   height:30px;
   line-height:30px;
-  margin-left:20px;
+  margin:0px 20px 0px 20px;
   background-color:#e74c3c;
   color:#fff;
   cursor:pointer;
@@ -101,8 +100,9 @@ div.display-item-label
 }
 div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group,div.duplicate-item
 {
-  width:920px;
+  width:215px;
   height:40px;
+  margin-right:20px;
   background-color:#2ecc71;
   color:#fff;
   line-height:40px;
@@ -111,15 +111,10 @@ div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group,div
 div.display-delete-group
 {
   background-color:#e74c3c;
-  color:#fff;
-}
-div.create-new-subitem-group
-{
-  background-color:#9b59b6;
 }
 table#output
 {
-  width:920px;
+  width:960px;
   display:none;
   padding:20px;
   background-color:#fff;
@@ -153,8 +148,8 @@ div#hide-code
 }
 div#fixedtoolbar
 {
-  width:260px;
-  height:55px;
+  width:180px;
+  height:35px;
   position:fixed;
   right:10px;
   bottom:10px;
@@ -165,10 +160,6 @@ div.fixedtoolbaritem
   height:35px;
   line-height:35px;
   float:right;
-  border-top:10px solid #8e44ad;
-  border-right:10px solid #8e44ad;
-  border-bottom:10px solid #BD85D3;
-  border-left:10px solid #BD85D3;
   background-color:#9b59b6;
   margin-left:10px;
   color:#fff;

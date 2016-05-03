@@ -9,13 +9,22 @@ require_once('C:/wamp/bend/modules/input_functions.php');
 
 foreach($form as $key=>$data)
 {
-  echo '<br><b>Form '.$key.'</b><br><br>';
-  foreach($data as $key=>$data_a)
+  echo '<b>Form '.$key.'</b><br><br>';
+  echo 'CREATE TABLE IF NOT EXISTS`'.$key.'`<br>';
+  echo '(<br>';
+  echo '`id` int(11) NOT NULL AUTO_INCREMENT,<br>';
+  echo '`main_id` int(11) NOT NULL,<br>';
+  foreach($data as $key_a=>$data_a)
   {
-    if(isset($data[$key]['sql'])&&!empty($data[$key]['sql']))
+    if(isset($data[$key_a]['sql'])&&!empty($data[$key_a]['sql']))
     {
-      echo $data[$key]['sql'].',';
+      echo $data[$key_a]['sql'].',';
       echo '<br>';
     }
   }
+  echo '`result` int(1) NOT NULL,<br>';
+  echo "`display` int(1) NOT NULL DEFAULT '1',<br>";
+  echo 'PRIMARY KEY (`id`)<br>';
+  echo ');<br>';
+  echo '<br>';
 }

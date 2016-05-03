@@ -346,10 +346,6 @@ $form['1']=[
     'sql'=>'`maintenance_initial` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'L51'
-  ],
-  [
-    'label'=>'Pass/Fail',
-    'xl'=>'K35'
   ]
 ];
 $form['2']=[
@@ -366,7 +362,8 @@ $form['2']=[
     'input_placeholder'=>'Equipment ID',
     'name'=>'equipment_id',
     'sql'=>'`equipment_id` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D5'
   ],
   [
     'label'=>'Manufacturer',
@@ -375,7 +372,8 @@ $form['2']=[
     'input_placeholder'=>'Manufacturer',
     'name'=>'manufacturer',
     'sql'=>'`manufacturer` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D6'
   ],
   [
     'label'=>'Model #',
@@ -384,7 +382,8 @@ $form['2']=[
     'input_placeholder'=>'Model #',
     'name'=>'model_number',
     'sql'=>'`model_number` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D7'
   ],
   [
     'label'=>'Serial #',
@@ -393,7 +392,8 @@ $form['2']=[
     'input_placeholder'=>'Serial #',
     'name'=>'serial_number',
     'sql'=>'`serial_number` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D8'
   ],
   [
     'label'=>'University ID',
@@ -402,7 +402,8 @@ $form['2']=[
     'input_placeholder'=>'University ID',
     'name'=>'uark_id',
     'sql'=>'`uark_id` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D9'
   ],
   [
     'label'=>'Location',
@@ -411,7 +412,8 @@ $form['2']=[
     'input_placeholder'=>'Location',
     'name'=>'location',
     'sql'=>'`location` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D10'
   ],
   [
     'label'=>'Calibration Date',
@@ -420,7 +422,8 @@ $form['2']=[
     'input_placeholder'=>'Date',
     'name'=>'calibration_date',
     'sql'=>'`calibration_date` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J5'
   ],
   [
     'label'=>'Performed by',
@@ -429,7 +432,8 @@ $form['2']=[
     'input_placeholder'=>'Performed by',
     'name'=>'performed_by',
     'sql'=>'`performed_by` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J6'
   ],
   [
     'label'=>'Next Calibration Due',
@@ -438,7 +442,8 @@ $form['2']=[
     'input_placeholder'=>'Next Calibration Due',
     'name'=>'calibration_due',
     'sql'=>'`calibration_due` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J8'
   ],
   [
     'label'=>'Last Calibration',
@@ -447,7 +452,8 @@ $form['2']=[
     'input_placeholder'=>'Last Calibration',
     'name'=>'calibration_last',
     'sql'=>'`calibration_last` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J9'
   ],
   [
     'label'=>'Calibration Item',
@@ -456,7 +462,8 @@ $form['2']=[
     'input_placeholder'=>'Calibration Item',
     'name'=>'calibration_item',
     'sql'=>'`calibration_item` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C12'
   ],
   [
     'label'=>'Calibration Procedure',
@@ -465,7 +472,8 @@ $form['2']=[
     'input_placeholder'=>'Calibration Procedure',
     'name'=>'calibration_procedure',
     'sql'=>'`calibration_procedure` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C14'
   ],
   [
     'label'=>'Calibration Equipment',
@@ -474,7 +482,8 @@ $form['2']=[
     'input_placeholder'=>'Calibration Equipment',
     'name'=>'calibration_equipment',
     'sql'=>'`calibration_equipment` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C16'
   ],
   [
     'tag'=>'div',
@@ -677,7 +686,8 @@ $form['3']=[
     'input_placeholder'=>'Equipment ID',
     'name'=>'equipment_id',
     'sql'=>'`equipment_id` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D5'
   ],
   [
     'label'=>'Manufacturer',
@@ -686,7 +696,8 @@ $form['3']=[
     'input_placeholder'=>'Manufacturer',
     'name'=>'manufacturer',
     'sql'=>'`manufacturer` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D6'
   ],
   [
     'label'=>'Model #',
@@ -695,7 +706,8 @@ $form['3']=[
     'input_placeholder'=>'Model #',
     'name'=>'model_number',
     'sql'=>'`model_number` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D7'
   ],
   [
     'label'=>'Serial #',
@@ -704,7 +716,8 @@ $form['3']=[
     'input_placeholder'=>'Serial #',
     'name'=>'serial_number',
     'sql'=>'`serial_number` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D8'
   ],
   [
     'label'=>'University ID',
@@ -713,7 +726,8 @@ $form['3']=[
     'input_placeholder'=>'University ID',
     'name'=>'uark_id',
     'sql'=>'`uark_id` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D9'
   ],
   [
     'label'=>'Location',
@@ -722,7 +736,8 @@ $form['3']=[
     'input_placeholder'=>'Location',
     'name'=>'location',
     'sql'=>'`location` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D10'
   ],
   [
     'label'=>'Calibration Date',
@@ -731,7 +746,8 @@ $form['3']=[
     'input_placeholder'=>'Date',
     'name'=>'calibration_date',
     'sql'=>'`calibration_date` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J5'
   ],
   [
     'label'=>'Performed by',
@@ -740,7 +756,8 @@ $form['3']=[
     'input_placeholder'=>'Performed by',
     'name'=>'performed_by',
     'sql'=>'`performed_by` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J6'
   ],
   [
     'label'=>'Next Calibration Due',
@@ -749,7 +766,8 @@ $form['3']=[
     'input_placeholder'=>'Next Calibration Due',
     'name'=>'calibration_due',
     'sql'=>'`calibration_due` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J8'
   ],
   [
     'label'=>'Last Calibration',
@@ -758,7 +776,8 @@ $form['3']=[
     'input_placeholder'=>'Last Calibration',
     'name'=>'calibration_last',
     'sql'=>'`calibration_last` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'J9'
   ],
   [
     'label'=>'Calibration Item',
@@ -767,7 +786,8 @@ $form['3']=[
     'input_placeholder'=>'Calibration Item',
     'name'=>'calibration_item',
     'sql'=>'`calibration_item` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C12'
   ],
   [
     'label'=>'Calibration Procedure',
@@ -776,7 +796,8 @@ $form['3']=[
     'input_placeholder'=>'Calibration Procedure',
     'name'=>'calibration_procedure',
     'sql'=>'`calibration_procedure` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C14'
   ],
   [
     'label'=>'Calibration Equipment',
@@ -785,7 +806,8 @@ $form['3']=[
     'input_placeholder'=>'Calibration Equipment',
     'name'=>'calibration_equipment',
     'sql'=>'`calibration_equipment` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C16'
   ],
   [
     'tag'=>'div',
@@ -800,7 +822,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'top_diam_data_1',
     'sql'=>'`top_diam_data_1` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D19'
   ],
   [
     'label'=>'Top Inside Diameter of Cone #2',
@@ -809,7 +832,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'top_diam_data_2',
     'sql'=>'`top_diam_data_2` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'F19'
   ],
   [
     'label'=>'Bottom Inside Diameter of Cone #1',
@@ -818,7 +842,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'bot_diam_data_1',
     'sql'=>'`bot_diam_data_1` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D21'
   ],
   [
     'label'=>'Bottom Inside Diameter of Cone #2',
@@ -827,7 +852,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'bot_diam_data_2',
     'sql'=>'`bot_diam_data_2` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'F21'
   ],
   [
     'label'=>'Height of Cone',
@@ -836,7 +862,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'h_data',
     'sql'=>'`h_data` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D23'
   ],
   [
     'label'=>'Thickness of Cone #1',
@@ -845,7 +872,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'thickness_data_1',
     'sql'=>'`thickness_data_1` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D25'
   ],
   [
     'label'=>'Thickness of Cone #2',
@@ -854,7 +882,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'thickness_data_2',
     'sql'=>'`thickness_data_2` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'F25'
   ],
   [
     'label'=>'Thickness of Cone #3',
@@ -863,7 +892,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'thickness_data_3',
     'sql'=>'`thickness_data_3` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D26'
   ],
   [
     'label'=>'Thickness of Cone #4',
@@ -872,7 +902,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'thickness_data_4',
     'sql'=>'`thickness_data_4` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'F26'
   ],
   [
     'label'=>'Diameter of tamper face #1',
@@ -881,7 +912,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'diam_tamper_data_1',
     'sql'=>'`diam_tamper_data_1` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D28'
   ],
   [
     'label'=>'Diameter of tamper face #2',
@@ -890,7 +922,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (mm)',
     'name'=>'diam_tamper_data_2',
     'sql'=>'`diam_tamper_data_2` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'F28'
   ],
   [
     'label'=>'Mass of tamper',
@@ -899,7 +932,8 @@ $form['3']=[
     'input_placeholder'=>'Measurement input (g)',
     'name'=>'tamper_mass',
     'sql'=>'`tamper_mass` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D30'
   ],
   [
     'label'=>'(optional) Comments',
@@ -908,7 +942,8 @@ $form['3']=[
     'input_placeholder'=>'Comments/Observations',
     'name'=>'data_comment',
     'sql'=>'`data_comment` text COLLATE utf8_bin',
-    'required'=>0
+    'required'=>0,
+    'xl'=>'C36'
   ],
   [
     'label'=>'Initial',
@@ -917,12 +952,11 @@ $form['3']=[
     'input_placeholder'=>'Initial by calibrator',
     'name'=>'data_initial',
     'sql'=>'`data_initial` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'L40'
   ]
 ];
-$form['4']=
-
-[
+$form['4']=[
   [
     'tag'=>'div',
     'class'=>'inputrowbigheader',
@@ -1201,7 +1235,7 @@ $form['4']=
     'tag'=>'text',
     'input_placeholder'=>'Initial by calibrator',
     'name'=>'data_initial',
-    'sql'=>'`data_initial` text COLLATE uft8_bin NOT NULL',
+    'sql'=>'`data_initial` text COLLATE utf8_bin NOT NULL',
     'required'=>'1',
     'xl'=>'L40'
   ]

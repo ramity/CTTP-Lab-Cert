@@ -120,7 +120,25 @@ for($z=1;$z<count($form);$z++)
     <link rel="stylesheet" type="text/css" href="http://localhost/css/inputform.css">
     <?php
     if(check_get('form'))
-      echo '<script src="http://localhost/js/'.$_GET['form'].'.js"></script>';
+    {
+    ?>
+    <script src="http://localhost/js/<?php echo $_GET['form'];?>.js"></script>
+    <!--JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!--JQuery UI-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>
+    $(function(){
+      $("input[name=calibration_date],input[name=calibration_due]").datepicker({
+        inline: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      });
+    });
+    </script>
+    <?php
+    }
     ?>
   </head>
   <body>
@@ -135,24 +153,33 @@ for($z=1;$z<count($form);$z++)
           <div class="inputrowbigheader">
             Calibration Sheets
           </div>
-          <div class="containerobj">
+          <div class="containerobj" style="padding-top:10px;">
             <div class="inputrowgroup">
               <div class="inputrowgroupheader">Aggregate Calibrations</div>
-              <div class="inputrow">
-                <a href="http://localhost/input.php?form=2">
-                  <div class="selectionlabel">Mechanical Splitter Calibration Input</div>
-                </a>
-              </div>
-              <div class="inputrow">
-                <a href="http://localhost/input.php?form=1">
-                  <div class="selectionlabel">Sieve Shaker Calibration Input</div>
-                </a>
-              </div>
-              <div class="inputrow">
-                <a href="http://localhost/input.php?form=3">
-                  <div class="selectionlabel">Cone and Tamper Calibration Input</div>
-                </a>
-              </div>
+              <?php
+              try
+              {
+                $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Aggregate' ORDER BY name ASC");
+                $st->execute();
+                $sr=$st->fetchAll();
+                if(!empty($sr))
+                {
+                  foreach($sr as $data)
+                  {
+                    echo '<div class="inputrow">';
+                      echo '<a href="http://localhost/input.php?form='.$data['id'].'">';
+                        echo '<div class="selectionlabel">'.$data['name'].'</div>';
+                      echo '</a>';
+                    echo '</div>';
+                  }
+                }
+              }
+              catch(PDOException $e)
+              {
+                echo $e->getMessage();
+              }
+              ?>
             </div>
             <div class="inputrowgroup">
               <div class="inputrowgroupheader">Digital Caliper Calibration</div>

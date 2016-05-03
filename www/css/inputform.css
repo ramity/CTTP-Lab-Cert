@@ -32,7 +32,6 @@ div.containerheader
 }
 div.containerobj
 {
-  padding-top:10px;
   background-color:#fff;
 }
 div.inputrow,div.inputrowerror
@@ -130,7 +129,8 @@ div.inputrowgroup
 }
 div.inputrowgroup div.inputrow
 {
-  width:925px;
+  width:915px;
+  margin-right:10px;
 }
 div.inputrowgroup div.selectionlabel
 {

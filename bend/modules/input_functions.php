@@ -107,7 +107,7 @@ function generate_edit_form($main_id,$tableid,$array,$error,$array_error,$data)
     }
   }
   echo '</div>';
-  echo '<input class="inputsubmit" type="submit" value="Submit form" name="submit-'.$tableid.'">';
+  echo '<input class="inputsubmit" type="submit" value="Update form" name="submit-'.$tableid.'">';
   echo '</form>';
 }
 function generate_view_form($main_id,$tableid,$array,$data)
