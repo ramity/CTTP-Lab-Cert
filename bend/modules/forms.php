@@ -346,6 +346,12 @@ $form['1']=[
     'sql'=>'`maintenance_initial` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'L51'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'K35'
   ]
 ];
 $form['2']=[
