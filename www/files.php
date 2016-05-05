@@ -1,15 +1,15 @@
 <?php
-require_once('C:/wamp/bend/modules/auth.php');
-require_once('C:/wamp/bend/modules/protected.php');
+require_once('C:/wamp/www/bend/modules/auth.php');
+require_once('C:/wamp/www/bend/modules/protected.php');
 
 if(isset($_GET['b'])&&!empty($_GET['b']))
 {
-    $fileurl="C:/wamp/bend/file_storage/".html_entity_decode($_GET['b'])."/";
+    $fileurl="C:/wamp/www/bend/file_storage/".html_entity_decode($_GET['b'])."/";
     $addb=false;
 }
 else
 {
-    $fileurl="C:/wamp/bend/file_storage/";
+    $fileurl="C:/wamp/www/bend/file_storage/";
     $addb=true;
 }
 ?>
@@ -21,8 +21,8 @@ else
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     </head>
     <body>
-        <?php require_once('C:/wamp/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/bend/blocks/banner.php');?>
+        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
+        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">

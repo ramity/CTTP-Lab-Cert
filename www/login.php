@@ -1,6 +1,6 @@
 <?php
-require_once('C:/wamp/bend/pass.php');
-require_once('C:/wamp/bend/modules/auth.php');
+require_once('C:/wamp/www/bend/pass.php');
+require_once('C:/wamp/www/bend/modules/auth.php');
 
 if(isset($_POST['login_subm'])&&!empty($_POST['login_subm']))
 {
@@ -62,8 +62,8 @@ function test_input()
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     </head>
     <body>
-        <?php require_once('C:/wamp/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/bend/blocks/banner.php');?>
+        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
+        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">

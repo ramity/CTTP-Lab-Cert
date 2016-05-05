@@ -1,5 +1,5 @@
 <?php
-require_once('C:/wamp/bend/PHPExcelReader/PHPExcel/IOFactory.php');
+require_once('C:/wamp/www/bend/PHPExcelReader/PHPExcel/IOFactory.php');
 $inputFileName = 'C:\wamp\bend\file_storage\AMRL Equipment Calibrations\2015 Equipment Calibrations\2015 Aggregate Calibration Sheets.xlsx';  // File to read
 echo 'Loading file ',pathinfo($inputFileName,PATHINFO_BASENAME),' using IOFactory to identify the format<br />';
 try {

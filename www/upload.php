@@ -1,7 +1,7 @@
 <?php
-require_once('C:/wamp/bend/modules/auth.php');
-require_once('C:/wamp/bend/modules/protected.php');
-require_once('C:/wamp/bend/modules/forms.php');
+require_once('C:/wamp/www/bend/modules/auth.php');
+require_once('C:/wamp/www/bend/modules/protected.php');
+require_once('C:/wamp/www/bend/modules/forms.php');
 ?>
 <!DOCTYPE>
 <html>
@@ -11,8 +11,8 @@ require_once('C:/wamp/bend/modules/forms.php');
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     </head>
     <body>
-        <?php require_once('C:/wamp/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/bend/blocks/banner.php');?>
+        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
+        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">
@@ -36,7 +36,7 @@ require_once('C:/wamp/bend/modules/forms.php');
                         <?php
                         if(isset($_POST['form-submit']))
                         {
-                          require_once('C:/wamp/bend/PHPExcelReader/PHPExcel/IOFactory.php');
+                          require_once('C:/wamp/www/bend/PHPExcelReader/PHPExcel/IOFactory.php');
                           try
                           {
                             $objPHPExcel = PHPExcel_IOFactory::load($_POST['file_name']);

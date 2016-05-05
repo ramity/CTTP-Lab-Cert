@@ -1,10 +1,10 @@
 <?php
 //START DEFINED POST VARIABLES
-require_once('C:/wamp/bend/pass.php');
-require_once('C:/wamp/bend/modules/auth.php');
-require_once('C:/wamp/bend/modules/protected.php');
-require_once('C:/wamp/bend/modules/forms.php');
-require_once('C:/wamp/bend/modules/input_functions.php');
+require_once('C:/wamp/www/bend/pass.php');
+require_once('C:/wamp/www/bend/modules/auth.php');
+require_once('C:/wamp/www/bend/modules/protected.php');
+require_once('C:/wamp/www/bend/modules/forms.php');
+require_once('C:/wamp/www/bend/modules/input_functions.php');
 //END DEFINED POST VARIABLES
 ?>
 <!DOCTYPE>
@@ -18,8 +18,8 @@ require_once('C:/wamp/bend/modules/input_functions.php');
     <script src="http://localhost/js/create.js"></script>
   </head>
   <body>
-    <?php require_once('C:/wamp/bend/blocks/sidebar.html');?>
-    <?php require_once('C:/wamp/bend/blocks/banner.php');?>
+    <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
+    <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
     <div id="container">
       <div id="containerinr">
         <table id="output">

@@ -1,10 +1,10 @@
 <?php
 //START DEFINED POST VARIABLES
-require_once('C:/wamp/bend/pass.php');
-require_once('C:/wamp/bend/modules/auth.php');
-require_once('C:/wamp/bend/modules/protected.php');
-require_once('C:/wamp/bend/modules/forms.php');
-require_once('C:/wamp/bend/modules/input_functions.php');
+require_once('C:/wamp/www/bend/pass.php');
+require_once('C:/wamp/www/bend/modules/auth.php');
+require_once('C:/wamp/www/bend/modules/protected.php');
+require_once('C:/wamp/www/bend/modules/forms.php');
+require_once('C:/wamp/www/bend/modules/input_functions.php');
 //END DEFINED POST VARIABLES
 
 foreach($form as $key=>$data)

@@ -1,4 +1,4 @@
-<?php require_once('C:/wamp/bend/modules/auth.php');?>
+<?php require_once('C:/wamp/www/bend/modules/auth.php');?>
 
 <!DOCTYPE>
 <html>
@@ -8,8 +8,8 @@
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     </head>
     <body>
-        <?php require_once('C:/wamp/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/bend/blocks/banner.php');?>
+        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
+        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj" style="padding-bottom:20px;background-color:#fff;">
