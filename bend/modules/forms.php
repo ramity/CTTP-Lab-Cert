@@ -150,7 +150,7 @@ $form['1']=[
     'name'=>'data_a',
     'sql'=>'`data_a` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
-    'xl'=>'C12'
+    'xl'=>'D19'
   ],
   [
     'label'=>'3/4" Mass passing',
@@ -230,7 +230,8 @@ $form['1']=[
     'value'=>'0.5%',
     'name'=>'data_i',
     'sql'=>'`data_i` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'C32'
   ],
   [
     'label'=>'(optional) Comments',
@@ -648,7 +649,7 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_q',
     'sql'=>'`data_q` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
   ],
   [
     'label'=>'Specified tolerance',

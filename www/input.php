@@ -60,7 +60,7 @@ for($z=1;$z<count($form);$z++)
         //$keys=substr($keys,0,-2);//remove ', '
         //$list=substr($list,0,-1);//remove last ','
 
-        echo 'yes<br>';
+        //result logic block
         if($z==1)
         {
           echo 'hl3confirmed<br>';

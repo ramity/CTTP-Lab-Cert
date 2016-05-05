@@ -154,27 +154,30 @@ function generate_view_form($main_id,$tableid,$array,$data)
   echo '</tr>';
   for($z=0;$z<count($array);$z++)
   {
-    if($array[$z]['tag']=='text')
+    if(isset($array[$z]['tag'])&&!empty($array[$z]['tag']))
     {
-      echo '<tr id="'.$z.'">';
-      echo '<td>'.$array[$z]['input_placeholder'].'</td>';
-      echo '<td>'.$data[0][$array[$z]['name']].'</td>';
-      echo '</div>';
-    }
-    elseif($array[$z]['tag']=='select')
-    {
-      echo '<tr id="'.$z.'">';
-      echo '<td>';
-      echo $array[$z]['label'];
-      echo '</td>';
-      echo '<td>';
-      for($x=0;$x<count($array[$z]['options']);$x++)
+      if($array[$z]['tag']=='text')
       {
-        if($array[$z]['options'][$x]['value']==$data[0][$array[$z]['name']])
-          echo $array[$z]['options'][$x]['value'];
+        echo '<tr id="'.$z.'">';
+        echo '<td>'.$array[$z]['input_placeholder'].'</td>';
+        echo '<td>'.$data[0][$array[$z]['name']].'</td>';
+        echo '</div>';
       }
-      echo '</td>';
-      echo '</td>';
+      elseif($array[$z]['tag']=='select')
+      {
+        echo '<tr id="'.$z.'">';
+        echo '<td>';
+        echo $array[$z]['label'];
+        echo '</td>';
+        echo '<td>';
+        for($x=0;$x<count($array[$z]['options']);$x++)
+        {
+          if($array[$z]['options'][$x]['value']==$data[0][$array[$z]['name']])
+            echo $array[$z]['options'][$x]['value'];
+        }
+        echo '</td>';
+        echo '</td>';
+      }
     }
   }
   echo '<tr>';
@@ -228,15 +231,18 @@ function find_post_error_array($array)
   $error_list=[];
   for($z=0;$z<count($array);$z++)
   {
-    if($array[$z]['required'])
+    if(isset($array[$z]['required']))
     {
-      if(!check_post($array[$z]['name'])&&$array[$z]['required'])
-        $error_list[$z]=$array[$z]['name']." is not defined";
+      if($array[$z]['required'])
+      {
+        if(!check_post($array[$z]['name'])&&$array[$z]['required'])
+          $error_list[$z]=$array[$z]['name']." is not defined";
+        else
+          $error_list[$z]=0;
+      }
       else
         $error_list[$z]=0;
     }
-    else
-      $error_list[$z]=0;
   }
   return $error_list;
 }
