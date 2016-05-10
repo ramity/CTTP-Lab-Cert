@@ -10,7 +10,7 @@
     <div id="bannerinr">
         <div id="bannerlogo">
             <a href="http://localhost/">
-                CTTP Calibration Database
+                CTTP Calibration Application
             </a>
         </div>
         <?php

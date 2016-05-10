@@ -16,7 +16,7 @@ else
 <!DOCTYPE>
 <html>
     <head>
-        <title>Demo</title>
+        <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     </head>

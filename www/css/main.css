@@ -175,21 +175,6 @@ input.viewsubmit
         display:none;
     }
 }
-form#uploadmodule {
-    width:920px;
-    padding:20px;
-    margin:0px;
-    background-color:#fff;
-    text-align:left;
-}
-div#uploadheader
-{
-    width:920px;
-    height:50px;
-    line-height: 50px;
-    font-size:30px;
-    margin-bottom:20px;
-}
 form#login
 {
     width:660px;
