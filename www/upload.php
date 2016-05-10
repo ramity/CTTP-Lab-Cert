@@ -208,9 +208,17 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           $st=$db->prepare("SELECT * FROM `main` ORDER BY id DESC LIMIT 0 , 1");
                           $st->execute();
                           $sr=$st->fetchAll();
+                          //last second additions
                           $keys.='main_id';
                           $list.='?';
                           array_push($locked,$sr[0]['id']);
+                          if($_POST['file_year']!==date('Y'))
+                          {
+                            $keys.=', display';
+                            $list.=',?';
+                            array_push($locked,'2');
+                          }
+
                           $tablename=$_POST['excel-format'];
                           $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                           $st=$db->prepare("INSERT INTO `$tablename`($keys) VALUES($list)");

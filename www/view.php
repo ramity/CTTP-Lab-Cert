@@ -71,6 +71,52 @@ else
               if($view_table)
               {
               ?>
+              <form class="searchmodule">
+                <div class="searchmoduleheader">Calibration Search Engine</div>
+                <div class="searchmodulelabel">Equipment ID</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Manufactuerer</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Model Number</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Serial Number</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Uark ID</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Location</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Performed By</div>
+                <input class="searchmodule" type="text">
+
+                <div class="searchmodulelabel">Year</div>
+                <?php
+                echo '<select class="searchmodule" name="file_year">';
+                echo '<option disabled selected value></option>';
+                foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/") as $oitem)
+                {
+                  if(strpos($oitem,'Equipment Calibrations')!==false)
+                  {
+                    $bits=explode(' Equipment Calibrations',$oitem);
+                    if(isset($_POST['file_year'])&&!empty($_POST['file_year'])&&$_POST['file_year']==$bits[0])
+                    {
+                      echo '<option value="'.$bits[0].'" selected>'.$bits[0].'</option>';
+                    }
+                    else
+                    {
+                      echo '<option value="'.$bits[0].'">'.$bits[0].'</option>';
+                    }
+                  }
+                }
+                echo '</select> ';
+                ?>
+                <input type="submit" name="searchmodulesubmit" class="searchmodulebutton" value="search">
+              </form>
               <table class="list">
                 <caption>Recent Calibrations</caption>
                 <tbody>
@@ -80,7 +126,7 @@ else
                     <th>Date performed</th>
                     <th>Performed By</th>
                     <th>Status</th>
-                    <th>View | Edit | Remove</th>
+                    <th>Commands</th>
                   </tr>
                   <?php
                   try
@@ -113,9 +159,7 @@ else
                         echo '<td>Deleted</td>';
                       echo '<td>';
                       echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                      echo ' | ';
                       echo '<a href="http://localhost/view.php?edititem='.$t_id.'&table='.$t_tn.'">Edit</a>';
-                      echo ' | ';
                       if($sr[0]['display'])
                         echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
                       else
@@ -141,7 +185,7 @@ else
                     <th>Calibration Type</th>
                     <th>Date Due</th>
                     <th>Calibration Interval</th>
-                    <th>View | Create | Remove</th>
+                    <th>Commands</th>
                   </tr>
                   <?php
                   try
@@ -193,9 +237,7 @@ else
 
                         echo '<td>';
                         echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                        echo ' | ';
                         echo '<a href="http://localhost/input.php?form='.$t_tn.'">Create</a>';
-                        echo ' | ';
                         echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
                         echo '</td>';
                         echo '</tr>';
@@ -219,7 +261,7 @@ else
                     <th>Equipment Id</th>
                     <th>Date performed</th>
                     <th>Performed By</th>
-                    <th>View | Undo</th>
+                    <th>Commands</th>
                   </tr>
                   <?php
                   try
@@ -249,7 +291,6 @@ else
                         echo '<td>'.$sr[0]['performed_by'].'</td>';
                         echo '<td>';
                         echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                        echo ' | ';
                         echo '<a href="http://localhost/view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
                         echo '</td>';
                         echo '</tr>';
