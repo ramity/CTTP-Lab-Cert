@@ -51,3 +51,46 @@ input#uploadsubmit
   font-family:'Roboto', sans-serif;
   font-size:16px;
 }
+table.excel
+{
+  width:920px;
+  margin:20px;
+  border-collapse:collapse;
+}
+table.excel td
+{
+  height:35px;
+  line-height:35px;
+  padding:0px 20px;
+}
+table.excel tr
+{
+  cursor:pointer;
+}
+table.excel tr:hover
+{
+  background-color:#3498db;
+  color:#fff;
+}
+table.excel td:hover
+{
+  text-decoration:underline;
+}
+div.notif-g,div.notif-b,div.notif-r
+{
+  width:920px;
+  height:35px;
+  margin:0px 20px 20px 20px;
+  line-height:35px;
+  text-align:center;
+  background-color:#2ecc71;
+  color:#fff;
+}
+div.notif-b
+{
+  background-color:#3498db;
+}
+div.notif-r
+{
+  background-color:#e74c3c;
+}

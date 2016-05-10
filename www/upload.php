@@ -23,6 +23,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           <?php
                           echo '<div class="label">Select a year</div>';
                           echo '<select class="plate" name="file_year">';
+                          echo '<option disabled selected value> -- select an option -- </option>';
                           foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/") as $oitem)
                           {
                             if(strpos($oitem,'Equipment Calibrations')!==false)
@@ -43,6 +44,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           {
                             echo '<div class="label">Select a file</div>';
                             echo '<select class="plate" name="file_name">';
+                            echo '<option disabled selected value> -- select an option -- </option>';
                             foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/") as $oitem)
                             {
                               if($oitem!=='.'&&$oitem!=='..')
@@ -62,7 +64,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           if(isset($_POST['file_name'])&&!empty($_POST['file_name']))
                           {
                             $path="bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/".$_POST['file_name'];
-                            echo '<div class="label">Sheet selection</div>';
+                            echo '<div class="label">Select a sheet</div>';
                             echo '<select class="plate" name="sheet_selection">';
                             require_once('C:/wamp/www/bend/PHPExcelReader/PHPExcel/IOFactory.php');
                             try
@@ -74,35 +76,50 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                               die('Error loading file "'.pathinfo($path,PATHINFO_BASENAME).'": '.$e->getMessage());
                             }
                             $sheets=$objPHPExcel->getSheetNames();
+                            echo '<option disabled selected value> -- select an option -- </option>';
                             foreach($sheets as $data)
                             {
-                              echo '<option value="'.$data.'">'.$data.'</option>';
+                              if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('"','&quote',$data))
+                              {
+                                echo '<option value="'.str_replace('"','&quote',$data).'" selected>'.$data.'</option>';
+                              }
+                              else
+                              {
+                                echo '<option value="'.str_replace('"','&quote',$data).'">'.$data.'</option>';
+                              }
                             }
                             echo '</select>';
                           }
                           if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection']))
                           {
-                            echo '<div class="label">Type of equipment</div>';
+                            echo '<div class="label">Select a calibration</div>';
                             echo '<select class="plate" name="excel-format">';
                             $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                             $st=$db->prepare("SELECT * FROM `calibrations`");
                             $st->execute();
                             $c_data=$st->fetchAll();
+                            echo '<option disabled selected value> -- select an option -- </option>';
                             for($z=0;$z<count($c_data);$z++)
                             {
-                              echo '<option value="'.$c_data[$z]['id'].'">'.$c_data[$z]['name'].'</option>';
+                              if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('&quote','"',$c_data[$z]['id']))
+                              {
+                                echo '<option value="'.str_replace('"','&quote',$c_data[$z]['id']).'" selected>'.$c_data[$z]['name'].'</option>';
+                              }
+                              else
+                              {
+                                echo '<option value="'.str_replace('"','&quote',$c_data[$z]['id']).'">'.$c_data[$z]['name'].'</option>';
+                              }
                             }
                             echo '</select>';
                           }
                           ?>
-
                           <input id="uploadsubmit" type="submit" name="form-submit">
                       </div>
                       <?php
-                      if(isset($_POST['sheet_selection']))
+                      if(isset($_POST['excel-format']))
                       {
                         $sheetData = $objPHPExcel->getSheetByName($_POST['sheet_selection'])->toArray(null,true,true,true);
-                        echo '<table style="width:100%">';
+                        echo '<table class="excel">';
                         echo '<tbody>';
                         $list='';
                         $keys='';
@@ -176,6 +193,8 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             echo '</tr>';
                           }
                         }
+                        echo '</tbody>';
+                        echo '</table>';
                         //INSERT DATA
                         try
                         {
@@ -192,16 +211,20 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           $keys.='main_id';
                           $list.='?';
                           array_push($locked,$sr[0]['id']);
-                          //print_r($locked);
                           $tablename=$_POST['excel-format'];
                           $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                           $st=$db->prepare("INSERT INTO `$tablename`($keys) VALUES($list)");
                           $result=$st->execute($locked);
                           if($result)
                           {
-                            echo '<br>Success';
+                            echo '<div class="notif-g">Success</div>';
+                            echo '<a href="http://localhost/view.php?viewitem='.$sr[0]['id'].'&table='.$tablename.'">';
+                              echo '<div class="notif-b">View calibration entry</div>';
+                            echo '</a>';
+                            echo '<a href="http://localhost/view.php?removeitem='.$sr[0]['id'].'&table='.$tablename.'">';
+                              echo '<div class="notif-r">Delete calibration entry</div>';
+                            echo '</a>';
                           }
-                          //header("Location: http://localhost/view.php");
                         }
                         catch(PDOException $e)
                         {
