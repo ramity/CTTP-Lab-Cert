@@ -15,7 +15,8 @@ des_inf=
     ['input_placeholder','Equipment ID'],
     ['name','equipment_id'],
     ['sql','`equipment_id` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D5']
   ],
   [
     ['label','Manufacturer'],
@@ -24,7 +25,8 @@ des_inf=
     ['input_placeholder','Manufacturer'],
     ['name','manufacturer'],
     ['sql','`manufacturer` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D6']
   ],
   [
     ['label','Model #'],
@@ -33,7 +35,8 @@ des_inf=
     ['input_placeholder','Model #'],
     ['name','model_number'],
     ['sql','`model_number` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D7']
   ],
   [
     ['label','Serial #'],
@@ -42,7 +45,8 @@ des_inf=
     ['input_placeholder','Serial #'],
     ['name','serial_number'],
     ['sql','`serial_number` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D8']
   ],
   [
     ['label','University ID'],
@@ -51,7 +55,8 @@ des_inf=
     ['input_placeholder','University ID'],
     ['name','uark_id'],
     ['sql','`uark_id` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D9']
   ],
   [
     ['label','Location'],
@@ -60,7 +65,8 @@ des_inf=
     ['input_placeholder','Location'],
     ['name','location'],
     ['sql','`location` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','D10']
   ],
   [
     ['label','Calibration Date'],
@@ -69,7 +75,8 @@ des_inf=
     ['input_placeholder','Date'],
     ['name','calibration_date'],
     ['sql','`calibration_date` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','J5']
   ],
   [
     ['tag','text'],
@@ -78,7 +85,8 @@ des_inf=
     ['input_placeholder','Performed by'],
     ['name','performed_by'],
     ['sql','`performed_by` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','J6']
   ],
   [
     ['label','Next Calibration Due'],
@@ -87,7 +95,8 @@ des_inf=
     ['input_placeholder','Next Calibration Due'],
     ['name','calibration_due'],
     ['sql','`calibration_due` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','J8']
   ],
   [
     ['label','Last Calibration'],
@@ -97,6 +106,7 @@ des_inf=
     ['required','1'],
     ['name','calibration_last'],
     ['sql','`calibration_last` text COLLATE utf8_bin NOT NULL'],
+    ['xl','J9']
   ],
   [
     ['label','Calibration Item'],
@@ -105,7 +115,8 @@ des_inf=
     ['input_placeholder','Calibration Item'],
     ['name','calibration_item'],
     ['sql','`calibration_item` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','C12']
   ],
   [
     ['label','Calibration Procedure'],
@@ -114,7 +125,8 @@ des_inf=
     ['tag','text'],
     ['name','calibration_procedure'],
     ['sql','`calibration_procedure` text COLLATE utf8_bin NOT NULL'],
-    ['required',1]
+    ['required',1],
+    ['xl','C14']
   ],
   [
     ['label','Calibration Equipment'],
@@ -123,7 +135,8 @@ des_inf=
     ['input_placeholder','Calibration Equipment'],
     ['name','calibration_equipment'],
     ['sql','`calibration_equipment` text COLLATE utf8_bin NOT NULL'],
-    ['required','1']
+    ['required','1'],
+    ['xl','C16']
   ],
   [
     ['tag','div'],
@@ -168,7 +181,16 @@ $(document).on('click','div.create-new-subitem',function(){
 
 $(document).on('click','div.duplicate-item',function(){
   bits=explode('duplicate-item-',$(this).attr('id'));
-  form.push(form[bits[1]]);//TODO
+  form.push([]);
+  for(z=0;z<form[bits[1]].length;z++)
+  {//item groups
+    form[form.length-1][z]=[];
+    for(x=0;x<form[bits[1]][z].length;x++)
+    {//item
+      console.log(form[bits[1]][z]);
+      form[form.length-1][z].push(form[bits[1]][z][x]);
+    }
+  }
   render();
   $(document).scrollTop($('div#elm-'+bits[1]).offset().top-120);
 });
@@ -186,9 +208,10 @@ $(document).on('click','div.create-new-subitem-group',function(){
 $(document).on('change','select.display-item-input',function(){
   bits=explode('select-name-',$(this).attr('id'));
   moarbits=explode('-',bits[1]);
-  x=bits[0];
-  y=bits[1];
-  z=bits[2];
+  x=parseInt(moarbits[0]);
+  y=parseInt(moarbits[1]);
+  z=parseInt(moarbits[2]);
+  console.log(x,y,z,$(this).val());
   form[x][y][z]=$(this).val();
   render();
 });
@@ -196,26 +219,25 @@ $(document).on('change','select.display-item-input',function(){
 $(document).on('change','input.display-item-input',function(){
   bits=explode('value-',$(this).attr('id'));
   moarbits=explode('-',bits[1]);
-  x=bits[0];
-  y=bits[1];
-  z=bits[2];
-  form[x][y][z]=$(this).val();
-  //render();
+  x=parseInt(moarbits[0]);
+  y=parseInt(moarbits[1]);
+  z=parseInt(moarbits[2]);
+  console.log(x,y,z,$(this).val()); form[x][y][z]=$(this).val();
+  render();
 });
 
 $(document).on('click','div.display-item-delete',function(){
   bits=explode('delete-',$(this).attr('id'));
   moarbits=explode('-',bits[1]);
-  x=bits[0];
-  y=bits[1];
+  x=moarbits[0];
+  y=moarbits[1];
   form[x].splice(y,1);
   render();
 });
 
 $(document).on('click','div.display-delete-group',function(){
   bits=explode('delete-group-',$(this).attr('id'));
-  x=bits[1];
-  form.splice(x,1);
+  form.splice(bits[1],1);
   render();
 });
 

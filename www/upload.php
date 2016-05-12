@@ -101,7 +101,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             echo '<option disabled selected value> -- select an option -- </option>';
                             for($z=0;$z<count($c_data);$z++)
                             {
-                              if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('&quote','"',$c_data[$z]['id']))
+                              if(isset($_POST['excel-format'])&&!empty($_POST['excel-format'])&&$_POST['excel-format']==str_replace('&quote','"',$c_data[$z]['id']))
                               {
                                 echo '<option value="'.str_replace('"','&quote',$c_data[$z]['id']).'" selected>'.$c_data[$z]['name'].'</option>';
                               }
@@ -124,7 +124,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                         $list='';
                         $keys='';
                         $locked=[];
-                        for($z=0;$z<sizeof($form[$_POST['excel-format']]);$z++)
+                        for($z=0;$z<count($form[$_POST['excel-format']]);$z++)
                         {
                           if(isset($form[$_POST['excel-format']][$z]['xl'])&&!empty($form[$_POST['excel-format']][$z]['xl']))
                           {
@@ -132,63 +132,107 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             $list.='?,';
                             echo '<tr>';
                             echo '<td>'.$form[$_POST['excel-format']][$z]['name'].'</td>';
-                            echo '<td>[';
-                            echo $col=preg_replace('/[0-9]/','',$form[$_POST['excel-format']][$z]['xl']);
-                            echo ',';
-                            echo $row=intval(preg_replace('/[^0-9]+/','',$form[$_POST['excel-format']][$z]['xl']),10);
-                            echo ']</td>';
-                            if(isset($sheetData[$row][$col])&&!empty($sheetData[$row][$col]))
+                            if(strpos($form[$_POST['excel-format']][$z]['xl'],'+')!==false)
                             {
-                              if($form[$_POST['excel-format']][$z]['name']=='result')
+                              $xlvalues=explode('+',$form[$_POST['excel-format']][$z]['xl']);
+                              $col=[];
+                              $row=[];
+                              $result=true;
+                              for($x=0;$x<count($xlvalues);$x++)
                               {
-                                if(strtolower($sheetData[$row][$col])==='pass')
-                                {
-                                  $sheetData[$row][$col]='1';
-                                  array_push($locked,'1');
-                                }
-                                elseif(strtolower($sheetData[$row][$col])==='fail')
-                                {
-                                  $sheetData[$row][$col]='0';
-                                  array_push($locked,'0');
-                                }
-                                echo '<td>';
-                                echo htmlentities($sheetData[$row][$col]);
-                                echo '</td>';
+                                $col[$x]=preg_replace('/[0-9]/','',$xlvalues[$x]);
+                                $row[$x]=intval(preg_replace('/[^0-9]+/','',$xlvalues[$x]),10);
                               }
-                              elseif($form[$_POST['excel-format']][$z]['name']=='calibration_date')
+                              echo '<td>';
+                              for($x=0;$x<count($xlvalues);$x++)
                               {
-                                $date=strtotime($sheetData[$row][$col]);
-                                $calibration_day=date('d',$date);
-                                array_push($locked,htmlentities($sheetData[$row][$col]));
-                                echo '<td>';
-                                echo htmlentities($sheetData[$row][$col]);
-                                echo '</td>';
+                                echo '[';
+                                echo $col[$x];
+                                echo ',';
+                                echo $row[$x];
+                                echo ']';
                               }
-                              elseif($form[$_POST['excel-format']][$z]['name']=='calibration_due'||$form[$_POST['excel-format']][$z]['name']=='calibration_last')
+                              echo '</td>';
+                            }
+                            else
+                            {
+                              echo '<td>[';
+                              echo $col=preg_replace('/[0-9]/','',$form[$_POST['excel-format']][$z]['xl']);
+                              echo ',';
+                              echo $row=intval(preg_replace('/[^0-9]+/','',$form[$_POST['excel-format']][$z]['xl']),10);
+                              echo ']</td>';
+                            }
+                            if(count($col)===1)
+                            {
+                              if(isset($sheetData[$row][$col])&&!empty($sheetData[$row][$col]))
                               {
-                                //Ref: http://stackoverflow.com/questions/2754765/how-to-reformat-date-in-php#answer-2754777
-                                $date=DateTime::createFromFormat('M Y',$sheetData[$row][$col]);
-                                $output=$date->format("m/$calibration_day/Y");
-                                $sheetData[$row][$col]=$output;
-                                array_push($locked,htmlentities($sheetData[$row][$col]));
-                                echo '<td>';
-                                echo htmlentities($sheetData[$row][$col]);
-                                echo '</td>';
+                                if($form[$_POST['excel-format']][$z]['name']==='result')
+                                {
+                                  if(strtolower($sheetData[$row][$col])==='pass')
+                                  {
+                                    $sheetData[$row][$col]='1';
+                                    array_push($locked,'1');
+                                  }
+                                  elseif(strtolower($sheetData[$row][$col])==='fail')
+                                  {
+                                    $sheetData[$row][$col]='0';
+                                    array_push($locked,'0');
+                                  }
+                                  echo '<td>';
+                                  echo htmlentities($sheetData[$row][$col]);
+                                  echo '</td>';
+                                }
+                                elseif($form[$_POST['excel-format']][$z]['name']==='calibration_date')
+                                {
+                                  $date=strtotime($sheetData[$row][$col]);
+                                  $calibration_day=date('d',$date);
+                                  array_push($locked,htmlentities($sheetData[$row][$col]));
+                                  echo '<td>';
+                                  echo htmlentities($sheetData[$row][$col]);
+                                  echo '</td>';
+                                }
+                                elseif($form[$_POST['excel-format']][$z]['name']==='calibration_due'||$form[$_POST['excel-format']][$z]['name']==='calibration_last')
+                                {
+                                  //Ref: http://stackoverflow.com/questions/2754765/how-to-reformat-date-in-php#answer-2754777
+                                  $date=DateTime::createFromFormat('M Y',$sheetData[$row][$col])->format("m/$calibration_day/Y");
+                                  $sheetData[$row][$col]=$date;
+                                  array_push($locked,htmlentities($sheetData[$row][$col]));
+                                  echo '<td>';
+                                  echo htmlentities($sheetData[$row][$col]);
+                                  echo '</td>';
+                                }
+                                else
+                                {
+                                  array_push($locked,htmlentities($sheetData[$row][$col]));
+                                  echo '<td>';
+                                  echo htmlentities($sheetData[$row][$col]);
+                                  echo '</td>';
+                                }
                               }
                               else
                               {
-                                array_push($locked,htmlentities($sheetData[$row][$col]));
+                                array_push($locked,'NOT GIVEN');
                                 echo '<td>';
-                                echo htmlentities($sheetData[$row][$col]);
+                                echo 'NOT GIVEN';
                                 echo '</td>';
                               }
                             }
                             else
                             {
-                              array_push($locked,'NOT GIVEN');
-                              echo '<td>';
-                              echo 'NOT GIVEN';
-                              echo '</td>';
+                              $data='';
+                              for($x=0;$x<count($xlvalues);$x++)
+                              {
+                                if(isset($sheetData[$row[$x]][$col[$x]])&&!empty($sheetData[$row[$x]][$col[$x]]))
+                                {
+                                  $data.=htmlentities($sheetData[$row[$x]][$col[$x]]);
+                                }
+                                else
+                                {
+                                  $data.='NOT GIVEN';
+                                }
+                              }
+                              array_push($locked,$data);
+                              echo '<td>'.$data.'</td>';
                             }
                             echo '</tr>';
                           }

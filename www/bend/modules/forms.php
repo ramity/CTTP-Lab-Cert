@@ -228,8 +228,8 @@ $form['1']=[
     'tag'=>'text',
     'input_placeholder'=>'% required to pass (tollerance)',
     'value'=>'0.5%',
-    'name'=>'data_i',
-    'sql'=>'`data_i` text COLLATE utf8_bin NOT NULL',
+    'name'=>'tolerance',
+    'sql'=>'`tolerance` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'C32'
   ],
@@ -505,7 +505,8 @@ $form['2']=[
     'input_placeholder'=>'Number of chutes (integer)',
     'name'=>'data_a',
     'sql'=>'`data_a` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D19'
   ],
   [
     'label'=>'Chute Opening #1',
@@ -514,7 +515,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_b',
     'sql'=>'`data_b` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D22'
   ],
   [
     'label'=>'Chute Opening #2',
@@ -523,7 +525,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_c',
     'sql'=>'`data_c` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D23'
   ],
   [
     'label'=>'Chute Opening #3',
@@ -532,7 +535,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_d',
     'sql'=>'`data_d` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D24'
   ],
   [
     'label'=>'Chute Opening #4',
@@ -541,7 +545,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_e',
     'sql'=>'`data_e` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D25'
   ],
   [
     'label'=>'Chute Opening #5',
@@ -550,7 +555,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_f',
     'sql'=>'`data_f` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D26'
   ],
   [
     'label'=>'Chute Opening #6',
@@ -559,7 +565,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_g',
     'sql'=>'`data_g` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D27'
   ],
   [
     'label'=>'Chute Opening #7',
@@ -568,7 +575,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_h',
     'sql'=>'`data_h` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D28'
   ],
   [
     'label'=>'Chute Opening #8',
@@ -577,7 +585,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_i',
     'sql'=>'`data_i` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D29'
   ],
   [
     'label'=>'Chute Opening #9',
@@ -586,7 +595,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_j',
     'sql'=>'`data_j` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D30'
   ],
   [
     'label'=>'Chute Opening #10',
@@ -595,7 +605,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_k',
     'sql'=>'`data_k` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D31'
   ],
   [
     'label'=>'Chute Opening #11',
@@ -604,7 +615,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_l',
     'sql'=>'`data_l` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D32'
   ],
   [
     'label'=>'Chute Opening #12',
@@ -613,7 +625,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_m',
     'sql'=>'`data_m` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D33'
   ],
   [
     'label'=>'Chute Opening #13',
@@ -622,7 +635,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_n',
     'sql'=>'`data_n` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D34'
   ],
   [
     'label'=>'Chute Opening #14',
@@ -631,7 +645,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_o',
     'sql'=>'`data_o` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D35'
   ],
   [
     'label'=>'Chute Opening #15',
@@ -640,7 +655,8 @@ $form['2']=[
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_p',
     'sql'=>'`data_p` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'D36'
   ],
   [
     'label'=>'Chute Opening #16',
@@ -650,15 +666,17 @@ $form['2']=[
     'name'=>'data_q',
     'sql'=>'`data_q` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
+    'xl'=>'D37'
   ],
   [
     'label'=>'Specified tolerance',
     'description'=>'##% larger than largest aggregate size. Ex) 50',
     'tag'=>'text',
     'input_placeholder'=>'% required to pass (tollerance)',
-    'name'=>'data_r',
-    'sql'=>'`data_r` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'name'=>'tolerance',
+    'sql'=>'`tolerance` text COLLATE utf8_bin NOT NULL',
+    'required'=>1,
+    'xl'=>'H19+I20+H22+I23'
   ],
   [
     'label'=>'(optional) Comments',
@@ -667,7 +685,8 @@ $form['2']=[
     'input_placeholder'=>'Comments/Observations',
     'name'=>'data_comment',
     'sql'=>'`data_comment` text COLLATE utf8_bin',
-    'required'=>0
+    'required'=>0,
+    'xl'=>'C43'
   ],
   [
     'label'=>'Initial',
@@ -676,7 +695,14 @@ $form['2']=[
     'input_placeholder'=>'Initial by calibrator',
     'name'=>'data_initial',
     'sql'=>'`data_initial` text COLLATE utf8_bin NOT NULL',
-    'required'=>1
+    'required'=>1,
+    'xl'=>'L47'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'K40'
   ]
 ];
 $form['3']=[
@@ -961,6 +987,12 @@ $form['3']=[
     'sql'=>'`data_initial` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'L40'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'K32'
   ]
 ];
 $form['4']=[
@@ -1245,6 +1277,12 @@ $form['4']=[
     'sql'=>'`data_initial` text COLLATE utf8_bin NOT NULL',
     'required'=>'1',
     'xl'=>'L40'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'K38'
   ]
 ];
 ?>
