@@ -29,6 +29,9 @@
                     <a href="http://localhost/create.php">
                       <div class="containeritem">Create</div>
                     </a>
+                    <a href="http://localhost/amrl/index.php">
+                      <div class="containeritem">AMRL</div>
+                    </a>
                     <div class="containerheader">Book versions</div>
                     <div class="containeritem">
                         <a href="http://localhost/book.php">

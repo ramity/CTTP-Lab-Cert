@@ -514,7 +514,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_b',
-    'sql'=>'`data_b` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_b` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D22'
   ],
@@ -524,7 +524,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_c',
-    'sql'=>'`data_c` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_c` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D23'
   ],
@@ -534,7 +534,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_d',
-    'sql'=>'`data_d` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_d` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D24'
   ],
@@ -544,7 +544,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_e',
-    'sql'=>'`data_e` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_e` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D25'
   ],
@@ -554,7 +554,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_f',
-    'sql'=>'`data_f` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_f` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D26'
   ],
@@ -564,7 +564,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_g',
-    'sql'=>'`data_g` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_g` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D27'
   ],
@@ -574,7 +574,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_h',
-    'sql'=>'`data_h` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_h` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D28'
   ],
@@ -584,7 +584,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_i',
-    'sql'=>'`data_i` text COLLATE utf8_bin NULL',
+    'sql'=>'`data_i` text COLLATE utf8_bin NOT NULL',
     'required'=>1,
     'xl'=>'D29'
   ],

@@ -1,0 +1,28 @@
+div.display
+{
+  width:960px;
+  background-color:#fff;
+}
+div.displayheader
+{
+  width:960px;
+  height:60px;
+  text-indent:30px;
+  line-height:60px;
+  color:#fff;
+  background-color:#3498db;
+  text-align:left;
+}
+div.displayitem
+{
+  width:960px;
+  height:60px;
+  line-height:60px;
+  text-indent:30px;
+  text-align:left;
+  cursor:pointer;
+}
+div.displayitem:hover
+{
+  background-color:#fafafa;
+}
