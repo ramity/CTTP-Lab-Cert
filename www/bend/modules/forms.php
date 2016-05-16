@@ -514,7 +514,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_b',
-    'sql'=>'`data_b` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_b` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D22'
   ],
@@ -524,7 +524,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_c',
-    'sql'=>'`data_c` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_c` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D23'
   ],
@@ -534,7 +534,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_d',
-    'sql'=>'`data_d` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_d` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D24'
   ],
@@ -544,7 +544,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_e',
-    'sql'=>'`data_e` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_e` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D25'
   ],
@@ -554,7 +554,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_f',
-    'sql'=>'`data_f` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_f` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D26'
   ],
@@ -564,7 +564,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_g',
-    'sql'=>'`data_g` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_g` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D27'
   ],
@@ -574,7 +574,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_h',
-    'sql'=>'`data_h` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_h` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D28'
   ],
@@ -584,7 +584,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_i',
-    'sql'=>'`data_i` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_i` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D29'
   ],
@@ -594,7 +594,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_j',
-    'sql'=>'`data_j` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_j` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D30'
   ],
@@ -604,7 +604,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_k',
-    'sql'=>'`data_k` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_k` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D31'
   ],
@@ -614,7 +614,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_l',
-    'sql'=>'`data_l` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_l` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D32'
   ],
@@ -624,7 +624,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_m',
-    'sql'=>'`data_m` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_m` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D33'
   ],
@@ -634,7 +634,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_n',
-    'sql'=>'`data_n` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_n` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D34'
   ],
@@ -644,7 +644,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_o',
-    'sql'=>'`data_o` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_o` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D35'
   ],
@@ -654,7 +654,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_p',
-    'sql'=>'`data_p` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_p` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D36'
   ],
@@ -664,7 +664,7 @@ $form['2']=[
     'tag'=>'text',
     'input_placeholder'=>'Width of chute opening',
     'name'=>'data_q',
-    'sql'=>'`data_q` text COLLATE utf8_bin NOT NULL',
+    'sql'=>'`data_q` text COLLATE utf8_bin NULL',
     'required'=>1,
     'xl'=>'D37'
   ],

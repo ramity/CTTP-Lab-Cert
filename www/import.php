@@ -17,7 +17,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">
-                    <form id="uploadmodule" action="http://localhost/upload.php" method="post">
+                    <form id="uploadmodule" action="http://localhost/import.php" method="post">
                         <div id="uploadheader">Select file for conversion</div>
                         <div id="uploadbar">
                           <?php

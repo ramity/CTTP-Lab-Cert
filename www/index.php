@@ -17,14 +17,17 @@
                     <a href="http://localhost/view.php">
                       <div class="containeritem">View</div>
                     </a>
-                    <a href="http://localhost/upload.php">
-                      <div class="containeritem">Upload</div>
+                    <a href="http://localhost/import.php">
+                      <div class="containeritem">Import</div>
                     </a>
                     <a href="http://localhost/input.php">
                       <div class="containeritem">Input</div>
                     </a>
                     <a href="http://localhost/files.php">
                       <div class="containeritem">Files</div>
+                    </a>
+                    <a href="http://localhost/create.php">
+                      <div class="containeritem">Create</div>
                     </a>
                     <div class="containerheader">Book versions</div>
                     <div class="containeritem">
