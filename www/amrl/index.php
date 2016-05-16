@@ -71,13 +71,30 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
 
                 if(!empty($return))
                 {
-                  $bits=explode('/',$return[0]['calibration_date']);
+                  if(strpos($return[0]['calibration_date'],'/'))
+                  {
+                    $bits=explode('/',$return[0]['calibration_date']);
+                  }
+                  elseif(strpos($return[0]['calibration_date'],'-'))
+                  {
+                    $bits=explode('-',$return[0]['calibration_date']);
+                  }
                   //[0] returns month
                   //[1] returns day
                   //[2] returns year
-                  if($bits[2]===substr($_GET['year'],2))
+                  if(strlen($bits[2])>=3)
                   {
-                    array_push($list,[$return[0]['main_id'],$table]);
+                    if(substr($bits[2],2)===substr($_GET['year'],2))
+                    {
+                      array_push($list,[$return[0]['main_id'],$table]);
+                    }
+                  }
+                  else
+                  {
+                    if($bits[2]===substr($_GET['year'],2))
+                    {
+                      array_push($list,[$return[0]['main_id'],$table]);
+                    }
                   }
                 }
               }
@@ -107,31 +124,38 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                         $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         $con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-                        $st=$con->prepare("SELECT * FROM `$table` WHERE main_id='$main_id' ORDER BY id DESC");
+                        $st=$con->prepare("SELECT * FROM `$table` WHERE main_id='$main_id' AND display!=0 ORDER BY id DESC");
                         $st->execute();
                         $sr=$st->fetchAll();
 
                         if(empty($sr))
                           break;
+
                         echo '<tr class="item">';
+
                         if($sr[0]['result'])
                           echo '<td class="pass">P</td>';
                         else
                           echo '<td class="fail">F</td>';
+
                         echo '<td>'.$sr[0]['equipment_id'].'</td>';
                         echo '<td>'.$sr[0]['calibration_date'].'</td>';
                         echo '<td>'.$sr[0]['performed_by'].'</td>';
+
                         if($sr[0]['display'])
                           echo '<td>Live</td>';
                         else
                           echo '<td>Deleted</td>';
+
                         echo '<td>';
                         echo '<a href="http://localhost/view.php?viewitem='.$main_id.'&table='.$table.'">View</a>';
                         echo '<a href="http://localhost/view.php?edititem='.$main_id.'&table='.$table.'">Edit</a>';
+
                         if($sr[0]['display'])
                           echo '<a href="http://localhost/view.php?removeitem='.$main_id.'&table='.$table.'">Remove</a>';
                         else
                           echo '<a href="http://localhost/view.php?undoitem='.$main_id.'&table='.$table.'">Undo</a>';
+
                         echo '</td>';
                         echo '</tr>';
                       }
