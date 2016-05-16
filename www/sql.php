@@ -22,7 +22,6 @@ foreach($form as $key=>$data)
       echo '<br>';
     }
   }
-  echo '`result` int(1) NOT NULL,<br>';
   echo "`display` int(1) NOT NULL DEFAULT '1',<br>";
   echo 'PRIMARY KEY (`id`)<br>';
   echo ');<br>';

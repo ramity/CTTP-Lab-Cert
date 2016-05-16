@@ -168,12 +168,12 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                               {
                                 if($form[$_POST['excel-format']][$z]['name']==='result')
                                 {
-                                  if(strtolower($sheetData[$row][$col])==='pass')
+                                  if(strtolower($sheetData[$row][$col])=='pass')
                                   {
                                     $sheetData[$row][$col]='1';
                                     array_push($locked,'1');
                                   }
-                                  elseif(strtolower($sheetData[$row][$col])==='fail')
+                                  elseif(strtolower($sheetData[$row][$col])=='fail')
                                   {
                                     $sheetData[$row][$col]='0';
                                     array_push($locked,'0');
@@ -247,26 +247,30 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                           $st=$db->prepare("INSERT INTO `main` (table_number) VALUES(:tablename)");
                           $st->bindParam('tablename',$_POST['excel-format']);
                           $st->execute();
+
                           //GET THE VALUE OF THE NEW ENTRY
                           $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                           $st=$db->prepare("SELECT * FROM `main` ORDER BY id DESC LIMIT 0 , 1");
                           $st->execute();
                           $sr=$st->fetchAll();
+
                           //last second additions
                           $keys.='main_id';
                           $list.='?';
                           array_push($locked,$sr[0]['id']);
+
                           if($_POST['file_year']!==date('Y'))
                           {
                             $keys.=', display';
                             $list.=',?';
                             array_push($locked,'2');
                           }
-
+                          
                           $tablename=$_POST['excel-format'];
                           $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                           $st=$db->prepare("INSERT INTO `$tablename`($keys) VALUES($list)");
                           $result=$st->execute($locked);
+
                           if($result)
                           {
                             echo '<div class="notif-g">Success</div>';

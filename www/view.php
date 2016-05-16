@@ -140,7 +140,7 @@ else
                       $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                       $t_tn=$data['table_number'];
                       $t_id=$data['id'];
-                      $st=$db->prepare("SELECT * FROM `$t_tn` WHERE main_id=$t_id ORDER BY id DESC");
+                      $st=$db->prepare("SELECT * FROM `$t_tn` WHERE main_id=$t_id AND display=1 ORDER BY id DESC");
                       $st->execute();
                       $sr=$st->fetchAll();
                       if(empty($sr))
