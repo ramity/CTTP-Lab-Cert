@@ -156,10 +156,21 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                           echo '<td>'.$sr[0]['calibration_date'].'</td>';
                           echo '<td>'.$sr[0]['performed_by'].'</td>';
 
-                          if($sr[0]['display'])
-                            echo '<td>Live</td>';
-                          else
+                          #first if statement should never trigger but is there to
+                          #provide format and handle all potential values of $sr[0]['display'].
+
+                          if($sr[0]['display']==0)
+                          {
                             echo '<td>Deleted</td>';
+                          }
+                          elseif($sr[0]['display']==1)
+                          {
+                            echo '<td>Live</td>';
+                          }
+                          elseif($sr[0]['display']==2)
+                          {
+                            echo '<td>Archived</td>';
+                          }
 
                           echo '<td>';
                           echo '<a href="http://localhost/view.php?viewitem='.$main_id.'&table='.$table.'">View</a>';
