@@ -138,32 +138,42 @@ else
                     foreach($sr as $data)
                     {
                       $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+
                       $t_tn=$data['table_number'];
                       $t_id=$data['id'];
+
                       $st=$db->prepare("SELECT * FROM `$t_tn` WHERE main_id=$t_id AND display=1 ORDER BY id DESC");
                       $st->execute();
                       $sr=$st->fetchAll();
+
                       if(empty($sr))
-                        break;
+                        continue;
+
                       echo '<tr class="item">';
+
                       if($sr[0]['result'])
                         echo '<td class="pass">P</td>';
                       else
                         echo '<td class="fail">F</td>';
+
                       echo '<td>'.$sr[0]['equipment_id'].'</td>';
                       echo '<td>'.$sr[0]['calibration_date'].'</td>';
                       echo '<td>'.$sr[0]['performed_by'].'</td>';
+
                       if($sr[0]['display'])
                         echo '<td>Live</td>';
                       else
                         echo '<td>Deleted</td>';
+
                       echo '<td>';
                       echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
                       echo '<a href="http://localhost/view.php?edititem='.$t_id.'&table='.$t_tn.'">Edit</a>';
+
                       if($sr[0]['display'])
                         echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
                       else
                         echo '<a href="http://localhost/view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
+
                       echo '</td>';
                       echo '</tr>';
                     }

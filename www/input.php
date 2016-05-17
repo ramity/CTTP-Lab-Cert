@@ -186,6 +186,30 @@ for($z=1;$z<count($form);$z++)
             </div>
             <div class="inputrowgroup">
               <div class="inputrowgroupheader">Hot Mix Calibration Sheets</div>
+              <?php
+              try
+              {
+                $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Hot Mix' ORDER BY name ASC");
+                $st->execute();
+                $sr=$st->fetchAll();
+                if(!empty($sr))
+                {
+                  foreach($sr as $data)
+                  {
+                    echo '<div class="inputrow">';
+                      echo '<a href="http://localhost/input.php?form='.$data['id'].'">';
+                        echo '<div class="selectionlabel">'.$data['name'].'</div>';
+                      echo '</a>';
+                    echo '</div>';
+                  }
+                }
+              }
+              catch(PDOException $e)
+              {
+                echo $e->getMessage();
+              }
+              ?>
             </div>
             <div class="inputrowgroup">
               <div class="inputrowgroupheader">Nuclear Gauge (Leak Test)</div>

@@ -131,65 +131,77 @@ function generate_view_form($main_id,$tableid,$array,$data)
   echo '</a>';
   echo '</div>';
   echo '<table class="viewermodule" id="attach-'.$main_id.'">';
-  echo '<thead>';
-  echo '<tr>';
-  echo '<th>Name</th>';
-  echo '<th>Value</th>';
-  echo '</tr>';
-  echo '</thead>';
-  echo '<tbody>';
-  echo '<tr>';
-  echo '<td>Calibration ID</td>';
-  echo '<td>';
-  echo $data[0]['main_id'];
-  echo '</td>';
-  echo '</tr>';
-  echo '<tr>';
-  echo '<td>';
-  echo 'Calibration Name';
-  echo '</td>';
-  echo '<td>';
-  echo $t_sr[0]['name'];
-  echo '</td>';
-  echo '</tr>';
-  for($z=0;$z<count($array);$z++)
-  {
-    if(isset($array[$z]['tag'])&&!empty($array[$z]['tag']))
-    {
-      if($array[$z]['tag']=='text')
-      {
-        echo '<tr id="'.$z.'">';
-        echo '<td>'.$array[$z]['input_placeholder'].'</td>';
-        echo '<td>'.$data[0][$array[$z]['name']].'</td>';
-        echo '</div>';
-      }
-      elseif($array[$z]['tag']=='select')
-      {
-        echo '<tr id="'.$z.'">';
+    echo '<thead>';
+      echo '<tr>';
+        echo '<th>Name</th>';
+        echo '<th>Description</th>';
+        echo '<th>Value</th>';
+      echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+      echo '<tr>';
+        echo '<td>Calibration ID</td>';
+        echo '<td>Auto generated ID of calibration</td>';
         echo '<td>';
-        echo $array[$z]['label'];
+          echo $data[0]['main_id'];
         echo '</td>';
+      echo '</tr>';
+
+      echo '<tr>';
         echo '<td>';
-        for($x=0;$x<count($array[$z]['options']);$x++)
+          echo 'Calibration Name';
+        echo '</td>';
+        echo '<td>Name of the calibration sheet used</td>';
+        echo '<td>';
+          echo $t_sr[0]['name'];
+        echo '</td>';
+      echo '</tr>';
+
+      for($z=0;$z<count($array);$z++)
+      {
+        if(isset($array[$z]['tag'])&&!empty($array[$z]['tag']))
         {
-          if($array[$z]['options'][$x]['value']==$data[0][$array[$z]['name']])
-            echo $array[$z]['options'][$x]['value'];
+          if($array[$z]['tag']=='text')
+          {
+            echo '<tr id="'.$z.'">';
+              echo '<td>'.$array[$z]['label'].'</td>';
+              echo '<td>'.$array[$z]['description'].'</td>';
+              echo '<td>'.$data[0][$array[$z]['name']].'</td>';
+            echo '</tr>';
+          }
+          elseif($array[$z]['tag']=='select')
+          {
+            echo '<tr id="'.$z.'">';
+              echo '<td>';
+                echo $array[$z]['label'];
+              echo '</td>';
+            echo '<td>';
+
+            for($x=0;$x<count($array[$z]['options']);$x++)
+            {
+              if($array[$z]['options'][$x]['value']==$data[0][$array[$z]['name']])
+              {
+                echo $array[$z]['options'][$x]['value'];
+              }
+            }
+            echo '</td>';
+            echo '</td>';
+          }
         }
-        echo '</td>';
-        echo '</td>';
       }
-    }
-  }
-  echo '<tr>';
-  echo '<td>Result</td>';
-  echo '<td>';
-  if($data[0]['result'])
-    echo 'Passed';
-  else
-    echo 'Failed';
-  echo '</td>';
-  echo '</tr>';
-  echo '</tbody>';
+
+      echo '<tr>';
+        echo '<td>Result</td>';
+        echo '<td>If the calibration passed or failed</td>';
+        echo '<td>';
+        if($data[0]['result'])
+          echo 'Passed';
+        else
+          echo 'Failed';
+
+          echo '</td>';
+      echo '</tr>';
+    echo '</tbody>';
   echo '</table>';
 }
 //START REQUIRED INTERNAL FUNCTIONS

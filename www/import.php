@@ -95,6 +95,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             echo '<div class="label">Select a calibration</div>';
                             echo '<select class="plate" name="excel-format">';
                             $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+
                             $st=$db->prepare("SELECT * FROM `calibrations`");
                             $st->execute();
                             $c_data=$st->fetchAll();
@@ -184,21 +185,99 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                                 }
                                 elseif($form[$_POST['excel-format']][$z]['name']==='calibration_date')
                                 {
-                                  $date=strtotime($sheetData[$row][$col]);
-                                  $calibration_day=date('d',$date);
+                                  if(strpos($sheetData[$row][$col],'-'))
+                                  {
+                                    $bits=explode('-',$sheetData[$row][$col]);
+                                  }
+                                  elseif(strpos($sheetData[$row][$col],'/'))
+                                  {
+                                    $bits=explode('/',$sheetData[$row][$col]);
+                                  }
+                                  else
+                                  {
+                                    die($sheetData[$row][$data].' Was not handled correctly. [#2k3j4go8d7fykjdhasf]');
+                                  }
+
+                                  //get calibration_day for calibration_due + calibration_last
+                                  if(count($bits)==3)
+                                  {
+                                    #$bits[0] - month
+                                    #$bits[1] - day
+                                    #$bits[2] - year
+                                    $calibration_day=$bits[1];
+                                  }
+                                  else
+                                  {
+                                    die('Bits did not have 3 array values [#jklhw3rkjas8diyf2k3jnr]');
+                                  }
+
                                   array_push($locked,htmlentities($sheetData[$row][$col]));
                                   echo '<td>';
-                                  echo htmlentities($sheetData[$row][$col]);
+                                    echo htmlentities($sheetData[$row][$col]);
                                   echo '</td>';
                                 }
                                 elseif($form[$_POST['excel-format']][$z]['name']==='calibration_due'||$form[$_POST['excel-format']][$z]['name']==='calibration_last')
                                 {
                                   //Ref: http://stackoverflow.com/questions/2754765/how-to-reformat-date-in-php#answer-2754777
-                                  $date=DateTime::createFromFormat('M Y',$sheetData[$row][$col])->format("m/$calibration_day/Y");
-                                  $sheetData[$row][$col]=$date;
-                                  array_push($locked,htmlentities($sheetData[$row][$col]));
+                                  $value=9;
+                                  $month_intials=
+                                  [
+                                    'Jan.',
+                                    'Feb.',
+                                    'Mar.',
+                                    'Apr.',
+                                    'Aug.',
+                                    'Sept.',
+                                    'Oct.',
+                                    'Nov.',
+                                    'Dec.'
+                                  ];
+                                  $month_actual=
+                                  [
+                                    'January',
+                                    'February',
+                                    'March',
+                                    'April',
+                                    'August',
+                                    'September',
+                                    'october',
+                                    'November',
+                                    'December'
+                                  ];
+
+                                  for($y=0;$y<count($month_intials);$y++)
+                                  {
+                                    if(strpos($sheetData[$row][$col],$month_intials[$y])!==false)
+                                    {
+                                      $value=$y;
+                                    }
+                                  }
+
+                                  if($value!==9)
+                                  {
+                                    $sheetData[$row][$col]=str_replace($month_intials[$value],$month_actual[$value],$sheetData[$row][$col]);
+                                  }
+
+                                  if(strpos($sheetData[$row][$col],' ')!==false)
+                                  {
+                                    $bits=explode(' ',$sheetData[$row][$col]);
+                                    //[0] month
+                                    //[1] year
+                                    if(strlen($bits[1])==2&&count($bits)==2)
+                                    {
+                                      $sheetData[$row][$col]=$bits[0].' 20'.$bits[1];
+                                    }
+                                  }
+
+                                  if(strpos($sheetData[$row][$col],' ')!==false)
+                                  {
+                                    $date=DateTime::createFromFormat('M Y',$sheetData[$row][$col])->format("m/$calibration_day/Y");
+                                    $sheetData[$row][$col]=$date;
+
+                                    array_push($locked,htmlentities($sheetData[$row][$col]));
+                                  }
                                   echo '<td>';
-                                  echo htmlentities($sheetData[$row][$col]);
+                                    echo htmlentities($sheetData[$row][$col]);
                                   echo '</td>';
                                 }
                                 else
@@ -242,19 +321,26 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                         //INSERT DATA
                         try
                         {
-                          //INSERT NEW ENTRY FOR REFERENCE
+                          $rolled=false;
+
+                          #INSERT NEW ENTRY FOR REFERENCE
+
                           $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+
+                          $db->beginTransaction();
+
                           $st=$db->prepare("INSERT INTO `main` (table_number) VALUES(:tablename)");
                           $st->bindParam('tablename',$_POST['excel-format']);
                           $st->execute();
 
-                          //GET THE VALUE OF THE NEW ENTRY
-                          $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+                          #GET THE VALUE OF THE NEW ENTRY
+
                           $st=$db->prepare("SELECT * FROM `main` ORDER BY id DESC LIMIT 0 , 1");
                           $st->execute();
                           $sr=$st->fetchAll();
 
-                          //last second additions
+                          #last second additions
+
                           $keys.='main_id';
                           $list.='?';
                           array_push($locked,$sr[0]['id']);
@@ -265,11 +351,13 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             $list.=',?';
                             array_push($locked,'2');
                           }
-                          
+
                           $tablename=$_POST['excel-format'];
-                          $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+
                           $st=$db->prepare("INSERT INTO `$tablename`($keys) VALUES($list)");
                           $result=$st->execute($locked);
+
+                          $db->commit();
 
                           if($result)
                           {
@@ -281,9 +369,20 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                               echo '<div class="notif-r">Delete calibration entry</div>';
                             echo '</a>';
                           }
+                          else
+                          {
+                            $rolled=true;
+                            $db->rollBack();
+                            $dba->rollBack();
+                          }
                         }
                         catch(PDOException $e)
                         {
+                          if(!$rolled)
+                          {
+                            $db->rollBack();
+                            $dba->rollBack();
+                          }
                           echo $e->getMessage();
                         }
                       }

@@ -1545,5 +1545,340 @@ $form['4']=
     'sql'=>'`result` int(1) NOT NULL',
     'xl'=>'K38'
   ]
-]
+];
+$form['5']=
+[
+  [
+    'tag'=>'div',
+    'class'=>'inputrowbigheader',
+    'value'=>'Designation Information',
+    'required'=>'0'
+  ],
+  [
+    'label'=>'Equipment ID',
+    'description'=>'Denotes the equipment ID number',
+    'tag'=>'text',
+    'input_placeholder'=>'Equipment ID',
+    'name'=>'equipment_id',
+    'sql'=>'`equipment_id` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B3'
+  ],
+  [
+    'label'=>'Manufacturer',
+    'description'=>'Manufacturer of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Manufacturer',
+    'name'=>'manufacturer',
+    'sql'=>'`manufacturer` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B4'
+  ],
+  [
+    'label'=>'Model #',
+    'description'=>'Model # of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Model #',
+    'name'=>'model_number',
+    'sql'=>'`model_number` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B5'
+  ],
+  [
+    'label'=>'Serial #',
+    'description'=>'Serial # of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Serial #',
+    'name'=>'serial_number',
+    'sql'=>'`serial_number` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B6'
+  ],
+  [
+    'label'=>'University ID',
+    'description'=>'UoA ID of the specified device (if it has one)',
+    'tag'=>'text',
+    'input_placeholder'=>'University ID',
+    'name'=>'uark_id',
+    'sql'=>'`uark_id` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B7'
+  ],
+  [
+    'label'=>'Location',
+    'description'=>'Location of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Location',
+    'name'=>'location',
+    'sql'=>'`location` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'B8'
+  ],
+  [
+    'label'=>'Calibration Date',
+    'description'=>'Date at which this calibration was performed',
+    'tag'=>'text',
+    'input_placeholder'=>'Date',
+    'name'=>'calibration_date',
+    'sql'=>'`calibration_date` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F3'
+  ],
+  [
+    'label'=>'Performed by',
+    'description'=>'Whom this calibration was performed by',
+    'tag'=>'text',
+    'input_placeholder'=>'Performed by',
+    'name'=>'performed_by',
+    'sql'=>'`performed_by` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F4'
+  ],
+  [
+    'label'=>'Next Calibration Due',
+    'description'=>'Date at which the next calibration is due',
+    'tag'=>'text',
+    'input_placeholder'=>'Next Calibration Due',
+    'name'=>'calibration_due',
+    'sql'=>'`calibration_due` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F6'
+  ],
+  [
+    'label'=>'Last Calibration',
+    'description'=>'Date at which the last calibration was performed',
+    'tag'=>'text',
+    'input_placeholder'=>'Last Calibration',
+    'required'=>'1',
+    'name'=>'calibration_last',
+    'sql'=>'`calibration_last` text COLLATE utf8_bin NOT NULL',
+    'xl'=>'F7'
+  ],
+  [
+    'label'=>'Calibration Item',
+    'description'=>'What the calibration of the specified device to check/validate.',
+    'tag'=>'text',
+    'input_placeholder'=>'Calibration Item',
+    'name'=>'calibration_item',
+    'sql'=>'`calibration_item` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C11'
+  ],
+  [
+    'label'=>'Calibration Procedure',
+    'description'=>'Brief description of how the calibration is performed.',
+    'input_placeholder'=>'Calibration Procedure',
+    'tag'=>'text',
+    'name'=>'calibration_procedure',
+    'sql'=>'`calibration_procedure` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C13'
+  ],
+  [
+    'label'=>'Calibration Equipment',
+    'description'=>'List any equipment used in the calibration of the device.',
+    'tag'=>'text',
+    'input_placeholder'=>'Calibration Equipment',
+    'name'=>'calibration_equipment',
+    'sql'=>'`calibration_equipment` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C15'
+  ],
+  [
+    'tag'=>'div',
+    'class'=>'inputrowbigheader',
+    'value'=>'Collected Data',
+    'required'=>'0'
+  ],
+  [
+    'label'=>'Ram Pressure Target',
+    'description'=>'(Load Cell Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in kPa',
+    'name'=>'ram_prs_target',
+    'sql'=>'`ram_prs_target` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C20'
+  ],
+  [
+    'label'=>'Ram Pressure Actual',
+    'description'=>'(Load Cell Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in kPa',
+    'name'=>'ram_prs_actual',
+    'sql'=>'`ram_prs_actual` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C21'
+  ],
+  [
+    'label'=>'Ram Pressure % Difference',
+    'description'=>'(Load Cell Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in kPa',
+    'name'=>'ram_prs_difference',
+    'sql'=>'`ram_prs_difference` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C22'
+  ],
+  [
+    'label'=>'Ram Pressure Tolerance',
+    'description'=>'(Load Cell Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in kPa',
+    'name'=>'ram_prs_tolerance',
+    'sql'=>'`ram_prs_tolerance` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C24'
+  ],
+  [
+    'label'=>'Ram Pressure Result',
+    'description'=>'(Load Cell Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Pass/Fail',
+    'name'=>'ram_prs_result',
+    'sql'=>'`ram_prs_result` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C26'
+  ],
+  [
+    'label'=>'Tilt Angle Measurement Type',
+    'description'=>'(Angle Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'N/A',
+    'name'=>'tilt_ang_type',
+    'sql'=>'`tilt_ang_type` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'E20'
+  ],
+  [
+    'label'=>'Tilt Angle Measurement Angle',
+    'description'=>'(Angle Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in degrees',
+    'name'=>'tilt_ang_angle',
+    'sql'=>'`tilt_ang_angle` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F22'
+  ],
+  [
+    'label'=>'Tilt Angle Measurement Acc. Range',
+    'description'=>'(Angle Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in degrees',
+    'name'=>'tilt_ang_acc_range',
+    'sql'=>'`tilt_ang_acc_range` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F24',
+    'value'=>'1.14 - 1.18'
+  ],
+  [
+    'label'=>'Tilt Angle Measurement Result',
+    'description'=>'(Angle Reading)',
+    'tag'=>'text',
+    'input_placeholder'=>'Pass/Fail',
+    'name'=>'tilt_ang_result',
+    'sql'=>'`tilt_ang_result` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F26'
+  ],
+  [
+    'label'=>'Height Target',
+    'description'=>'6 Inch Block',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'height_target',
+    'sql'=>'`height_target` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C32'
+  ],
+  [
+    'label'=>'Height Actual',
+    'description'=>'6 Inch Block',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'height_actual',
+    'sql'=>'`height_actual` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C33'
+  ],
+  [
+    'label'=>'Height Acc. Range',
+    'description'=>'6 Inch Block',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'height_acc_range',
+    'sql'=>'`height_acc_range` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C34',
+    'value'=>'+/- 0.05'
+  ],
+  [
+    'label'=>'Height Result',
+    'description'=>'6 Inch Block',
+    'tag'=>'text',
+    'input_placeholder'=>'Pass/Fail',
+    'name'=>'height_result',
+    'sql'=>'`height_result` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C35'
+  ],
+  [
+    'label'=>'Speed Target Gyr',
+    'description'=>'Not provided',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in Gyrations/min',
+    'name'=>'speed_gyr_target',
+    'sql'=>'`speed_gyr_target` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F32'
+  ],
+  [
+    'label'=>'Speed Actual Time',
+    'description'=>'Not provided',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in Gyrations/min',
+    'name'=>'speed_gyr_actual',
+    'sql'=>'`speed_gyr_actual` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F33'
+  ],
+  [
+    'label'=>'Speed Acc. Range',
+    'description'=>'Not provided',
+    'tag'=>'text',
+    'input_placeholder'=>'Range allowed to pass',
+    'name'=>'speed_gyr_range',
+    'sql'=>'`speed_gyr_range` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F34',
+    'value'=>'+/- 0.5 sec'
+  ],
+  [
+    'label'=>'Comments (optional)',
+    'description'=>'N/A',
+    'tag'=>'text',
+    'input_placeholder'=>'Any comments on the calibration',
+    'name'=>'comments',
+    'sql'=>'`comments` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C38'
+  ],
+  [
+    'label'=>'Initial',
+    'description'=>'Initial from calibrator',
+    'tag'=>'text',
+    'input_placeholder'=>'Initials',
+    'name'=>'initial',
+    'sql'=>'`initial` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'G42'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'F35'
+  ]
+];
+
 ?>
