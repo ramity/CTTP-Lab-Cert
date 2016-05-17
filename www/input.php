@@ -151,7 +151,7 @@ for($z=1;$z<count($form);$z++)
         {
         ?>
           <div class="inputrowbigheader">
-            Calibration Sheets
+            [Simple] Calibration Sheets
           </div>
           <div class="containerobj" style="padding-top:10px;">
             <div class="inputrowgroup">
@@ -160,7 +160,7 @@ for($z=1;$z<count($form);$z++)
               try
               {
                 $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
-                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Aggregate' ORDER BY name ASC");
+                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Aggregate' AND format='Simple' ORDER BY name ASC");
                 $st->execute();
                 $sr=$st->fetchAll();
                 if(!empty($sr))
@@ -190,7 +190,7 @@ for($z=1;$z<count($form);$z++)
               try
               {
                 $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
-                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Hot Mix' ORDER BY name ASC");
+                $st=$db->prepare("SELECT * FROM `calibrations` WHERE type='Hot Mix' AND format='Simple' ORDER BY name ASC");
                 $st->execute();
                 $sr=$st->fetchAll();
                 if(!empty($sr))
@@ -370,6 +370,14 @@ for($z=1;$z<count($form);$z++)
             </div>
           </div>
         -->
+        <div class="inputrowbigheader">
+          [Complex] Calibration Sheets
+        </div>
+        <div class="containerobj" style="padding-top:10px;">
+          <div class="inputrowgroup">
+            <div class="inputrowgroupheader">Aggregate Calibrations</div>
+          </div>
+        </div>
         <?php
         }
         else

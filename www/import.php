@@ -79,13 +79,13 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             echo '<option disabled selected value> -- select an option -- </option>';
                             foreach($sheets as $data)
                             {
-                              if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('"','&quote',$data))
+                              if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('"','&',$data))
                               {
-                                echo '<option value="'.str_replace('"','&quote',$data).'" selected>'.$data.'</option>';
+                                echo '<option value="'.str_replace('"','&',$data).'" selected>'.$data.'</option>';
                               }
                               else
                               {
-                                echo '<option value="'.str_replace('"','&quote',$data).'">'.$data.'</option>';
+                                echo '<option value="'.str_replace('"','&',$data).'">'.$data.'</option>';
                               }
                             }
                             echo '</select>';
@@ -102,16 +102,19 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                             echo '<option disabled selected value> -- select an option -- </option>';
                             for($z=0;$z<count($c_data);$z++)
                             {
-                              if(isset($_POST['excel-format'])&&!empty($_POST['excel-format'])&&$_POST['excel-format']==str_replace('&quote','"',$c_data[$z]['id']))
+                              if(isset($_POST['excel-format'])&&!empty($_POST['excel-format'])&&$_POST['excel-format']==str_replace('&','"',$c_data[$z]['id']))
                               {
-                                echo '<option value="'.str_replace('"','&quote',$c_data[$z]['id']).'" selected>'.$c_data[$z]['name'].'</option>';
+                                echo '<option value="'.str_replace('"','&',$c_data[$z]['id']).'" selected>'.$c_data[$z]['name'].'</option>';
                               }
                               else
                               {
-                                echo '<option value="'.str_replace('"','&quote',$c_data[$z]['id']).'">'.$c_data[$z]['name'].'</option>';
+                                echo '<option value="'.str_replace('"','&',$c_data[$z]['id']).'">'.$c_data[$z]['name'].'</option>';
                               }
                             }
                             echo '</select>';
+
+                            //change post_sheet_selection back to quote to properly load the file
+                            $_POST['sheet_selection']=str_replace('&','"',$_POST['sheet_selection']);
                           }
                           ?>
                           <input id="uploadsubmit" type="submit" name="form-submit">
@@ -139,19 +142,24 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                               $col=[];
                               $row=[];
                               $result=true;
-                              for($x=0;$x<count($xlvalues);$x++)
-                              {
-                                $col[$x]=preg_replace('/[0-9]/','',$xlvalues[$x]);
-                                $row[$x]=intval(preg_replace('/[^0-9]+/','',$xlvalues[$x]),10);
-                              }
                               echo '<td>';
                               for($x=0;$x<count($xlvalues);$x++)
                               {
-                                echo '[';
-                                echo $col[$x];
-                                echo ',';
-                                echo $row[$x];
-                                echo ']';
+                                if(strpos($xlvalues[$x],',')!==false||
+                                  strpos($xlvalues[$x],'(')!==false||
+                                  strpos($xlvalues[$x],')')!==false||
+                                  strpos($xlvalues[$x],'/')!==false)
+                                {
+                                  echo $xlvalues[$x];
+                                }
+                                else
+                                {
+                                  echo '[';
+                                  echo $col[$x]=preg_replace('/[0-9]/','',$xlvalues[$x]);
+                                  echo ',';
+                                  echo $row[$x]=intval(preg_replace('/[^0-9]+/','',$xlvalues[$x]),10);
+                                  echo ']';
+                                }
                               }
                               echo '</td>';
                             }
@@ -301,13 +309,23 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                               $data='';
                               for($x=0;$x<count($xlvalues);$x++)
                               {
-                                if(isset($sheetData[$row[$x]][$col[$x]])&&!empty($sheetData[$row[$x]][$col[$x]]))
+                                if(strpos($xlvalues[$x],',')!==false||
+                                  strpos($xlvalues[$x],'(')!==false||
+                                  strpos($xlvalues[$x],')')!==false||
+                                  strpos($xlvalues[$x],'/')!==false)
                                 {
-                                  $data.=htmlentities($sheetData[$row[$x]][$col[$x]]);
+                                  $data.=$xlvalues[$x];
                                 }
                                 else
                                 {
-                                  $data.='NOT GIVEN';
+                                  if(isset($sheetData[$row[$x]][$col[$x]])&&!empty($sheetData[$row[$x]][$col[$x]]))
+                                  {
+                                    $data.=htmlentities($sheetData[$row[$x]][$col[$x]]);
+                                  }
+                                  else
+                                  {
+                                    $data.='NOT GIVEN';
+                                  }
                                 }
                               }
                               array_push($locked,$data);
@@ -321,6 +339,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
                         //INSERT DATA
                         try
                         {
+                          //die('no entry for you');
                           $rolled=false;
 
                           #INSERT NEW ENTRY FOR REFERENCE

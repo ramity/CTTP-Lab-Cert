@@ -23,7 +23,7 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
     <div id="container">
       <div id="containerinr">
         <?php
-        if(!isset($_GET['year'])||empty($_GET['year']))
+        if(!isset($_GET['year'])||empty($_GET['year'])||!ctype_digit($_GET['year'])||strlen($_GET['year'])!==4)
         {
         ?>
         <div class="display">
@@ -71,44 +71,108 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
 
                 if(!empty($return))
                 {
-                  if(strpos($return[0]['calibration_date'],'/'))
+                  //TODO FIX THIS PL0X
+                  //CURRENT ISSUE: NOT HANDLING CALIBRATION_DATE WITH
+                  //COMMA, THEREFORE NOT DISPLAYING RESULT CURRENTLY.
+
+                  if(strpos($return[0]['calibration_date'],','))
                   {
-                    #M/D/Y
-                    $bits=explode('/',$return[0]['calibration_date']);
-                  }
-                  elseif(strpos($return[0]['calibration_date'],'-'))
-                  {
-                    #M-D-Y
-                    $bits=explode('-',$return[0]['calibration_date']);
-                  }
-                  elseif(strpos($return[0]['calibration_date'],' '))
-                  {
-                    #MONTH_YEAR
-                    $bits=explode(' ',$return[0]['calibration_date']);
-                    #set bits[2]=bits[1] to keep universal format
-                    $bits[2]=$bits[1];
-                  }
-                  else
-                  {
-                    //something didn't meet the formats above.
-                    echo $return[0]['calibration_date'];
-                    die('An error occured #2983h2gf9238f');
-                  }
-                  //[0] returns month
-                  //[1] returns day
-                  //[2] returns year
-                  if(strlen($bits[2])>=3)
-                  {
-                    if(substr($bits[2],2)===substr($_GET['year'],2))
+                    $sublist=[];
+                    $bits=explode(',',$return[0]['calibration_date']);
+                    foreach($bits as $return[0]['calibration_date'])
                     {
-                      array_push($list,[$return[0]['main_id'],$table]);
+                      if(strpos($return[0]['calibration_date'],'/'))
+                      {
+                        #M/D/Y
+                        $bits=explode('/',$return[0]['calibration_date']);
+                      }
+                      elseif(strpos($return[0]['calibration_date'],'-'))
+                      {
+                        #M-D-Y
+                        $bits=explode('-',$return[0]['calibration_date']);
+                      }
+                      elseif(strpos($return[0]['calibration_date'],' '))
+                      {
+                        #MONTH_YEAR
+                        $bits=explode(' ',$return[0]['calibration_date']);
+                        #set bits[2]=bits[1] to keep universal format
+                        $bits[2]=$bits[1];
+                      }
+                      else
+                      {
+                        //something didn't meet the formats above.
+                        echo $return[0]['calibration_date'];
+                        die('An error occured #2983h2gf9238f');
+                      }
+                      //[0] returns month
+                      //[1] returns day
+                      //[2] returns year
+                      if(strlen($bits[2])>=3)
+                      {
+                        if(substr($bits[2],2)===substr($_GET['year'],2))
+                        {
+                          array_push($sublist,[$return[0]['main_id'],$table]);
+                        }
+                      }
+                      else
+                      {
+                        if($bits[2]===substr($_GET['year'],2))
+                        {
+                          array_push($sublist,[$return[0]['main_id'],$table]);
+                        }
+                      }
                     }
+                    print_r($sublist);
+                    echo '<br>';
+                    //die();
+                    for($a=0;$a<count($sublist);$a++)
+                    {
+                      array_push($list,[$sublist[$a][0],$sublist[$a][1]]);
+                    }
+                    print_r($list);
+                    die('FIX THE ABOVE');
                   }
                   else
                   {
-                    if($bits[2]===substr($_GET['year'],2))
+                    if(strpos($return[0]['calibration_date'],'/'))
                     {
-                      array_push($list,[$return[0]['main_id'],$table]);
+                      #M/D/Y
+                      $bits=explode('/',$return[0]['calibration_date']);
+                    }
+                    elseif(strpos($return[0]['calibration_date'],'-'))
+                    {
+                      #M-D-Y
+                      $bits=explode('-',$return[0]['calibration_date']);
+                    }
+                    elseif(strpos($return[0]['calibration_date'],' '))
+                    {
+                      #MONTH_YEAR
+                      $bits=explode(' ',$return[0]['calibration_date']);
+                      #set bits[2]=bits[1] to keep universal format
+                      $bits[2]=$bits[1];
+                    }
+                    else
+                    {
+                      //something didn't meet the formats above.
+                      echo $return[0]['calibration_date'];
+                      die('An error occured #2983h2gf9238f');
+                    }
+                    //[0] returns month
+                    //[1] returns day
+                    //[2] returns year
+                    if(strlen($bits[2])>=3)
+                    {
+                      if(substr($bits[2],2)===substr($_GET['year'],2))
+                      {
+                        array_push($list,[$return[0]['main_id'],$table]);
+                      }
+                    }
+                    else
+                    {
+                      if($bits[2]===substr($_GET['year'],2))
+                      {
+                        array_push($list,[$return[0]['main_id'],$table]);
+                      }
                     }
                   }
                 }

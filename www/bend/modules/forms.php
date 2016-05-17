@@ -1880,5 +1880,436 @@ $form['5']=
     'xl'=>'F35'
   ]
 ];
-
+$form['6']=
+[
+  [
+    'tag'=>'div',
+    'class'=>'inputrowbigheader',
+    'value'=>'Designation Information',
+    'required'=>'0'
+  ],
+  [
+    'label'=>'Equipment ID',
+    'description'=>'Denotes the equipment ID number',
+    'tag'=>'text',
+    'input_placeholder'=>'Equipment ID',
+    'name'=>'equipment_id',
+    'sql'=>'`equipment_id` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D3'
+  ],
+  [
+    'label'=>'Manufacturer',
+    'description'=>'Manufacturer of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Manufacturer',
+    'name'=>'manufacturer',
+    'sql'=>'`manufacturer` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D4'
+  ],
+  [
+    'label'=>'Model #',
+    'description'=>'Model # of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Model #',
+    'name'=>'model_number',
+    'sql'=>'`model_number` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D5'
+  ],
+  [
+    'label'=>'Serial #',
+    'description'=>'Serial # of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Serial #',
+    'name'=>'serial_number',
+    'sql'=>'`serial_number` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'K3'
+  ],
+  [
+    'label'=>'University ID',
+    'description'=>'UoA ID of the specified device (if it has one)',
+    'tag'=>'text',
+    'input_placeholder'=>'University ID',
+    'name'=>'uark_id',
+    'sql'=>'`uark_id` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'K4'
+  ],
+  [
+    'label'=>'Location',
+    'description'=>'Location of the specified device',
+    'tag'=>'text',
+    'input_placeholder'=>'Location',
+    'name'=>'location',
+    'sql'=>'`location` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'K5'
+  ],
+  [
+    'label'=>'Calibration Date',
+    'description'=>'Date at which this calibration was performed',
+    'tag'=>'text',
+    'input_placeholder'=>'Date',
+    'name'=>'calibration_date',
+    'sql'=>'`calibration_date` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D16+, +K16'
+  ],
+  [
+    'tag'=>'text',
+    'label'=>'Performed by',
+    'description'=>'Whom this calibration was performed by',
+    'input_placeholder'=>'Performed by',
+    'name'=>'performed_by',
+    'sql'=>'`performed_by` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D17+, +K17'
+  ],
+  [
+    'label'=>'Next Calibration Due',
+    'description'=>'Date at which the next calibration is due',
+    'tag'=>'text',
+    'input_placeholder'=>'Next Calibration Due',
+    'name'=>'calibration_due',
+    'sql'=>'`calibration_due` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D19+, +K19'
+  ],
+  [
+    'label'=>'Last Calibration',
+    'description'=>'Date at which the last calibration was performed',
+    'tag'=>'text',
+    'input_placeholder'=>'Last Calibration',
+    'required'=>'1',
+    'name'=>'calibration_last',
+    'sql'=>'`calibration_last` text COLLATE utf8_bin NOT NULL',
+    'xl'=>'D20+, +K20'
+  ],
+  [
+    'label'=>'Calibration Item',
+    'description'=>'What the calibration of the specified device to check/validate.',
+    'tag'=>'text',
+    'input_placeholder'=>'Calibration Item',
+    'name'=>'calibration_item',
+    'sql'=>'`calibration_item` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C7'
+  ],
+  [
+    'label'=>'Calibration Procedure',
+    'description'=>'Brief description of how the calibration is performed.',
+    'input_placeholder'=>'Calibration Procedure',
+    'tag'=>'text',
+    'name'=>'calibration_procedure',
+    'sql'=>'`calibration_procedure` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C9'
+  ],
+  [
+    'label'=>'Calibration Equipment',
+    'description'=>'List any equipment used in the calibration of the device.',
+    'tag'=>'text',
+    'input_placeholder'=>'Calibration Equipment',
+    'name'=>'calibration_equipment',
+    'sql'=>'`calibration_equipment` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'C11'
+  ],
+  [
+    'label'=>'Requirement',
+    'description'=>'(according to ASHTO M 92)',
+    'tag'=>'text',
+    'input_placeholder'=>'Predefined required value',
+    'name'=>'required_value',
+    'sql'=>'`required_value` text COLLATE utf8_bin NOT NULL',
+    'required'=>'0',
+    'xl'=>'(+H13+)/(+H14+)',
+    'value'=>'(50+/-1.50mm)/(48.5mm-51.5mm)'
+  ],
+  [
+    'tag'=>'div',
+    'class'=>'inputrowbigheader',
+    'value'=>'Collected Data',
+    'required'=>'0'
+  ],
+  [
+    'label'=>'Measurement #1 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_a_a',
+    'sql'=>'`measure_a_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D23+, +K23'
+  ],
+  [
+    'label'=>'Measurement #1 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_a_b',
+    'sql'=>'`measure_a_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F23+, +M23'
+  ],
+  [
+    'label'=>'Measurement #2 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_b_a',
+    'sql'=>'`measure_b_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D24+, +K24'
+  ],
+  [
+    'label'=>'Measurement #2 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_b_b',
+    'sql'=>'`measure_b_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F24+, +M24'
+  ],
+  [
+    'label'=>'Measurement #3 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_c_a',
+    'sql'=>'`measure_c_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D25+, +K25'
+  ],
+  [
+    'label'=>'Measurement #3 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_c_b',
+    'sql'=>'`measure_c_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F25+, +M25'
+  ],
+  [
+    'label'=>'Measurement #4 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_d_a',
+    'sql'=>'`measure_d_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D26+, +K26'
+  ],
+  [
+    'label'=>'Measurement #4 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_d_b',
+    'sql'=>'`measure_d_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F26+, +M26'
+  ],
+  [
+    'label'=>'Measurement #5 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_e_a',
+    'sql'=>'`measure_e_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D27+, +K27'
+  ],
+  [
+    'label'=>'Measurement #5 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_e_b',
+    'sql'=>'`measure_e_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F27+, +M27'
+  ],
+  [
+    'label'=>'Measurement #6 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_f_a',
+    'sql'=>'`measure_f_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D28+, +K28'
+  ],
+  [
+    'label'=>'Measurement #6 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_f_b',
+    'sql'=>'`measure_f_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F28+, +M28'
+  ],
+  [
+    'label'=>'Measurement #7 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_g_a',
+    'sql'=>'`measure_g_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D29+, +K29'
+  ],
+  [
+    'label'=>'Measurement #7 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_g_b',
+    'sql'=>'`measure_g_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F29+, +M29'
+  ],
+  [
+    'label'=>'Measurement #8 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_h_a',
+    'sql'=>'`measure_h_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D30+, +K30'
+  ],
+  [
+    'label'=>'Measurement #8 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_h_b',
+    'sql'=>'`measure_h_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F30+, +M30'
+  ],
+  [
+    'label'=>'Measurement #9 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_i_a',
+    'sql'=>'`measure_i_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D31+, +K31'
+  ],
+  [
+    'label'=>'Measurement #9 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_i_b',
+    'sql'=>'`measure_i_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F31+, +M31'
+  ],
+  [
+    'label'=>'Measurement #10 a',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_j_a',
+    'sql'=>'`measure_j_a` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D32+, +K32'
+  ],
+  [
+    'label'=>'Measurement #10 b',
+    'description'=>'Measurement using calipers',
+    'tag'=>'text',
+    'input_placeholder'=>'Measurement in mm',
+    'name'=>'measure_j_b',
+    'sql'=>'`measure_j_b` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F32+, +M32'
+  ],
+  [
+    'label'=>'Frame Condition',
+    'description'=>'Condition of specified object',
+    'tag'=>'text',
+    'input_placeholder'=>'Excellent/Good/Fair/Poor',
+    'name'=>'condition_frame',
+    'sql'=>'`condition_frame` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D35+, +K35'
+  ],
+  [
+    'label'=>'Joints Condition',
+    'description'=>'Condition of specified object',
+    'tag'=>'text',
+    'input_placeholder'=>'Excellent/Good/Fair/Poor',
+    'name'=>'condition_joints',
+    'sql'=>'`condition_joints` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D36+, +K36'
+  ],
+  [
+    'label'=>'Cloth Condition',
+    'description'=>'Condition of specified object',
+    'tag'=>'text',
+    'input_placeholder'=>'Excellent/Good/Fair/Poor',
+    'name'=>'condition_cloth',
+    'sql'=>'`condition_cloth` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D37+, +K37'
+  ],
+  [
+    'label'=>'Tightness Condition',
+    'description'=>'Condition of specified object',
+    'tag'=>'text',
+    'input_placeholder'=>'Excellent/Good/Fair/Poor',
+    'name'=>'condition_tightness',
+    'sql'=>'`condition_tightness` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'D38+, +K38'
+  ],
+  [
+    'label'=>'Other Condition',
+    'description'=>'Condition of specified object',
+    'tag'=>'text',
+    'input_placeholder'=>'Excellent/Good/Fair/Poor',
+    'name'=>'condition_other',
+    'sql'=>'`condition_other` text COLLATE utf8_bin NOT NULL',
+    'required'=>'0',
+    'xl'=>'D39+, +K39'
+  ],
+  [
+    'label'=>'Comments (Optional)',
+    'description'=>'Observations of calibration',
+    'tag'=>'text',
+    'input_placeholder'=>'text placeholder',
+    'name'=>'comments',
+    'sql'=>'`comments` text COLLATE utf8_bin NOT NULL',
+    'required'=>'0',
+    'xl'=>'C41+, +J41'
+  ],
+  [
+    'label'=>'Initial',
+    'description'=>'Required to authorize calibration performed.',
+    'tag'=>'text',
+    'input_placeholder'=>'Initial by calibrator',
+    'name'=>'initial',
+    'sql'=>'`initial` text COLLATE utf8_bin NOT NULL',
+    'required'=>'1',
+    'xl'=>'F47+, +M47'
+  ],
+  [
+    'label'=>'Pass/Fail',
+    'name'=>'result',
+    'sql'=>'`result` int(1) NOT NULL',
+    'xl'=>'E45+, +L45'
+  ]
+];
 ?>

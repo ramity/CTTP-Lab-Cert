@@ -35,7 +35,7 @@
                     <div class="containerheader">Book versions</div>
                     <div class="containeritem">
                         <a href="http://localhost/book.php">
-                            Complete Book
+                            Complete Book - Depreciated
                         </a>
                     </div>
                 </div>
