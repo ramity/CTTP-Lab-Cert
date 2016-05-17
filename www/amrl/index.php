@@ -73,11 +73,26 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                 {
                   if(strpos($return[0]['calibration_date'],'/'))
                   {
+                    #M/D/Y
                     $bits=explode('/',$return[0]['calibration_date']);
                   }
                   elseif(strpos($return[0]['calibration_date'],'-'))
                   {
+                    #M-D-Y
                     $bits=explode('-',$return[0]['calibration_date']);
+                  }
+                  elseif(strpos($return[0]['calibration_date'],' '))
+                  {
+                    #MONTH_YEAR
+                    $bits=explode(' ',$return[0]['calibration_date']);
+                    #set bits[2]=bits[1] to keep universal format
+                    $bits[2]=$bits[1];
+                  }
+                  else
+                  {
+                    //something didn't meet the formats above.
+                    echo $return[0]['calibration_date'];
+                    die('An error occured #2983h2gf9238f');
                   }
                   //[0] returns month
                   //[1] returns day
@@ -128,36 +143,36 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                         $st->execute();
                         $sr=$st->fetchAll();
 
-                        if(empty($sr))
-                          break;
+                        if(!empty($sr))
+                        {
+                          echo '<tr class="item">';
 
-                        echo '<tr class="item">';
+                          if($sr[0]['result'])
+                            echo '<td class="pass">P</td>';
+                          else
+                            echo '<td class="fail">F</td>';
 
-                        if($sr[0]['result'])
-                          echo '<td class="pass">P</td>';
-                        else
-                          echo '<td class="fail">F</td>';
+                          echo '<td>'.$sr[0]['equipment_id'].'</td>';
+                          echo '<td>'.$sr[0]['calibration_date'].'</td>';
+                          echo '<td>'.$sr[0]['performed_by'].'</td>';
 
-                        echo '<td>'.$sr[0]['equipment_id'].'</td>';
-                        echo '<td>'.$sr[0]['calibration_date'].'</td>';
-                        echo '<td>'.$sr[0]['performed_by'].'</td>';
+                          if($sr[0]['display'])
+                            echo '<td>Live</td>';
+                          else
+                            echo '<td>Deleted</td>';
 
-                        if($sr[0]['display'])
-                          echo '<td>Live</td>';
-                        else
-                          echo '<td>Deleted</td>';
+                          echo '<td>';
+                          echo '<a href="http://localhost/view.php?viewitem='.$main_id.'&table='.$table.'">View</a>';
+                          echo '<a href="http://localhost/view.php?edititem='.$main_id.'&table='.$table.'">Edit</a>';
 
-                        echo '<td>';
-                        echo '<a href="http://localhost/view.php?viewitem='.$main_id.'&table='.$table.'">View</a>';
-                        echo '<a href="http://localhost/view.php?edititem='.$main_id.'&table='.$table.'">Edit</a>';
+                          if($sr[0]['display'])
+                            echo '<a href="http://localhost/view.php?removeitem='.$main_id.'&table='.$table.'">Remove</a>';
+                          else
+                            echo '<a href="http://localhost/view.php?undoitem='.$main_id.'&table='.$table.'">Undo</a>';
 
-                        if($sr[0]['display'])
-                          echo '<a href="http://localhost/view.php?removeitem='.$main_id.'&table='.$table.'">Remove</a>';
-                        else
-                          echo '<a href="http://localhost/view.php?undoitem='.$main_id.'&table='.$table.'">Undo</a>';
-
-                        echo '</td>';
-                        echo '</tr>';
+                          echo '</td>';
+                          echo '</tr>';
+                        }
                       }
                       catch(PDOException $e)
                       {
