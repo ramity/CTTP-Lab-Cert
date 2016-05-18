@@ -102,7 +102,7 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                       {
                         //something didn't meet the formats above.
                         echo $return[0]['calibration_date'];
-                        die('An error occured #2983h2gf9238f');
+                        die('An error occured #rwew323fsfbsdaf');
                       }
                       //[0] returns month
                       //[1] returns day
@@ -122,15 +122,10 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
                         }
                       }
                     }
-                    print_r($sublist);
-                    echo '<br>';
-                    //die();
                     for($a=0;$a<count($sublist);$a++)
                     {
                       array_push($list,[$sublist[$a][0],$sublist[$a][1]]);
                     }
-                    print_r($list);
-                    die('FIX THE ABOVE');
                   }
                   else
                   {

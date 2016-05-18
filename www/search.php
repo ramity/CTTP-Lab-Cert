@@ -139,114 +139,126 @@ else
                 $search_where_criteria.='equipment_id=? AND ';
                 array_push($search_execute_array,$_POST['equipment_id']);
               }
-              elseif(isset($_POST['manufacturer'])&&!empty($_POST['manufacturer']))
+              if(isset($_POST['manufacturer'])&&!empty($_POST['manufacturer']))
               {
                 $search_status=true;
                 $search_where_criteria.='manufacturer=? AND ';
                 array_push($search_execute_array,$_POST['manufacturer']);
               }
-              elseif(isset($_POST['model_number'])&&!empty($_POST['model_number']))
+              if(isset($_POST['model_number'])&&!empty($_POST['model_number']))
               {
                 $search_status=true;
                 $search_where_criteria.='model_number=? AND ';
                 array_push($search_execute_array,$_POST['model_number']);
               }
-              elseif(isset($_POST['serial_number'])&&!empty($_POST['serial_number']))
+              if(isset($_POST['serial_number'])&&!empty($_POST['serial_number']))
               {
                 $search_status=true;
                 $search_where_criteria.='serial_number=? AND ';
                 array_push($search_execute_array,$_POST['serial_number']);
               }
-              elseif(isset($_POST['uark_id'])&&!empty($_POST['uark_id']))
+              if(isset($_POST['uark_id'])&&!empty($_POST['uark_id']))
               {
                 $search_status=true;
                 $search_where_criteria.='uark_id=? AND ';
                 array_push($search_execute_array,$_POST['uark_id']);
               }
-              elseif(isset($_POST['location'])&&!empty($_POST['location']))
+              if(isset($_POST['location'])&&!empty($_POST['location']))
               {
                 $search_status=true;
                 $search_where_criteria.='location=? AND ';
                 array_push($search_execute_array,$_POST['location']);
               }
-              elseif(isset($_POST['performed_by'])&&!empty($_POST['performed_by']))
+              if(isset($_POST['performed_by'])&&!empty($_POST['performed_by']))
               {
                 $search_status=true;
                 $search_where_criteria.='performed_by=? AND ';
                 array_push($search_execute_array,$_POST['performed_by']);
               }
-              elseif(isset($_POST['calibration_year'])&&!empty($_POST['calibration_year']))
+              if(isset($_POST['calibration_year'])&&!empty($_POST['calibration_year']))
               {
                 $search_status=true;
                 $search_where_criteria.='calibration_year=? AND ';
                 array_push($search_execute_array,$_POST['calibration_year']);
               }
-              else
-              {
-                //Do nothing
-              }
 
-              if($search_status)
+              try
               {
+                $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
+                $st=$db->prepare("SELECT * FROM `calibrations`");
+                $st->execute();
+                $sr=$st->fetchAll();
 
-                try
+                //removes space + AND + space
+                if($search_status)
+                {
+                  $search_where_criteria=substr($search_where_criteria,0,-5);
+                }
+
+                foreach($sr as $data)
                 {
                   $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
-                  $st=$db->prepare("SELECT * FROM `calibrations`");
-                  $st->execute();
+
+                  $t_tn=$data['id'];
+
+                  if($search_status)
+                  {
+                    $st=$db->prepare("SELECT * FROM `$t_tn` WHERE $search_where_criteria ORDER BY main_id DESC");
+                  }
+                  else
+                  {
+                    $st=$db->prepare("SELECT * FROM `$t_tn` ORDER BY main_id DESC");
+                  }
+
+                  $st->execute($search_execute_array);
                   $sr=$st->fetchAll();
 
-                  //removes space + AND + space
-                  $search_where_criteria=substr($search_where_criteria,0,-5);
-
-                  foreach($sr as $data)
+                  foreach($sr as $ref)
                   {
-                    $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
-
-                    $t_tn=$data['id'];
-
-                    $st=$db->prepare("SELECT * FROM `$t_tn` WHERE $search_where_criteria AND display=1 ORDER BY id DESC");
-                    $st->execute($search_execute_array);
-                    $sr=$st->fetchAll();
-
-                    echo 'iteration<br>';
-
-                    if(empty($sr))
+                    if(empty($ref))
                       continue;
 
                     echo '<tr class="item">';
 
-                    if($sr[0]['result'])
+                    if($ref['result'])
                       echo '<td class="pass">P</td>';
                     else
                       echo '<td class="fail">F</td>';
 
-                    echo '<td>'.$sr[0]['equipment_id'].'</td>';
-                    echo '<td>'.$sr[0]['calibration_date'].'</td>';
-                    echo '<td>'.$sr[0]['performed_by'].'</td>';
+                    echo '<td>'.$ref['equipment_id'].'</td>';
+                    echo '<td>'.$ref['calibration_date'].'</td>';
+                    echo '<td>'.$ref['performed_by'].'</td>';
 
-                    if($sr[0]['display'])
+                    if($ref['display']==1)
+                    {
                       echo '<td>Live</td>';
+                    }
+                    elseif($ref['display']==2)
+                    {
+                      echo '<td>Arcive</td>';
+                    }
                     else
+                    {
                       echo '<td>Deleted</td>';
+                    }
 
                     echo '<td>';
-                    echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                    echo '<a href="http://localhost/view.php?edititem='.$t_id.'&table='.$t_tn.'">Edit</a>';
+                      echo '<a href="http://localhost/view.php?viewitem='.$ref['main_id'].'&table='.$t_tn.'">View</a>';
+                      echo '<a href="http://localhost/view.php?edititem='.$ref['main_id'].'&table='.$t_tn.'">Edit</a>';
 
-                    if($sr[0]['display'])
-                      echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
-                    else
-                      echo '<a href="http://localhost/view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
+                      if($ref['display'])
+                        echo '<a href="http://localhost/view.php?removeitem='.$ref['main_id'].'&table='.$t_tn.'">Remove</a>';
+                      else
+                        echo '<a href="http://localhost/view.php?undoitem='.$ref['main_id'].'&table='.$t_tn.'">Undo</a>';
 
                     echo '</td>';
                     echo '</tr>';
                   }
                 }
-                catch(PDOException $e)
-                {
-                    echo $e->getMessage();
-                }
+              }
+              catch(PDOException $e)
+              {
+                  echo $e->getMessage();
               }
             }
             ?>

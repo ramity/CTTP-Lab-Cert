@@ -134,27 +134,67 @@ function generate_view_form($main_id,$tableid,$array,$data)
     echo '<thead>';
       echo '<tr>';
         echo '<th>Name</th>';
+
+        if($t_sr[0]['format']=='Complex')
+        {
+          for($a=0;$a<$t_sr[0]['format_number'];$a++)
+          {
+            echo '<th>['.$a.'] Value</th>';
+          }
+        }
+        else
+        {
+          echo '<th>Value</th>';
+        }
+
         echo '<th>Description</th>';
-        echo '<th>Value</th>';
       echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
       echo '<tr>';
         echo '<td>Calibration ID</td>';
+
+        if($t_sr[0]['format']=='Complex')
+        {
+          for($x=0;$x<$t_sr[0]['format_number'];$x++)
+          {
+            echo '<td>';
+              echo $data[0]['main_id'];
+            echo '</td>';
+          }
+        }
+        else
+        {
+          echo '<td>';
+            echo $data[0]['main_id'];
+          echo '</td>';
+        }
+
         echo '<td>Auto generated ID of calibration</td>';
-        echo '<td>';
-          echo $data[0]['main_id'];
-        echo '</td>';
       echo '</tr>';
 
       echo '<tr>';
         echo '<td>';
           echo 'Calibration Name';
         echo '</td>';
+
+        if($t_sr[0]['format']=='Complex')
+        {
+          for($x=0;$x<$t_sr[0]['format_number'];$x++)
+          {
+            echo '<td>';
+              echo $t_sr[0]['name'];
+            echo '</td>';
+          }
+        }
+        else
+        {
+          echo '<td>';
+            echo $t_sr[0]['name'];
+          echo '</td>';
+        }
+
         echo '<td>Name of the calibration sheet used</td>';
-        echo '<td>';
-          echo $t_sr[0]['name'];
-        echo '</td>';
       echo '</tr>';
 
       for($z=0;$z<count($array);$z++)
@@ -165,8 +205,48 @@ function generate_view_form($main_id,$tableid,$array,$data)
           {
             echo '<tr id="'.$z.'">';
               echo '<td>'.$array[$z]['label'].'</td>';
+
+              if(strpos($data[0][$array[$z]['name']],',')!==false)
+              {
+                if($t_sr[0]['format']=='Complex')
+                {
+                  $bits=explode(',',$data[0][$array[$z]['name']]);
+                  for($x=0;$x<count($bits);$x++)
+                  {
+                    if(strpos($bits[$x],',')!==false)
+                    {
+
+                    }
+                    else
+                    {
+                      echo '<td>';
+                        echo '['.$x.'] = ';
+                        echo ltrim(rtrim($bits[$x]));
+                      echo '</td>';
+                    }
+                  }
+                }
+                else
+                {
+                  for($x=0;$x<$t_sr[0]['format_number'];$x++)
+                  {
+                    echo '<td>';
+                      echo ltrim(rtrim($data[0][$array[$z]['name']]));
+                    echo '</td>';
+                  }
+                }
+              }
+              else
+              {
+                for($x=0;$x<$t_sr[0]['format_number'];$x++)
+                {
+                  echo '<td>';
+                    echo ltrim(rtrim($data[0][$array[$z]['name']]));
+                  echo '</td>';
+                }
+              }
+
               echo '<td>'.$array[$z]['description'].'</td>';
-              echo '<td>'.$data[0][$array[$z]['name']].'</td>';
             echo '</tr>';
           }
           elseif($array[$z]['tag']=='select')
@@ -192,14 +272,42 @@ function generate_view_form($main_id,$tableid,$array,$data)
 
       echo '<tr>';
         echo '<td>Result</td>';
-        echo '<td>If the calibration passed or failed</td>';
-        echo '<td>';
-        if($data[0]['result'])
-          echo 'Passed';
+
+        if($t_sr[0]['format']=='Complex')
+        {
+          for($x=0;$x<$t_sr[0]['format_number'];$x++)
+          {
+            echo '<td>';
+
+              if($data[0]['result'])
+              {
+                echo 'Passed';
+              }
+              else
+              {
+                echo 'Failed';
+              }
+
+            echo '</td>';
+          }
+        }
         else
-          echo 'Failed';
+        {
+          echo '<td>';
+
+            if($data[0]['result'])
+            {
+              echo 'Passed';
+            }
+            else
+            {
+              echo 'Failed';
+            }
 
           echo '</td>';
+        }
+
+        echo '<td>If the calibration passed or failed</td>';
       echo '</tr>';
     echo '</tbody>';
   echo '</table>';
