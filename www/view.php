@@ -23,6 +23,7 @@ else
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css"/>
         <link rel="stylesheet" type="text/css" href="http://localhost/css/inputform.css"/>
         <link rel="stylesheet" type="text/css" href="http://localhost/css/view.css"/>
+        <link rel="stylesheet" type="text/css" href="http://localhost/css/display.css"/>
         <!--JQuery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <!--JQuery UI-->
@@ -71,39 +72,74 @@ else
               if($view_table)
               {
               ?>
-              <form class="searchmodule">
+              <form class="searchmodule" action="http://localhost/search.php" method="post">
                 <div class="searchmoduleheader">Calibration Search Engine</div>
                 <div class="searchmodulelabel">Equipment ID</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="equipment_id" value="<?php
+                  if(isset($_POST['equipment_id'])&&!empty($_POST['equipment_id']))
+                  {
+                    echo $_POST['equipment_id'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Manufactuerer</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="manufacturer" value="<?php
+                  if(isset($_POST['manufacturer'])&&!empty($_POST['manufacturer']))
+                  {
+                    echo $_POST['manufacturer'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Model Number</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="model_number" value="<?php
+                  if(isset($_POST['model_number'])&&!empty($_POST['model_number']))
+                  {
+                    echo $_POST['model_number'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Serial Number</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="serial_number" value="<?php
+                  if(isset($_POST['serial_number'])&&!empty($_POST['serial_number']))
+                  {
+                    echo $_POST['serial_number'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Uark ID</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="uark_id" value="<?php
+                  if(isset($_POST['uark_id'])&&!empty($_POST['uark_id']))
+                  {
+                    echo $_POST['uark_id'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Location</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="location" value="<?php
+                  if(isset($_POST['location'])&&!empty($_POST['location']))
+                  {
+                    echo $_POST['location'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Performed By</div>
-                <input class="searchmodule" type="text">
+                <input class="searchmodule" type="text" name="performed_by" value="<?php
+                  if(isset($_POST['performed_by'])&&!empty($_POST['performed_by']))
+                  {
+                    echo $_POST['performed_by'];
+                  }
+                ?>">
 
                 <div class="searchmodulelabel">Year</div>
                 <?php
-                echo '<select class="searchmodule" name="file_year">';
+                echo '<select class="searchmodule" name="calibration_year">';
                 echo '<option disabled selected value></option>';
                 foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/") as $oitem)
                 {
                   if(strpos($oitem,'Equipment Calibrations')!==false)
                   {
                     $bits=explode(' Equipment Calibrations',$oitem);
-                    if(isset($_POST['file_year'])&&!empty($_POST['file_year'])&&$_POST['file_year']==$bits[0])
+                    if(isset($_POST['calibration_year'])&&!empty($_POST['calibration_year'])&&$_POST['calibration_year']==$bits[0])
                     {
                       echo '<option value="'.$bits[0].'" selected>'.$bits[0].'</option>';
                     }
@@ -115,7 +151,7 @@ else
                 }
                 echo '</select> ';
                 ?>
-                <input type="submit" name="searchmodulesubmit" class="searchmodulebutton" value="search">
+                <input type="submit" name="searchmodulesubmit" class="searchmodulebutton" value="Search">
               </form>
               <table class="list">
                 <caption>Recent Calibrations</caption>
