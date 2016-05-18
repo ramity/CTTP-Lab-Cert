@@ -278,11 +278,11 @@ else
               {
                 if(isset($_POST['equipment_id'])&&!empty($_POST['equipment_id']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.($data).'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.($data).'</option>';
                 }
               }
             echo '</select> ';
@@ -294,11 +294,11 @@ else
               {
                 if(isset($_POST['manufacturer'])&&!empty($_POST['manufacturer']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -310,11 +310,11 @@ else
               {
                 if(isset($_POST['model_number'])&&!empty($_POST['model_number']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -326,11 +326,11 @@ else
               {
                 if(isset($_POST['serial_number'])&&!empty($_POST['serial_number']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -342,11 +342,11 @@ else
               {
                 if(isset($_POST['uark_id'])&&!empty($_POST['uark_id']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -358,11 +358,11 @@ else
               {
                 if(isset($_POST['location'])&&!empty($_POST['location']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -374,11 +374,11 @@ else
               {
                 if(isset($_POST['performed_by'])&&!empty($_POST['performed_by']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';
@@ -390,11 +390,11 @@ else
               {
                 if(isset($_POST['calibration_date'])&&!empty($_POST['calibration_date']))
                 {
-                  echo '<option value="'.$data.'" selected>'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'" selected>'.$data.'</option>';
                 }
                 else
                 {
-                  echo '<option value="'.$data.'">'.$data.'</option>';
+                  echo '<option value="'.htmlspecialchars($data).'">'.$data.'</option>';
                 }
               }
             echo '</select> ';

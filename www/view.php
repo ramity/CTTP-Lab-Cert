@@ -73,7 +73,8 @@ else
               {
               ?>
               <form class="searchmodule" action="http://localhost/search.php" method="post">
-                <div class="searchmoduleheader">Calibration Search Engine</div>
+                <!--STANDARD SEARCH MODULE-->
+                <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="http://localhost/search.php?alpha=true">Click here to enable auto-complete search [alpha]</a></div>
                 <div class="searchmodulelabel">Equipment ID</div>
                 <input class="searchmodule" type="text" name="equipment_id" value="<?php
                   if(isset($_POST['equipment_id'])&&!empty($_POST['equipment_id']))
@@ -132,14 +133,14 @@ else
 
                 <div class="searchmodulelabel">Year</div>
                 <?php
-                echo '<select class="searchmodule" name="calibration_year">';
+                echo '<select class="searchmodule" name="calibration_date">';
                 echo '<option disabled selected value></option>';
                 foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/") as $oitem)
                 {
                   if(strpos($oitem,'Equipment Calibrations')!==false)
                   {
                     $bits=explode(' Equipment Calibrations',$oitem);
-                    if(isset($_POST['calibration_year'])&&!empty($_POST['calibration_year'])&&$_POST['calibration_year']==$bits[0])
+                    if(isset($_POST['calibration_date'])&&!empty($_POST['calibration_date'])&&$_POST['calibration_date']==$bits[0])
                     {
                       echo '<option value="'.$bits[0].'" selected>'.$bits[0].'</option>';
                     }
