@@ -8,7 +8,7 @@ scripts/
 tmp/
 tools/
 vhosts/
-www/bend/filestorage/*
+www/bend/file_storage/*
 art.png
 barimage.bmp
 images_off.bmp
