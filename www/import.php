@@ -9,7 +9,7 @@ require_once('C:/wamp/www/bend/modules/forms.php');
         <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/upload.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost/css/import.css">
     </head>
     <body>
         <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>

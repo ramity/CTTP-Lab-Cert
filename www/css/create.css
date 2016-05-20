@@ -1,173 +1,54 @@
-select
+table
 {
-  float:left;
+  width:920px;
+  border-collapse:collapse;
+  margin:0px 20px 20px 20px;
+  border-spacing:0px;
 }
-div#tools
+td, th
 {
-  width:940px;
-  height:45px;
-  padding:20px 0px 20px 20px;
-  margin-bottom:20px;
-  background-color:#fff;
+  cursor:move;
+  border:1px solid #eee;
+  padding:2px;
 }
-div.tool-item
+th
 {
-  width:215px;
-  height:40px;
-  margin-right:20px;
-  background-color:#2ecc71;
-  color:#fff;
-  cursor:pointer;
-  line-height:40px;
-  border-bottom:5px solid #27ae60;
-  -webkit-touch-callout:none; /* iOS Safari */
-  -webkit-user-select:none;   /* Chrome/Safari/Opera */
-  -khtml-user-select:none;    /* Konqueror */
-  -moz-user-select:none;      /* Firefox */
-  -ms-user-select:none;       /* Internet Explorer/Edge */
-  user-select:none;
-}
-div#clear
-{
-  background-color:#e74c3c;
-}
-div#display
-{
-  width:960px;
-}
-div.display-item
-{
-  width:940px;
-  padding:20px 0px 20px 20px;
-  background-color:#fff;
-  text-align:left;
-  margin-bottom:20px;
-  padding-bottom:0px;
-}
-div.display-item-label
-{
-  width:110px;
-  height:30px;
-  text-indent:7px;
-  line-height:30px;
   padding:0px;
-  margin:0px;
-  border:none;
-  outline:none;
-  margin-bottom:20px;
-  background-color:#eee;
-  text-align:left;
-  float:left;
 }
-input.display-item-input,select.display-item-input
+td:hover, th:hover
 {
-  width:190px;
-  height:30px;
-  text-indent:7px;
-  line-height:30px;
+  background-color:#fafafa;
+}
+td.null
+{
+  cursor:move;
+  border:1px solid #eee;
   padding:0px;
-  margin:0px;
-  border:none;
-  outline:none;
-  margin-bottom:20px;
-  background-color:#eee;
-  text-align:left;
+}
+div.shadow
+{
+  width:0px;
+  height:0px;
   float:left;
 }
-input.display-item-input
+div#selectdisplay
 {
-  width:430px;
+  width:320px;
+  position:fixed;
+  top:120px;
+  right:20px;
+  background-color:#fff;
 }
-div.display-item-delete
+div.selectdisplaykeyheader,div.selectdisplayvalheader
 {
-  width:60px;
-  height:30px;
+  width:320px;
   line-height:30px;
-  margin:0px 20px 0px 20px;
-  background-color:#e74c3c;
-  color:#fff;
-  cursor:pointer;
-  -webkit-touch-callout:none; /* iOS Safari */
-  -webkit-user-select:none;   /* Chrome/Safari/Opera */
-  -khtml-user-select:none;    /* Konqueror */
-  -moz-user-select:none;      /* Firefox */
-  -ms-user-select:none;       /* Internet Explorer/Edge */
-  user-select:none;
-}
-div.display-item-label
-{
-  background-color:#fff;
-}
-div.create-new-subitem,div.display-delete-group,div.create-new-subitem-group,div.duplicate-item
-{
-  width:215px;
-  height:40px;
-  margin-right:20px;
-  background-color:#2ecc71;
-  color:#fff;
-  line-height:40px;
-  margin-bottom:20px;
-}
-div.display-delete-group
-{
-  background-color:#e74c3c;
-}
-table#output
-{
-  width:960px;
-  display:none;
-  padding:20px;
-  background-color:#fff;
-  margin-bottom:20px;
-}
-td.output-line
-{
-  height:20px;
-  line-height:20px;
-  text-align:left;
-}
-td.output-line:hover,
-{
-  background-color:#ecf0f1;
-}
-div#hide-code
-{
-  width:960px;
-  height:40px;
-  line-height:40px;
+  text-indent:15px;
   background-color:#3498db;
   color:#fff;
-  cursor:pointer;
-  -webkit-touch-callout:none; /* iOS Safari */
-  -webkit-user-select:none;   /* Chrome/Safari/Opera */
-  -khtml-user-select:none;    /* Konqueror */
-  -moz-user-select:none;      /* Firefox */
-  -ms-user-select:none;       /* Internet Explorer/Edge */
-  user-select:none;
-  border-bottom:5px solid #2980b9;
+  text-align:left;
 }
-div#fixedtoolbar
+div.selectdisplayvalheader
 {
-  width:180px;
-  height:35px;
-  position:fixed;
-  right:10px;
-  bottom:10px;
-}
-div.fixedtoolbaritem
-{
-  width:35px;
-  height:35px;
-  line-height:35px;
-  float:right;
-  background-color:#9b59b6;
-  margin-left:10px;
-  color:#fff;
-  cursor:pointer;
-  -webkit-touch-callout:none; /* iOS Safari */
-  -webkit-user-select:none;   /* Chrome/Safari/Opera */
-  -khtml-user-select:none;    /* Konqueror */
-  -moz-user-select:none;      /* Firefox */
-  -ms-user-select:none;       /* Internet Explorer/Edge */
-  user-select:none;
+  background-color:#2ecc71;
 }
