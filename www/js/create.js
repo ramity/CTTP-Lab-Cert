@@ -10,8 +10,10 @@ window.keystatus=[];
 window.keystatus['K']=false;
 window.keystatus['V']=false;
 window.keystatus['LMOUSE']=false;
-window.keystatus['RMOUSE']=false;
 window.keystatus['CTRL']=false;
+
+$(document).mousedown(function(){window.keystatus['LMOUSE']=true;
+}).mouseup(function(){window.keystatus['LMOUSE']=false;});
 
 kd.run(function(){kd.tick();});
 
@@ -20,9 +22,6 @@ kd.K.up(function(){window.keystatus['K']=false;});
 
 kd.V.down(function(){window.keystatus['V']=true;});
 kd.V.up(function(){window.keystatus['V']=false;});
-
-kd.CTRL.down(function(){window.keystatus['CTRL']=true;console.log(keystatus['CTRL']);});
-//kd.LMOUSE.up(function(){window.keystatus['LMOUSE']=false;console.log(keystatus['LMOUSE']);});
 
 kd.ENTER.down(function()
 {
@@ -71,6 +70,30 @@ $(function()
     }
 
     e.stopPropagation();
+  });
+  $("td.bind").on('mousemove',function(e)
+  {
+    if(window.keystatus['LMOUSE'])
+    {
+      if(window.keystatus['K'])
+      {
+        $(this).css('background-image','url(http://localhost/img/selected.gif)');
+        $(this).css('border-color','#85C4ED');
+
+        add_to_key_array($(this).attr('id'));
+
+        compile_select_display();
+      }
+      else if(window.keystatus['V'])
+      {
+        $(this).css('background-image','url(http://localhost/img/selected.gif)');
+        $(this).css('border-color','#2ecc71');
+
+        add_to_val_array($(this).attr('id'));
+
+        compile_select_display();
+      }
+    }
   });
 });
 

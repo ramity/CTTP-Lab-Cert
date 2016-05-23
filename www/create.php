@@ -16,7 +16,7 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
     <link rel="stylesheet" type="text/css" href="http://localhost/css/create.css">
     <link rel="stylesheet" type="text/css" href="http://localhost/css/import.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="http://localhost/js/keydrown.js"></script>
+    <script src="http://localhost/js/keydrown.min.js"></script>
     <script src="http://localhost/js/create.js"></script>
   </head>
   <body>
