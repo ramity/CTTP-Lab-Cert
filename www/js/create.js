@@ -9,13 +9,20 @@ window.
 window.keystatus=[];
 window.keystatus['K']=false;
 window.keystatus['V']=false;
+window.keystatus['LMOUSE']=false;
+window.keystatus['RMOUSE']=false;
+window.keystatus['CTRL']=false;
 
 kd.run(function(){kd.tick();});
+
 kd.K.down(function(){window.keystatus['K']=true;});
 kd.K.up(function(){window.keystatus['K']=false;});
 
 kd.V.down(function(){window.keystatus['V']=true;});
 kd.V.up(function(){window.keystatus['V']=false;});
+
+kd.CTRL.down(function(){window.keystatus['CTRL']=true;console.log(keystatus['CTRL']);});
+//kd.LMOUSE.up(function(){window.keystatus['LMOUSE']=false;console.log(keystatus['LMOUSE']);});
 
 kd.ENTER.down(function()
 {
