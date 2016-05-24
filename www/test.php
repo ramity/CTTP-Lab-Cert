@@ -1,17 +1,16 @@
 <?php
-$im = imagecreatetruecolor(300, 150);
-$black = imagecolorallocate($im, 0, 0, 0);
-$white = imagecolorallocate($im, 255, 255, 255);
+$font = 'C:/wamp/www/font/arial.ttf';
 
-// Set the background to be white
-imagefilledrectangle($im, 0, 0, 299, 299, $white);
+echo '<style>@font-face {
+    font-family: myFirstFont;
+    src: url(http://localhost/font/Arial.ttf);
+}</style>';
 
-// Path to our font file
-$font = 'arial.ttf';
+$box = imagettfbbox(15,0,$font,'Something works and stuff');
 
-// First we create our bounding box for the first text
-$bbox = imagettfbbox(15,0, $font,'Powered by PHP ' . phpversion());
+echo '<div style="font-family:myFirstFont;font-size:15px;float:left;">Something works and stuff</div>';
 
-print_r($bbox);
-// This is our cordinates for X and Y
+echo $text_width = $box[0] + $box[2];
+
+print_r($box);
 ?>

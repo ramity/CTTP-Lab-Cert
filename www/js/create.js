@@ -111,15 +111,6 @@ function draw()
     cell_row_font_offset_x=(cell_row_header_width / 2);
     cell_row_font_offset_y=(cell_row_header_height / 2);
 
-    for(y=0;y<window.conv_array.length;y++)
-    {
-      for(x=0;x<window.conv_array[y].length;x++)
-      {
-        //does this work?
-        
-      }
-    }
-
     for(y=0;y<created_cell_y;y++)
     {
       for(x=0;x<created_cell_x;x++)
