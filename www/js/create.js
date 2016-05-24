@@ -23,148 +23,224 @@ kd.K.up(function(){window.keystatus['K']=false;});
 kd.V.down(function(){window.keystatus['V']=true;});
 kd.V.up(function(){window.keystatus['V']=false;});
 
-kd.ENTER.down(function()
-{
-  if(window.selected_key_array.length&&window.selected_val_array.length)
-  {
-    if(window.selected_key_array.length==window.selected_val_array.length)
-    {
-      for(z=0;z<window.selected_key_array.length;z++)
-      {
-        $("td#"+window.selected_key_array[z]).css('background-image','none');
-        $("td#"+window.selected_key_array[z]).css('border-color','#eee');
-
-        $("td#"+window.selected_val_array[z]).css('background-image','none');
-        $("td#"+window.selected_val_array[z]).css('border-color','#eee');
-      }
-    }
-    else
-    {
-      console.log('An error occured: key_num != val_num');
-    }
-  }
-});
+kd.ENTER.down(function(){});
 
 $(function()
 {
-  $("td.bind").on('click',function(e)
-  {
-    if(window.keystatus['K'])
-    {
-      $(this).css('background-image','url(http://localhost/img/selected.gif)');
-      $(this).css('border-color','#85C4ED');
-
-      add_to_key_array($(this).attr('id'));
-
-      compile_select_display();
-    }
-
-    if(window.keystatus['V'])
-    {
-      $(this).css('background-image','url(http://localhost/img/selected.gif)');
-      $(this).css('border-color','#2ecc71');
-
-      add_to_val_array($(this).attr('id'));
-
-      compile_select_display();
-    }
-
-    e.stopPropagation();
-  });
-  $("td.bind").on('mousemove',function(e)
-  {
-    if(window.keystatus['LMOUSE'])
-    {
-      if(window.keystatus['K'])
-      {
-        $(this).css('background-image','url(http://localhost/img/selected.gif)');
-        $(this).css('border-color','#85C4ED');
-
-        add_to_key_array($(this).attr('id'));
-
-        compile_select_display();
-      }
-      else if(window.keystatus['V'])
-      {
-        $(this).css('background-image','url(http://localhost/img/selected.gif)');
-        $(this).css('border-color','#2ecc71');
-
-        add_to_val_array($(this).attr('id'));
-
-        compile_select_display();
-      }
-    }
-  });
+  $('canvas#container').css('background-color','#fff');
+  draw();
 });
 
-function compile_select_display()
+$(window).resize(function()
 {
-  if(!window.select_display)
-  {
-    window.select_display=true;
+  draw();
+});
 
-    $('<div/>',
-    {
-      id: 'selectdisplay',
-    }).appendTo('body');
+function draw()
+{
+  canvas = $('canvas#container');
+
+  ctx = $("canvas#container").get(0).getContext('2d');
+
+  reset();
+
+  canvas_width = document.body.clientWidth;
+  canvas_height = $(window).height()-155;
+
+  canvas.width=canvas_width;
+  canvas.height=canvas_height;
+
+  canvas.attr('width',canvas_width+'px');
+  canvas.attr('height',canvas_height+'px');
+
+  canvas.css('width',canvas_width);
+  canvas.css('height',canvas_height);
+
+  cell_width = 100;
+  cell_height = 25;
+
+  cell_col_header_width = cell_width;
+  cell_col_header_height = cell_height;
+
+  cell_row_header_width = 40;
+  cell_row_header_height = cell_height;
+
+  selected_header_color = '#DDD';
+
+  spreadsheet_area_x = canvas_width - cell_col_header_width;
+  spreadsheet_area_y = canvas_height - cell_col_header_height;
+
+  cell_display_x = Math.round(canvas_width / cell_width);
+  cell_display_y = Math.round(canvas_height / cell_height);
+
+  if(window.max > cell_display_x)
+  {
+    created_cell_x = window.max;
+  }
+  else
+  {
+    created_cell_x = cell_display_x;
   }
 
-  $("div#selectdisplay").empty();
-
-  max=Math.max(selected_key_array.length,selected_val_array.length);
-
-  push_string='';
-
-  for(z=0;z<max;z++)
+  if(window.conv_array.length)
   {
-    if(selected_key_array[z]!=null)
+    if(window.conv_array.length > cell_display_y)
     {
-      push_string+='<div id="SDH-'+selected_key_array[z]+'" class="selectdisplaykeyheader">KEY: '+$("td#"+selected_key_array[z]).text()+'</div>';
+      created_cell_y = window.conv_array.length;
+    }
+    else
+    {
+      created_cell_y = cell_display_y;
     }
 
-    if(selected_val_array[z]!=null)
+    dx = 0;
+    dy = 0;
+
+    font_size=15;
+
+    ctx.lineWidth='1';
+    ctx.strokeStyle='#C0C0C0';
+    ctx.fillStyle='#fff';
+    ctx.font=font_size+'px Arial';
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+
+    cell_col_font_offset_x=(cell_col_header_width / 2);
+    cell_col_font_offset_y=(cell_col_header_height / 2);
+
+    cell_row_font_offset_x=(cell_row_header_width / 2);
+    cell_row_font_offset_y=(cell_row_header_height / 2);
+
+    for(y=0;y<window.conv_array.length;y++)
     {
-      push_string+='<div id="SDH-'+selected_val_array[z]+'" class="selectdisplayvalheader">VAL: '+$("td#"+selected_val_array[z]).text()+'</div>';
+      for(x=0;x<window.conv_array[y].length;x++)
+      {
+        //does this work?
+        
+      }
+    }
+
+    for(y=0;y<created_cell_y;y++)
+    {
+      for(x=0;x<created_cell_x;x++)
+      {
+        if(y==0 && x==0)
+        {
+          //spacer
+          ctx.fillStyle='#F3F3F3';
+
+          ctx.fillRect(dx,dy,cell_row_header_width,cell_row_header_height);
+          ctx.rect(dx,dy,cell_row_header_width,cell_row_header_height);
+
+          ctx.fillStyle='#fff';
+
+          ctx.stroke();
+
+          dx+=cell_row_header_width;
+        }
+        else if(y==0 && x!=0)
+        {
+          //col header
+          ctx.fillStyle='#F3F3F3';
+
+          ctx.fillRect(dx,dy,cell_col_header_width,cell_col_header_height);
+          ctx.rect(dx,dy,cell_col_header_width,cell_col_header_height);
+
+          ctx.fillStyle='#fff';
+
+          ctx.stroke();
+
+          ctx.fillStyle='#000';
+          ctx.fillText(toLetters(x),dx+cell_col_font_offset_x,dy+cell_col_font_offset_y);
+          ctx.fillStyle='#fff';
+
+          dx+=cell_col_header_width;
+        }
+        else if(y!=0 && x==0)
+        {
+          //row header
+          dx=0;
+          dy+=cell_col_header_height;
+
+          ctx.fillStyle='#F3F3F3';
+
+          ctx.fillRect(dx,dy,cell_row_header_width,cell_row_header_height);
+          ctx.rect(dx,dy,cell_row_header_width,cell_row_header_height);
+
+          ctx.fillStyle='#fff';
+
+          ctx.stroke();
+
+          ctx.fillStyle='#000';
+          ctx.fillText(y,dx+cell_row_font_offset_x,dy+cell_row_font_offset_y);
+          ctx.fillStyle='#fff';
+
+          dx+=cell_row_header_width;
+        }
+        else
+        {
+          ctx.fillStyle='#fff';
+
+          ctx.fillRect(dx,dy,cell_col_header_width,cell_col_header_height);
+          ctx.rect(dx,dy,cell_col_header_width,cell_col_header_height);
+
+          ctx.stroke();
+
+          if(conv_array[y][x])
+          {
+            ctx.fillStyle='#000';
+            ctx.fillText(conv_array[y][x],dx+cell_col_font_offset_x,dy+cell_col_font_offset_y);
+            ctx.fillStyle='#fff';
+          }
+
+          dx+=cell_col_header_width;
+        }
+      }
     }
   }
-
-  $("div#selectdisplay").append(push_string);
 }
 
-function add_to_key_array(id)
+function reset()
 {
-  result=true;
+  canvas.attr('height','0px');
+  canvas.attr('width','0px');
+}
 
-  for(z=0;z<window.selected_key_array.length;z++)
+function explode(delimiter,string,limit=null)
+{
+  result=[];
+  if(string.indexOf(delimiter)>-1)
   {
-    if(window.selected_key_array[z]==id)
+    bits=string.split(delimiter);
+    if(bits.length>limit&&limit!==null)
     {
-      result=false;
-      console.log('Value already exists in array');
+      temp='';
+      for(z=0;z<limit;z++)
+      {
+        result[z]=bits[z];
+      }
+      for(z=limit;z<bits.length;z++)
+      {
+        temp+=bits[z];
+      }
+      result[limit]=temp;
+      return result;
+    }
+    else
+    {
+      return bits;
     }
   }
-
-  if(result)
+  else
   {
-      window.selected_key_array.push(id);
+      console.log('Supplied delimiter does not exist in string');
   }
 }
 
-function add_to_val_array(id)
-{
-  result=true;
-
-  for(z=0;z<window.selected_val_array.length;z++)
-  {
-    if(window.selected_val_array[z]==id)
-    {
-      result=false;
-      console.log('Value already exists in array');
-    }
-  }
-
-  if(result)
-  {
-      window.selected_val_array.push(id);
-  }
+function toLetters(num) {
+    "use strict";
+    var mod = num % 26,
+        pow = num / 26 | 0,
+        out = mod ? String.fromCharCode(64 + mod) : (--pow, 'Z');
+    return pow ? toLetters(pow) + out : out;
 }
