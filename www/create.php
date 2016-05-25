@@ -6,9 +6,20 @@ require_once('C:/wamp/www/bend/modules/protected.php');
 require_once('C:/wamp/www/bend/modules/forms.php');
 require_once('C:/wamp/www/bend/modules/input_functions.php');
 //END DEFINED POST VARIABLES
+function width($text,$xl)
+{
+  if(empty($text))
+  {
+    $box = imagettfbbox(15,0,'C:/wamp/www/font/arial.ttf',$xl);
+    return $text_width = $box[0] + $box[2];
+  }
+  {
+    $box = imagettfbbox(15,0,'C:/wamp/www/font/arial.ttf',$text);
+    return $text_width = $box[0] + $box[2];
+  }
+}
 ?>
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
   <head>
     <title>CTTP Calibration Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -112,6 +123,7 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
           }
         }
 
+        $cell_widths=array();
 
         echo '<script>';
         echo 'window.max='.$max.';';
@@ -122,6 +134,15 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
           echo "[";
           for($z=0;$z<=$max;$z++)
           {
+            if(isset($row[$abc[$z]]))
+            {
+              $cell_widths[$key][$z]=width(htmlentities($row[$abc[$z]],ENT_QUOTES),$abc[$z]);
+            }
+            else
+            {
+              $cell_widths[$key][$z]=width('',$abc[$z]);
+            }
+
             if($z==$max)
             {
               if(!empty($row[$abc[$z]]))
@@ -151,11 +172,53 @@ require_once('C:/wamp/www/bend/modules/input_functions.php');
           }
         }
         echo '];';
+
+        $cell_widths_max=array();
+        $cell_widths_padding=10;
+
+        foreach($cell_widths as $row)
+        {
+          for($x=0;$x<count($row);$x++)
+          {
+            if(empty($cell_widths_max[$x]))
+            {
+              $cell_widths_max[$x]=$row[$x]+$cell_widths_padding;
+            }
+            else
+            {
+              if($row[$x]>$cell_widths_max[$x])
+              {
+                $cell_widths_max[$x]=$row[$x]+$cell_widths_padding;
+              }
+            }
+          }
+        }
+
+        echo 'window.col_widths=[';
+
+        for($x=0;$x<count($cell_widths_max);$x++)
+        {
+          if($x==count($cell_widths_max)-1)
+          {
+            echo "['".$cell_widths_max[$x]."']";
+          }
+          else
+          {
+            echo "['".$cell_widths_max[$x]."'],";
+          }
+        }
+
+        echo ']';
+
         echo '</script>';
-        print_r(imagettfbbox('15px',0,'Arial','149.70'));
+        //var_dump($cell_widths_max);
+        //echo '<br>';
+        //var_dump($cell_widths);
       }
       ?>
-      <canvas id="container"></canvas>
+      <div id="canvas_container">
+        <canvas id="container">Your browser does not support the canvas tag.</canvas>
+      </div>
     </div>
   </body>
 </html>
