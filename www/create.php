@@ -214,7 +214,10 @@ function width($text,$xl)
           }
         }
 
-        echo ']';
+        echo '];';
+
+        echo 'window.canvas_width='.$col_width.';';
+        echo 'window.canvas_height='.(count($sheetData)*25).';';
 
         echo '</script>';
         //var_dump($cell_widths_max);
@@ -222,8 +225,8 @@ function width($text,$xl)
         //var_dump($cell_widths);
       }
       ?>
-      <div id="spreadsheet_main" <?php echo 'style="width:'.($col_width+40).'px;"';?>>
-        <div>
+      <div id="spreadsheet_main">
+        <div <?php echo 'style="width:'.($col_width+40).'px"';?>>
           <div id="spacer"></div>
           <div id="col_holder" <?php echo 'style="width:'.$col_width.'px"';?>>
             <?php
@@ -234,7 +237,7 @@ function width($text,$xl)
             ?>
           </div>
         </div>
-        <div>
+        <div <?php echo 'style="width:'.($col_width+40).'px;height:'.(count($sheetData)*25).'px"';?>>
           <div id="row_holder" <?php echo 'style="height:'.(count($sheetData)*25).'px"';?>>
             <?php
             for($x=1;$x<count($sheetData);$x++)

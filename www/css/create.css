@@ -97,6 +97,8 @@ div#spreadsheet_main
   -webkit-user-select:none;
   -ms-user-select:none;
   border-top:1px solid #C0C0C0;
+  overflow-y:overlay;
+  overflow-x:overlay;
 }
 div#spacer
 {

@@ -33,6 +33,9 @@ $(document).on('scroll','canvas#container',function(){
 
 $(function()
 {
+  $('div#spreadsheet_main').css('width',document.body.clientWidth);
+  $('div#spreadsheet_main').css('hegiht',$(window).height()-155);
+
   $('canvas#container').css('background-color','#fff');
 
   $('canvas#container').click(function(e)
@@ -52,6 +55,9 @@ $(function()
 
 $(window).resize(function()
 {
+  $('div#spreadsheet_main').css('width',document.body.clientWidth);
+  $('div#spreadsheet_main').css('height',($(window).height()-155));
+
   console.log('resizing...')
   draw();
   console.log('...done')
@@ -68,19 +74,16 @@ function draw()
 
     reset();
 
-    canvas_width = $('body').innerWidth();
-    canvas_height = $(window).height()-155;
-
     if(col_widths.length)
     {
 
     }
 
-    canvas.attr('width',canvas_width+'px');
-    canvas.attr('height',canvas_height+'px');
+    canvas.attr('width',window.canvas_width+'px');
+    canvas.attr('height',window.canvas_height+'px');
 
-    canvas.css('width',canvas_width);
-    canvas.css('height',canvas_height);
+    canvas.css('width',window.canvas_width);
+    canvas.css('height',window.canvas_height);
 
     scroll_distance_x=25;
     scroll_distance_y=25;
