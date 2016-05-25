@@ -132,7 +132,7 @@ function width($text,$xl)
         foreach($sheetData as $key=>$row)
         {
           echo "[";
-          for($z=0;$z<=$max;$z++)
+          for($z=0;$z<$max;$z++)
           {
             if(isset($row[$abc[$z]]))
             {
@@ -143,7 +143,7 @@ function width($text,$xl)
               $cell_widths[$key][$z]=width('',$abc[$z]);
             }
 
-            if($z==$max)
+            if($z==$max-1)
             {
               if(!empty($row[$abc[$z]]))
               {
@@ -196,14 +196,20 @@ function width($text,$xl)
 
         echo 'window.col_widths=[';
 
+        $col_width=0;
+
         for($x=0;$x<count($cell_widths_max);$x++)
         {
           if($x==count($cell_widths_max)-1)
           {
+            $col_width+=$cell_widths_max[$x];
+
             echo "['".$cell_widths_max[$x]."']";
           }
           else
           {
+            $col_width+=$cell_widths_max[$x];
+
             echo "['".$cell_widths_max[$x]."'],";
           }
         }
@@ -216,8 +222,29 @@ function width($text,$xl)
         //var_dump($cell_widths);
       }
       ?>
-      <div id="canvas_container">
-        <canvas id="container">Your browser does not support the canvas tag.</canvas>
+      <div id="spreadsheet_main" <?php echo 'style="width:'.($col_width+40).'px;"';?>>
+        <div>
+          <div id="spacer"></div>
+          <div id="col_holder" <?php echo 'style="width:'.$col_width.'px"';?>>
+            <?php
+            for($x=0;$x<count($cell_widths_max);$x++)
+            {
+              echo '<div class="col_item" id="col_header_'.$abc[$x].'" style="width:'.($cell_widths_max[$x]-1).'px">'.$abc[$x].'</div>';
+            }
+            ?>
+          </div>
+        </div>
+        <div>
+          <div id="row_holder" <?php echo 'style="height:'.(count($sheetData)*25).'px"';?>>
+            <?php
+            for($x=1;$x<count($sheetData);$x++)
+            {
+              echo '<div class="row_item" id="row_header_'.$x.'">'.$x.'</div>';
+            }
+            ?>
+          </div>
+          <canvas id="container">Your browser does not support the canvas tag.</canvas>
+        </div>
       </div>
     </div>
   </body>
