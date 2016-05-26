@@ -18,6 +18,9 @@ window.toolbar_h=200;
 
 window.canvas_clicked=false;
 
+window.canvas_mouse_x=0;
+window.canvas_mouse_y=0;
+
 window.contextmenu_open=false;
 
 $(document).mousedown(function(){window.keystatus['LMOUSE']=true;
@@ -35,6 +38,15 @@ kd.ENTER.down(function(){});
 
 window.scroll_x=0;
 window.scroll_y=0;
+
+$('div#ctmi_open_toolbar').on('click',function()
+{
+  $('div#contextmenu').remove();
+
+  window.toolbar_open=true;
+
+  draw();
+});
 
 $(function()
 {
@@ -103,11 +115,12 @@ $(function()
 
     contextmenu_items=
     [
-      [1,'Copy'],
-      [0,'Add selection to keys'],
-      [0,'Add selection to values'],
-      [1,'Open key overlay'],
-      [1,'Open value overlay']
+      [1,'Copy','ctmi_copy'],
+      [0,'Add selection to keys','ctmi_add_sel_keys'],
+      [0,'Add selection to values','ctmi_add_sel_vals'],
+      [1,'Open toolbar','ctmi_open_toolbar'],
+      [1,'Open key overlay','ctmi_open_key_overlay'],
+      [1,'Open value overlay','ctmi_open_val_overlay']
     ];
 
     $('div#spreadsheet_holder').append(contextmenu);
@@ -116,7 +129,7 @@ $(function()
     {
       if(contextmenu_items[z][0])
       {
-        $('div#contextmenu').append('<div class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
+        $('div#contextmenu').append('<div id="'+contextmenu_items[z][2]+'"class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
       }
       else
       {
@@ -333,10 +346,28 @@ function explode(delimiter,string,limit=null)
   }
 }
 
-function toLetters(num) {
-    "use strict";
-    var mod = num % 26,
-        pow = num / 26 | 0,
-        out = mod ? String.fromCharCode(64 + mod) : (--pow, 'Z');
-    return pow ? toLetters(pow) + out : out;
+function toLetters(num)
+{
+  "use strict";
+  var mod = num % 26,
+    pow = num / 26 | 0,
+    out = mod ? String.fromCharCode(64 + mod) : (--pow, 'Z');
+  return pow ? toLetters(pow) + out : out;
+}
+
+function open_toolbar()
+{
+  close_context_menu();
+
+  window.toolbar_open=true;
+
+  draw();
+}
+
+function close_context_menu()
+{
+  if(window.contextmenu_open)
+  {
+    $('div#contextmenu').remove();
+  }
 }
