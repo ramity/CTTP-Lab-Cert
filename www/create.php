@@ -223,7 +223,6 @@ function width($text,$xl)
         //var_dump($cell_widths_max);
         //echo '<br>';
         //var_dump($cell_widths);
-      }
       ?>
       <div id="spreadsheet_main">
         <div <?php echo 'style="width:'.($col_width+40).'px"';?>>
@@ -240,7 +239,7 @@ function width($text,$xl)
         <div <?php echo 'style="width:'.($col_width+40).'px;height:'.(count($sheetData)*25).'px"';?>>
           <div id="row_holder" <?php echo 'style="height:'.(count($sheetData)*25).'px"';?>>
             <?php
-            for($x=1;$x<count($sheetData);$x++)
+            for($x=1;$x<count($sheetData)+1;$x++)
             {
               echo '<div class="row_item" id="row_header_'.$x.'">'.$x.'</div>';
             }
@@ -249,6 +248,9 @@ function width($text,$xl)
           <canvas id="container">Your browser does not support the canvas tag.</canvas>
         </div>
       </div>
+      <?php
+      }
+      ?>
     </div>
   </body>
 </html>
