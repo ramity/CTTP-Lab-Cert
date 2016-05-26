@@ -211,3 +211,30 @@ div#menubar_mouse
   text-align:left;
   border-right:1px solid #c0c0c0;
 }
+div#contextmenu
+{
+  width:200px;
+  background-color:#fff;
+  position:absolute;
+  z-index:100;
+  border:1px solid #eee;
+}
+div.contextmenu_item,div.contextmenu_item_disabled
+{
+  width:195px;
+  height:30px;
+  padding-left:5px;
+  line-height:30px;
+  cursor:pointer;
+  text-align:left;
+}
+div.contextmenu_item:hover
+{
+  background-color:#f3f3f3;
+}
+div.contextmenu_item_disabled
+{
+  cursor:default;
+  background-color:#fafafa;
+  color:#999;
+}

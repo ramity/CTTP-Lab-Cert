@@ -13,8 +13,12 @@ window.keystatus['LMOUSE']=false;
 window.keystatus['CTRL']=false;
 
 window.toolbar_open=false;
+//window.toolbar_w=document.body.clientWidth;
+window.toolbar_h=200;
 
 window.canvas_clicked=false;
+
+window.contextmenu_open=false;
 
 $(document).mousedown(function(){window.keystatus['LMOUSE']=true;
 }).mouseup(function(){window.keystatus['LMOUSE']=false;});
@@ -34,6 +38,10 @@ window.scroll_y=0;
 
 $(function()
 {
+  //DYANMICALLY CALULATED VALUE(S)
+  window.toolbar_w=document.body.clientWidth;
+
+  //ON MOUSEMOVE FUNCTIONS / VALUES
   $('canvas#container').on('mousemove',function(e)
   {
     area=this.getBoundingClientRect();
@@ -41,20 +49,23 @@ $(function()
     window.canvas_mouse_x = e.clientX - area.left;
     window.canvas_mouse_y = e.clientY - area.top;
 
-    console.log(canvas_mouse_x,canvas_mouse_y);
-
     $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
   });
 
+  //ON CLICK FUNCTIONS / VALUES
   $('canvas#container').click(function(e)
   {
     window.canvas_clicked=true;
 
-    console.log(canvas_mouse_x,canvas_mouse_y);
+    if(contextmenu_open)
+    {
+      $('div#contextmenu').remove();
+    }
 
     draw();
   });
 
+  //ON SCROLL FUNCTIONS / VALUES
   $('div#spreadsheet_holder').scroll(function()
   {
     current_scroll_x=$(this).scrollLeft();
@@ -73,8 +84,51 @@ $(function()
     }
   });
 
-  $("canvas#container").on("contextmenu",function(e){
-     return false;
+  //ON RIGHTCLICK FUNCTIONS / VALUES
+  $("canvas#container").on("contextmenu",function(e)
+  {
+    window.canvas_clicked=true;
+
+    offset = $(this).offset();
+
+    if(contextmenu_open)
+    {
+      $('div#contextmenu').remove();
+    }
+
+    contextmenu=document.createElement('div');
+    contextmenu.id='contextmenu';
+
+    contextmenu.style.cssText='left:'+(canvas_mouse_x)+'px;top:'+(canvas_mouse_y)+'px';
+
+    contextmenu_items=
+    [
+      [1,'Copy'],
+      [0,'Add selection to keys'],
+      [0,'Add selection to values'],
+      [1,'Open key overlay'],
+      [1,'Open value overlay']
+    ];
+
+    $('div#spreadsheet_holder').append(contextmenu);
+
+    for(z=0;z<contextmenu_items.length;z++)
+    {
+      if(contextmenu_items[z][0])
+      {
+        $('div#contextmenu').append('<div class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
+      }
+      else
+      {
+        $('div#contextmenu').append('<div class="contextmenu_item_disabled">'+contextmenu_items[z][1]+'</div>');
+      }
+    }
+
+    window.contextmenu_open=true;
+
+    draw();
+
+    return false;
   });
 
   draw();
@@ -179,7 +233,6 @@ function draw()
             {
               if(window.canvas_mouse_y > dy && window.canvas_mouse_y <= (parseInt(dy) + parseInt(cell_col_header_height)))
               {
-                console.log(dx,dy,'has been clicked!');
                 selected=[dx,dy,col_widths[x],cell_col_header_height,toLetters(x+1),(y+1)];
               }
             }
@@ -231,8 +284,6 @@ function draw()
 
         $('div#col_header_'+selected[4]).css('background-color','#ddd');
         $('div#row_header_'+selected[5]).css('background-color','#ddd');
-
-        console.log('div#col_header_'+selected[4]);
       }
     }
   }
