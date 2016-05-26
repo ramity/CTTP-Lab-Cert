@@ -161,7 +161,7 @@ function draw()
               if(window.canvas_mouse_y > dy && window.canvas_mouse_y <= (parseInt(dy) + parseInt(cell_col_header_height)))
               {
                 console.log(dx,dy,'has been clicked!');
-                selected=[dx,dy,col_widths[x],cell_col_header_height];
+                selected=[dx,dy,col_widths[x],cell_col_header_height,toLetters(x+1),(y+1)];
               }
             }
           }
@@ -193,8 +193,6 @@ function draw()
 
       if(selected.length)
       {
-        console.log('running code');
-
         ctx.beginPath();
 
         ctx.strokeStyle='#3498db';
@@ -205,6 +203,17 @@ function draw()
         ctx.stroke();
 
         ctx.closePath();
+
+        t_col=selected[4];
+        t_row=selected[5];
+
+        $('div#col_holder').children().css('background-color','#f3f3f3');
+        $('div#row_holder').children().css('background-color','#f3f3f3');
+
+        $('div#col_header_'+selected[4]).css('background-color','#ddd');
+        $('div#row_header_'+selected[5]).css('background-color','#ddd');
+
+        console.log('div#col_header_'+selected[4]);
       }
     }
   }
