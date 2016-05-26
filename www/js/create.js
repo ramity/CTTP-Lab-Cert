@@ -48,7 +48,7 @@ $(function()
     draw();
   });
 
-  $('div#spreadsheet_main').scroll(function()
+  $('div#spreadsheet_holder').scroll(function()
   {
     current_scroll_x=$(this).scrollLeft();
     current_scroll_y=$(this).scrollTop();
@@ -210,6 +210,9 @@ function draw()
   }
   $('div#spreadsheet_main').css('width',document.body.clientWidth);
   $('div#spreadsheet_main').css('height',$(window).height()-155);
+
+  $('div#spreadsheet_holder').css('width',(document.body.clientWidth-40));
+  $('div#spreadsheet_holder').css('height',($(window).height()-180));
 }
 
 function reset()

@@ -225,29 +225,27 @@ function width($text,$xl)
         //var_dump($cell_widths);
       ?>
       <div id="spreadsheet_main">
-        <div <?php echo 'style="width:'.($col_width+40).'px;height:25px;"';?>>
-          <div id="col_holder" <?php echo 'style="width:'.$col_width.'px"';?>>
-            <?php
-            for($x=0;$x<count($cell_widths_max);$x++)
-            {
-              echo '<div class="col_item" id="col_header_'.$abc[$x].'" style="width:'.($cell_widths_max[$x]-1).'px">'.$abc[$x].'</div>';
-            }
-            ?>
-          </div>
+        <div id="spacer"></div>
+        <div id="col_holder" <?php echo 'style="width:'.$col_width.'px"';?>>
+          <?php
+          for($x=0;$x<count($cell_widths_max);$x++)
+          {
+            echo '<div class="col_item" id="col_header_'.$abc[$x].'" style="width:'.($cell_widths_max[$x]-1).'px">'.$abc[$x].'</div>';
+          }
+          ?>
         </div>
-        <div <?php echo 'style="width:'.($col_width+40).'px;height:'.(count($sheetData)*25).'px"';?>>
-          <div id="row_holder" <?php echo 'style="height:'.(count($sheetData)*25).'px"';?>>
-            <?php
-            for($x=1;$x<count($sheetData)+1;$x++)
-            {
-              echo '<div class="row_item" id="row_header_'.$x.'">'.$x.'</div>';
-            }
-            ?>
-          </div>
+        <div id="row_holder" <?php echo 'style="height:'.(count($sheetData)*25).'px"';?>>
+          <?php
+          for($x=1;$x<count($sheetData)+1;$x++)
+          {
+            echo '<div class="row_item" id="row_header_'.$x.'">'.$x.'</div>';
+          }
+          ?>
+        </div>
+        <div id="spreadsheet_holder">
           <canvas id="container">Your browser does not support the canvas tag.</canvas>
         </div>
       </div>
-      <div id="spacer"></div>
       <?php
       }
       ?>
