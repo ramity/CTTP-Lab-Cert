@@ -143,7 +143,7 @@ div#col_holder
 }
 div.col_item
 {
-  height:24px;
+  height:23px;
   cursor:pointer;
   cursor:-webkit-grab;
   border-right:1px solid #C0C0C0;
