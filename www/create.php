@@ -65,7 +65,7 @@ function conv_js_string($input)
           echo '<option disabled selected value>File</option>';
           foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/") as $oitem)
           {
-            if($oitem!=='.'&&$oitem!=='..')
+            if($oitem!=='.'&&$oitem!=='..'&&substr($oitem,-4)!='.pdf')
             {
               if(isset($_POST['file_name'])&&!empty($_POST['file_name'])&&$_POST['file_name']==$oitem)
               {
