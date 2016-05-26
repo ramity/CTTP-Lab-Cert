@@ -1,9 +1,3 @@
-window.selected_key_array=[];
-window.selected_val_array=[];
-
-window.selected_array=[];
-window.select_display=false;
-
 window.conv_array=[];
 
 window.keystatus=[];
@@ -13,7 +7,7 @@ window.keystatus['LMOUSE']=false;
 window.keystatus['CTRL']=false;
 
 window.toolbar_open=false;
-//window.toolbar_w=document.body.clientWidth;
+//window.toolbar_w
 window.toolbar_h=200;
 
 window.canvas_clicked=false;
@@ -23,8 +17,12 @@ window.canvas_mouse_y=0;
 
 window.contextmenu_open=false;
 
-$(document).mousedown(function(){window.keystatus['LMOUSE']=true;
-}).mouseup(function(){window.keystatus['LMOUSE']=false;});
+window.scroll_x=0;
+window.scroll_y=0;
+
+//ALL VARAIBLE DEFININING KEYBOARD INPUT FUNCTIONS
+$(document).mousedown(function(){window.keystatus['LMOUSE']=true;});
+$(document).mouseup(function(){window.keystatus['LMOUSE']=false;});
 
 kd.run(function(){kd.tick();});
 
@@ -36,124 +34,41 @@ kd.V.up(function(){window.keystatus['V']=false;});
 
 kd.ENTER.down(function(){});
 
-window.scroll_x=0;
-window.scroll_y=0;
-
-$('div#ctmi_open_toolbar').on('click',function()
-{
-  $('div#contextmenu').remove();
-
-  window.toolbar_open=true;
-
-  draw();
-});
-
+//ONLOAD FUNCTION
 $(function()
 {
-  //DYANMICALLY CALULATED VALUE(S)
-  window.toolbar_w=document.body.clientWidth;
-
   //ON MOUSEMOVE FUNCTIONS / VALUES
   $('canvas#container').on('mousemove',function(e)
   {
-    area=this.getBoundingClientRect();
-
-    window.canvas_mouse_x = e.clientX - area.left;
-    window.canvas_mouse_y = e.clientY - area.top;
-
-    $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
+    on_mousemove_handler(this,e);
   });
 
   //ON CLICK FUNCTIONS / VALUES
   $('canvas#container').click(function(e)
   {
-    window.canvas_clicked=true;
-
-    if(contextmenu_open)
-    {
-      $('div#contextmenu').remove();
-    }
-
-    draw();
+    on_click_handler();
   });
 
   //ON SCROLL FUNCTIONS / VALUES
   $('div#spreadsheet_holder').scroll(function()
   {
-    current_scroll_x=$(this).scrollLeft();
-    current_scroll_y=$(this).scrollTop();
-
-    if(window.scroll_x!=current_scroll_x)
-    {
-      window.scroll_x=current_scroll_x;
-      $('div#col_holder').css('left',(-current_scroll_x + 40));
-    }
-
-    if(window.scroll_y!=current_scroll_y)
-    {
-      window.scroll_y=current_scroll_y;
-      $('div#row_holder').css('top',(-current_scroll_y + 180));
-    }
+    on_scroll_handler(this);
   });
 
   //ON RIGHTCLICK FUNCTIONS / VALUES
   $("canvas#container").on("contextmenu",function(e)
   {
-    window.canvas_clicked=true;
-
-    offset = $(this).offset();
-
-    if(contextmenu_open)
-    {
-      $('div#contextmenu').remove();
-    }
-
-    contextmenu=document.createElement('div');
-    contextmenu.id='contextmenu';
-
-    contextmenu.style.cssText='left:'+(canvas_mouse_x)+'px;top:'+(canvas_mouse_y)+'px';
-
-    contextmenu_items=
-    [
-      [1,'Copy','ctmi_copy'],
-      [0,'Add selection to keys','ctmi_add_sel_keys'],
-      [0,'Add selection to values','ctmi_add_sel_vals'],
-      [1,'Open toolbar','ctmi_open_toolbar'],
-      [1,'Open key overlay','ctmi_open_key_overlay'],
-      [1,'Open value overlay','ctmi_open_val_overlay']
-    ];
-
-    $('div#spreadsheet_holder').append(contextmenu);
-
-    for(z=0;z<contextmenu_items.length;z++)
-    {
-      if(contextmenu_items[z][0])
-      {
-        $('div#contextmenu').append('<div id="'+contextmenu_items[z][2]+'"class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
-      }
-      else
-      {
-        $('div#contextmenu').append('<div class="contextmenu_item_disabled">'+contextmenu_items[z][1]+'</div>');
-      }
-    }
-
-    window.contextmenu_open=true;
-
-    draw();
-
-    return false;
+    return open_context_menu(e);
   });
 
   draw();
 });
 
-$(window).resize(function()
-{
-  draw();
-});
 
 function draw()
 {
+  window.toolbar_w=document.body.clientWidth;
+
   $('div#spreadsheet_main').css('width',document.body.clientWidth);
   $('div#spreadsheet_main').css('height',$(window).height()-155);
 
@@ -187,22 +102,14 @@ function draw()
     canvas.css('width',window.canvas_width);
     canvas.css('height',window.canvas_height);
 
-    cell_width = 100;
-    cell_height = 25;
+    window.cell_height = 25;
 
-    cell_col_header_width = cell_width;
-    cell_col_header_height = cell_height;
+    window.cell_col_header_height = cell_height;
 
-    cell_row_header_width = 40;
-    cell_row_header_height = cell_height;
+    window.cell_row_header_width = 40;
+    window.cell_row_header_height = cell_height;
 
-    selected_header_color = '#DDD';
-
-    spreadsheet_area_x = canvas_width - cell_col_header_width;
-    spreadsheet_area_y = canvas_height - cell_col_header_height;
-
-    cell_display_x = Math.round(canvas_width / cell_width);
-    cell_display_y = Math.round(canvas_height / cell_height);
+    window.selected_header_color = '#DDD';
 
     if(window.conv_array.length)
     {
@@ -302,12 +209,14 @@ function draw()
   }
 }
 
+//CANVAS RESET/CLEAR FUNCTION(S)
 function reset()
 {
   canvas.attr('height','0px');
   canvas.attr('width','0px');
 }
 
+//MISC FUNCTIONS
 function decode(input)
 {
   var txt = document.createElement("textarea");
@@ -355,16 +264,111 @@ function toLetters(num)
   return pow ? toLetters(pow) + out : out;
 }
 
+//ON_[EVEN]_HANDLER FUNCTIONS
+$(window).resize(function()
+{
+  draw();
+});
+
+function on_scroll_handler(elm)
+{
+  window.current_scroll_x=$(elm).scrollLeft();
+  window.current_scroll_y=$(elm).scrollTop();
+
+  if(window.scroll_x!=current_scroll_x)
+  {
+    window.scroll_x=current_scroll_x;
+    $('div#col_holder').css('left',(-current_scroll_x + 40));
+  }
+
+  if(window.scroll_y!=current_scroll_y)
+  {
+    window.scroll_y=current_scroll_y;
+    $('div#row_holder').css('top',(-current_scroll_y + 180));
+  }
+}
+
+function on_mousemove_handler(elm,e)
+{
+  area=elm.getBoundingClientRect();
+
+  window.canvas_mouse_x = e.clientX - area.left;
+  window.canvas_mouse_y = e.clientY - area.top;
+
+  $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
+}
+
+function on_click_handler()
+{
+  window.canvas_clicked=true;
+
+  if(window.contextmenu_open)
+  {
+    $('div#contextmenu').remove();
+  }
+
+  draw();
+}
+
+//OPEN_[OBJECT] FUNCTIONS
 function open_toolbar()
 {
-  close_context_menu();
+  close_context_menu_handler();
 
   window.toolbar_open=true;
 
   draw();
 }
 
-function close_context_menu()
+function open_context_menu(e)
+{
+  window.canvas_clicked=true;
+
+  offset = $(this).offset();
+
+  if(contextmenu_open)
+  {
+    $('div#contextmenu').remove();
+  }
+
+  contextmenu=document.createElement('div');
+  contextmenu.id='contextmenu';
+
+  contextmenu.style.cssText='left:'+(canvas_mouse_x)+'px;top:'+(canvas_mouse_y)+'px';
+
+  contextmenu_items=
+  [
+    [1,'Copy','ctmi_copy'],
+    [0,'Add selection to keys','ctmi_add_sel_keys'],
+    [0,'Add selection to values','ctmi_add_sel_vals'],
+    [1,'Open toolbar','ctmi_open_toolbar'],
+    [1,'Open key overlay','ctmi_open_key_overlay'],
+    [1,'Open value overlay','ctmi_open_val_overlay']
+  ];
+
+  $('div#spreadsheet_holder').append(contextmenu);
+
+  for(z=0;z<contextmenu_items.length;z++)
+  {
+    if(contextmenu_items[z][0])
+    {
+      $('div#contextmenu').append('<div id="'+contextmenu_items[z][2]+'"class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
+    }
+    else
+    {
+      $('div#contextmenu').append('<div class="contextmenu_item_disabled">'+contextmenu_items[z][1]+'</div>');
+    }
+  }
+
+  window.contextmenu_open=true;
+
+  draw();
+
+  return false;
+}
+
+//CLOSE_[OBJECT]_HANDLER FUNCTIONS
+function close_context_menu_handler()
 {
   if(window.contextmenu_open)
   {
