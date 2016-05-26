@@ -34,16 +34,21 @@ window.scroll_y=0;
 
 $(function()
 {
-  $('canvas#container').css('background-color','#fff');
-
-  $('canvas#container').click(function(e)
+  $('canvas#container').on('mousemove',function(e)
   {
-    window.canvas_clicked=true;
-
     area=this.getBoundingClientRect();
 
     window.canvas_mouse_x = e.clientX - area.left;
     window.canvas_mouse_y = e.clientY - area.top;
+
+    console.log(canvas_mouse_x,canvas_mouse_y);
+
+    $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
+  });
+
+  $('canvas#container').click(function(e)
+  {
+    window.canvas_clicked=true;
 
     console.log(canvas_mouse_x,canvas_mouse_y);
 

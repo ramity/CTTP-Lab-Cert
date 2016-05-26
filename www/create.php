@@ -259,7 +259,7 @@ function conv_js_string($input)
           <canvas id="container">Your browser does not support the canvas tag.</canvas>
         </div>
         <div id="menubar">
-
+          <div id="menubar_mouse">x 0 : y 0</div>
         </div>
       </div>
       <?php
