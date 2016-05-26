@@ -18,6 +18,13 @@ function width($text,$xl)
     return $text_width = $box[0] + $box[2];
   }
 }
+
+function conv_js_string($input)
+{
+  $input = str_replace(array("\n","\r"),' ',$input);
+  $input = htmlentities($input,ENT_QUOTES);
+  return $input;
+}
 ?>
 <!DOCTYPE html>
   <head>
@@ -102,6 +109,12 @@ function width($text,$xl)
         }
         ?>
         <input class="submit" type="submit" name="form-submit">
+        <?php
+        if(isset($_POST['file_year'])&&!empty($_POST['file_year']))
+        {
+          echo '<a href="http://localhost/create.php"><div class="clearbutton">Reset Query</div></a>';
+        }
+        ?>
       </form>
       <?php
       if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection']))
@@ -136,7 +149,7 @@ function width($text,$xl)
           {
             if(isset($row[$abc[$z]]))
             {
-              $cell_widths[$key][$z]=width(htmlentities($row[$abc[$z]],ENT_QUOTES),$abc[$z]);
+              $cell_widths[$key][$z]=width(conv_js_string($row[$abc[$z]]),$abc[$z]);
             }
             else
             {
@@ -148,7 +161,7 @@ function width($text,$xl)
               if(!empty($row[$abc[$z]]))
               {
                 echo '[';
-                  echo '"'.htmlentities($row[$abc[$z]],ENT_QUOTES).'"';
+                  echo '"'.conv_js_string($row[$abc[$z]]).'"';
                 echo ']],';
               }
               else
@@ -161,7 +174,7 @@ function width($text,$xl)
               if(!empty($row[$abc[$z]]))
               {
                 echo '[';
-                echo '"'.htmlentities($row[$abc[$z]],ENT_QUOTES).'"';
+                echo '"'.conv_js_string($row[$abc[$z]]).'"';
                 echo '],';
               }
               else

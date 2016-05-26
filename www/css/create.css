@@ -75,8 +75,8 @@ input.submit
   padding:0px 10px;
   float:left;
   color:#fff;
+  cursor:pointer;
   background-color:#3498db;
-  border-bottom:5px;
 }
 form#filebar
 {
@@ -90,6 +90,19 @@ form#filebar
   position:fixed;
   top:100px;
   left:0px;
+}
+div.clearbutton
+{
+  height:35px;
+  margin:10px 10px 10px 0px;
+  border:none;
+  line-height:35px;
+  outline:none;
+  padding:0px 10px;
+  float:left;
+  color:#fff;
+  background-color:#e74c3c;
+  font-size:13px;
 }
 div#spreadsheet_main
 {
