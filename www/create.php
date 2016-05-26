@@ -62,7 +62,7 @@ function conv_js_string($input)
         if(isset($_POST['file_year'])&&!empty($_POST['file_year']))
         {
           echo '<select class="plate" name="file_name">';
-          echo '<option disabled selected value>File</option>';
+          echo '<option disabled selected value>File Name</option>';
           foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/") as $oitem)
           {
             if($oitem!=='.'&&$oitem!=='..'&&substr($oitem,-4)!='.pdf')
@@ -93,7 +93,7 @@ function conv_js_string($input)
             die('Error loading file "'.pathinfo($path,PATHINFO_BASENAME).'": '.$e->getMessage());
           }
           $sheets=$objPHPExcel->getSheetNames();
-          echo '<option disabled selected value>Sheet</option>';
+          echo '<option disabled selected value>Sheet Name</option>';
           foreach($sheets as $data)
           {
             if(isset($_POST['sheet_selection'])&&!empty($_POST['sheet_selection'])&&$_POST['sheet_selection']==str_replace('"','&',$data))
@@ -257,6 +257,9 @@ function conv_js_string($input)
         </div>
         <div id="spreadsheet_holder">
           <canvas id="container">Your browser does not support the canvas tag.</canvas>
+        </div>
+        <div id="menubar">
+
         </div>
       </div>
       <?php

@@ -12,6 +12,8 @@ window.keystatus['V']=false;
 window.keystatus['LMOUSE']=false;
 window.keystatus['CTRL']=false;
 
+window.toolbar_open=false;
+
 window.canvas_clicked=false;
 
 $(document).mousedown(function(){window.keystatus['LMOUSE']=true;
@@ -66,21 +68,33 @@ $(function()
     }
   });
 
+  $("canvas#container").on("contextmenu",function(e){
+     return false;
+  });
+
   draw();
 });
 
 $(window).resize(function()
 {
-  $('div#spreadsheet_main').css('width',document.body.clientWidth);
-  $('div#spreadsheet_main').css('height',$(window).height()-155);
-
-  console.log('resizing...');
   draw();
-  console.log('...done');
 });
 
 function draw()
 {
+  $('div#spreadsheet_main').css('width',document.body.clientWidth);
+  $('div#spreadsheet_main').css('height',$(window).height()-155);
+
+  $('div#spreadsheet_holder').css('width',(document.body.clientWidth-40));
+  if(window.toolbar_open)
+  {
+    $('div#spreadsheet_holder').css('height',($(window).height()-405));
+  }
+  else
+  {
+    $('div#spreadsheet_holder').css('height',($(window).height()-205));
+  }
+
   if(conv_array.length)
   {
     canvas = $('canvas#container');
@@ -217,11 +231,6 @@ function draw()
       }
     }
   }
-  $('div#spreadsheet_main').css('width',document.body.clientWidth);
-  $('div#spreadsheet_main').css('height',$(window).height()-155);
-
-  $('div#spreadsheet_holder').css('width',(document.body.clientWidth-40));
-  $('div#spreadsheet_holder').css('height',($(window).height()-180));
 }
 
 function reset()
