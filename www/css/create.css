@@ -86,6 +86,7 @@ form#filebar
   margin:0px;
   background-color:#fff;
   float:left;
+  z-index:3;
 }
 div#spreadsheet_main
 {
@@ -97,8 +98,7 @@ div#spreadsheet_main
   -webkit-user-select:none;
   -ms-user-select:none;
   border-top:1px solid #C0C0C0;
-  overflow-y:overlay;
-  overflow-x:overlay;
+  overflow:auto;
 }
 div#spacer
 {
@@ -106,6 +106,9 @@ div#spacer
   height:24px;
   border-right:1px solid #C0C0C0;
   border-bottom:1px solid #C0C0C0;
+  position:fixed;
+  top:155px;
+  z-index:4;
 }
 div#col_holder
 {
@@ -113,6 +116,10 @@ div#col_holder
   line-height:25px;
   background-color:#F3F3F3;
   border-bottom:1px solid #C0C0C0;
+  position:fixed;
+  left:40px;
+  top:155px;
+  z-index:2;
 }
 div.col_item
 {
@@ -127,6 +134,10 @@ div#row_holder
   line-height:25px;
   background-color:#F3F3F3;
   border-right:1px solid #C0C0C0;
+  position:fixed;
+  left:0px;
+  top:180px;
+  z-index:2;
 }
 div.row_item
 {
@@ -147,4 +158,5 @@ div.col_item:active,div.row_item:active
 canvas#container
 {
   float:left;
+  margin-left:40px;
 }

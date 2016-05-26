@@ -225,8 +225,7 @@ function width($text,$xl)
         //var_dump($cell_widths);
       ?>
       <div id="spreadsheet_main">
-        <div <?php echo 'style="width:'.($col_width+40).'px"';?>>
-          <div id="spacer"></div>
+        <div <?php echo 'style="width:'.($col_width+40).'px;height:25px;"';?>>
           <div id="col_holder" <?php echo 'style="width:'.$col_width.'px"';?>>
             <?php
             for($x=0;$x<count($cell_widths_max);$x++)
@@ -248,6 +247,7 @@ function width($text,$xl)
           <canvas id="container">Your browser does not support the canvas tag.</canvas>
         </div>
       </div>
+      <div id="spacer"></div>
       <?php
       }
       ?>

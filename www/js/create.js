@@ -27,27 +27,43 @@ kd.V.up(function(){window.keystatus['V']=false;});
 
 kd.ENTER.down(function(){});
 
-$(document).on('scroll','canvas#container',function(){
-  console.log('Event Fired');
-});
+window.scroll_x=0;
+window.scroll_y=0;
 
 $(function()
 {
-  $('div#spreadsheet_main').css('width',document.body.clientWidth);
-  $('div#spreadsheet_main').css('hegiht',$(window).height()-155);
-
   $('canvas#container').css('background-color','#fff');
 
   $('canvas#container').click(function(e)
   {
     window.canvas_clicked=true;
 
-    window.canvas_mouse_x = e.pageX - this.offsetLeft;
-    window.canvas_mouse_y = e.pageY - this.offsetTop;
+    area=this.getBoundingClientRect();
+
+    window.canvas_mouse_x = e.clientX - area.left;
+    window.canvas_mouse_y = e.clientY - area.top;
 
     console.log(canvas_mouse_x,canvas_mouse_y);
 
     draw();
+  });
+
+  $('div#spreadsheet_main').scroll(function()
+  {
+    current_scroll_x=$(this).scrollLeft();
+    current_scroll_y=$(this).scrollTop();
+
+    if(window.scroll_x!=current_scroll_x)
+    {
+      window.scroll_x=current_scroll_x;
+      $('div#col_holder').css('left',(-current_scroll_x + 40));
+    }
+
+    if(window.scroll_y!=current_scroll_y)
+    {
+      window.scroll_y=current_scroll_y;
+      $('div#row_holder').css('top',(-current_scroll_y + 180));
+    }
   });
 
   draw();
@@ -56,11 +72,11 @@ $(function()
 $(window).resize(function()
 {
   $('div#spreadsheet_main').css('width',document.body.clientWidth);
-  $('div#spreadsheet_main').css('height',($(window).height()-155));
+  $('div#spreadsheet_main').css('height',$(window).height()-155);
 
-  console.log('resizing...')
+  console.log('resizing...');
   draw();
-  console.log('...done')
+  console.log('...done');
 });
 
 function draw()
@@ -84,9 +100,6 @@ function draw()
 
     canvas.css('width',window.canvas_width);
     canvas.css('height',window.canvas_height);
-
-    scroll_distance_x=25;
-    scroll_distance_y=25;
 
     cell_width = 100;
     cell_height = 25;
@@ -195,6 +208,8 @@ function draw()
       }
     }
   }
+  $('div#spreadsheet_main').css('width',document.body.clientWidth);
+  $('div#spreadsheet_main').css('height',$(window).height()-155);
 }
 
 function reset()
