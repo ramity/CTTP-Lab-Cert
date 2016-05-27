@@ -1,10 +1,23 @@
 window.conv_array=[];
 
 window.keystatus=[];
+window.keytoggled=[];
 window.keystatus['K']=false;
+  window.keytoggled['K']=false;
+
+window.keystatus['T']=false;
+  window.keytoggled['T']=false;
+
 window.keystatus['V']=false;
+  window.keytoggled['V']=false;
+
 window.keystatus['LMOUSE']=false;
+  window.keytoggled['LMOUSE']=false;
+
 window.keystatus['CTRL']=false;
+  window.keytoggled['CTRL']=false;
+
+window.selected=[];
 
 window.toolbar_open=false;
 //window.toolbar_w
@@ -14,6 +27,9 @@ window.canvas_clicked=false;
 
 window.canvas_mouse_x=0;
 window.canvas_mouse_y=0;
+
+window.screen_mouse_x=0;
+window.screen_mouse_y=0;
 
 window.contextmenu_open=false;
 
@@ -32,6 +48,9 @@ kd.K.up(function(){window.keystatus['K']=false;});
 kd.V.down(function(){window.keystatus['V']=true;});
 kd.V.up(function(){window.keystatus['V']=false;});
 
+kd.T.down(function(){window.keystatus['T']=true;});
+kd.T.up(function(){window.keystatus['T']=false;});
+
 kd.ENTER.down(function(){});
 
 //ONLOAD FUNCTION
@@ -43,10 +62,16 @@ $(function()
     on_mousemove_handler(this,e);
   });
 
+  $(document).on('mousemove',function(e)
+  {
+    window.screen_mouse_x=e.clientX;
+    window.screen_mouse_y=e.clientY;
+  });
+
   //ON CLICK FUNCTIONS / VALUES
   $('canvas#container').click(function(e)
   {
-    on_click_handler();
+    on_click_canvas_handler();
   });
 
   //ON SCROLL FUNCTIONS / VALUES
@@ -58,13 +83,13 @@ $(function()
   //ON RIGHTCLICK FUNCTIONS / VALUES
   $("canvas#container").on("contextmenu",function(e)
   {
-    return open_context_menu(e);
+    return open_contextmenu(e);
   });
 
   draw();
 });
 
-
+//CANVAS DRAW FUNTION
 function draw()
 {
   window.toolbar_w=document.body.clientWidth;
@@ -73,9 +98,10 @@ function draw()
   $('div#spreadsheet_main').css('height',$(window).height()-155);
 
   $('div#spreadsheet_holder').css('width',(document.body.clientWidth-40));
+
   if(window.toolbar_open)
   {
-    $('div#spreadsheet_holder').css('height',($(window).height()-405));
+    $('div#spreadsheet_holder').css('height',($(window).height()-205-toolbar_h));
   }
   else
   {
@@ -90,11 +116,6 @@ function draw()
     ctx = $("canvas#container").get(0).getContext('2d');
 
     reset();
-
-    if(col_widths.length)
-    {
-
-    }
 
     canvas.attr('width',window.canvas_width+'px');
     canvas.attr('height',window.canvas_height+'px');
@@ -133,7 +154,7 @@ function draw()
       //cell_col_font_offset_x dynamically evaluated
       cell_col_font_offset_y=(cell_col_header_height / 2);
 
-      selected=[];
+      window.selected=[];
 
       for(y=0;y<window.conv_array.length;y++)
       {
@@ -298,7 +319,7 @@ function on_mousemove_handler(elm,e)
   $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
 }
 
-function on_click_handler()
+function on_click_canvas_handler()
 {
   window.canvas_clicked=true;
 
@@ -310,17 +331,73 @@ function on_click_handler()
   draw();
 }
 
+window.toolbar_resizing_y_start=0;
+window.toolbar_resizing_y_end=0;
+
+window.toolbar_resizing=false;
+
+window.toolbar_resizebar_clicked=false;
+
+window.toolbar_array=[];
+
 //OPEN_[OBJECT] FUNCTIONS
 function open_toolbar()
 {
-  close_context_menu_handler();
+  close_contextmenu_handler();
 
   window.toolbar_open=true;
 
   draw();
+
+  toolbar=document.createElement('div');
+  toolbar.id='toolbar';
+
+  toolbar_resizebar=document.createElement('div');
+  toolbar_resizebar.id='toolbar_resizebar';
+
+  toolbar_holder=document.createElement('div');
+  toolbar_holder.id=toolbar_holder;
+
+  $('div#spreadsheet_main').append(toolbar);
+  $('div#toolbar').append(toolbar_resizebar);
+
+  //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
+  $('div#toolbar_resizebar').on('mousedown',function()
+  {
+    window.toolbar_resizebar_clicked=true;
+
+    window.toolbar_resizing_y_start=window.screen_mouse_y;
+  });
+
+  $('div#toolbar_resizebar').on('mouseleave',function()
+  {
+    if(window.toolbar_resizebar_clicked)
+    {
+      window.toolbar_resizing=true;
+
+      window.toolbar_resizebar_clicked=false;
+    }
+  });
+
+  $(document).mouseup(function()
+  {
+    if(window.toolbar_resizing)
+    {
+      window.toolbar_resizing_y_end=window.screen_mouse_y;
+
+      window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
+
+      $('div#toolbar').css('height',window.toolbar_h);
+
+      window.toolbar_resizing=false;
+
+      draw();
+    }
+  });
+
 }
 
-function open_context_menu(e)
+function open_contextmenu(e)
 {
   window.canvas_clicked=true;
 
@@ -338,13 +415,21 @@ function open_context_menu(e)
 
   contextmenu_items=
   [
-    [1,'Copy','ctmi_copy'],
-    [0,'Add selection to keys','ctmi_add_sel_keys'],
-    [0,'Add selection to values','ctmi_add_sel_vals'],
-    [1,'Open toolbar','ctmi_open_toolbar'],
-    [1,'Open key overlay','ctmi_open_key_overlay'],
-    [1,'Open value overlay','ctmi_open_val_overlay']
+    //FORMAT:
+    //active, text, id, onclick function//
+    [1,'Copy','ctmi_copy',0],
+    [0,'Add selection to keys','ctmi_add_sel_keys',0],
+    [0,'Add selection to values','ctmi_add_sel_vals',0],
+    [1,'Open toolbar','ctmi_open_toolbar','open_toolbar'],
+    [1,'Open key overlay','ctmi_open_key_overlay',0],
+    [1,'Open value overlay','ctmi_open_val_overlay',0]
   ];
+
+  if(window.toolbar_open)
+  {
+    temp=[1,'Push to toolbar','ctmi_push_tools','push_to_tools'];
+    contextmenu_items.push(temp);
+  }
 
   $('div#spreadsheet_holder').append(contextmenu);
 
@@ -353,6 +438,16 @@ function open_context_menu(e)
     if(contextmenu_items[z][0])
     {
       $('div#contextmenu').append('<div id="'+contextmenu_items[z][2]+'"class="contextmenu_item">'+contextmenu_items[z][1]+'</div>');
+
+      //for safest practice - declaring function as defined rather than string->function conversion
+      if(contextmenu_items[z][3]=='open_toolbar')
+      {
+        $('div#'+contextmenu_items[z][2]).on('click',function(){open_toolbar()});
+      }
+      if(contextmenu_items[z][3]=='push_to_tools')
+      {
+        $('div#'+contextmenu_items[z][2]).on('click',function(){push_to_tools()});
+      }
     }
     else
     {
@@ -367,8 +462,14 @@ function open_context_menu(e)
   return false;
 }
 
+function push_to_tools()
+{
+  console.log(window.selected);
+  console.log(conv_array[selected[5]][selected[4]]);
+}
+
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
-function close_context_menu_handler()
+function close_contextmenu_handler()
 {
   if(window.contextmenu_open)
   {

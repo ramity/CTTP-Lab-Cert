@@ -1,16 +1,13 @@
 <?php
-$font = 'C:/wamp/www/font/arial.ttf';
-
-echo '<style>@font-face {
-    font-family: myFirstFont;
-    src: url(http://localhost/font/Arial.ttf);
-}</style>';
-
-$box = imagettfbbox(15,0,$font,'Something works and stuff');
-
-echo '<div style="font-family:myFirstFont;font-size:15px;float:left;">Something works and stuff</div>';
-
-echo $text_width = $box[0] + $box[2];
-
-print_r($box);
-?>
+ $array=array(10,20,10,50,80,100,40,10);
+ $count=count($array);
+ $max=max($array);
+ $line='';
+ foreach($array as $x=>$y)
+ {
+  $line.="$x,$y ";
+ }
+ ?>
+ <svg height="200px" width="200px" viewBox="0 0 <?=$count-1?> <?=$max?>" preserveAspectRatio="none">
+  <polyline style="stroke:red;stroke-width:1px;" points="<?=trim($line)?>">
+ </svg>

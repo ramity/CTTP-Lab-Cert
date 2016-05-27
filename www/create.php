@@ -35,6 +35,9 @@ function conv_js_string($input)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="http://localhost/js/keydrown.min.js"></script>
     <script src="http://localhost/js/create.js"></script>
+    <!--icon links-->
+    <link rel="icon" href="http://localhost/img/caliper.ico">
+
   </head>
   <body>
     <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>

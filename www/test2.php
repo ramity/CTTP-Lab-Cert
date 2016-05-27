@@ -1,4 +1,4 @@
 <!DOCTYPE html>
   <head>
-    <script src="http://localhost/test.php"></script>
+    <script src="http://localhost/js/test.js"></script>
   </head>
