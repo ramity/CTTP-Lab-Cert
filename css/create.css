@@ -267,3 +267,8 @@ div#toolbar_holder
   width:100%;
   height:190px;
 }
+div.toolbar_row
+{
+  width:100%;
+  height:25px;
+}

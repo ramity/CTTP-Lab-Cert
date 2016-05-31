@@ -174,7 +174,7 @@ function draw()
             {
               if(window.canvas_mouse_y > dy && window.canvas_mouse_y <= (parseInt(dy) + parseInt(cell_col_header_height)))
               {
-                selected=[dx,dy,col_widths[x],cell_col_header_height,toLetters(x+1),(y+1)];
+                selected=[dx,dy,parseInt(col_widths[x][0]),cell_col_header_height,toLetters(x+1),(y+1)];
               }
             }
           }
@@ -343,9 +343,17 @@ window.toolbar_array=[];
 //OPEN_[OBJECT] FUNCTIONS
 function open_toolbar()
 {
-  close_contextmenu_handler();
+  if(toolbar_open)
+  {
+    window.toolbar_open=false;
+    $('div#toolbar')
+  }
+  else
+  {
+    window.toolbar_open=true;
+  }
 
-  window.toolbar_open=true;
+  close_contextmenu_handler();
 
   draw();
 
@@ -462,10 +470,30 @@ function open_contextmenu(e)
   return false;
 }
 
+window.toolbar_array=[];
+//PUSH_TO_[OBJECT] FUNCTIONS
 function push_to_tools()
 {
   console.log(window.selected);
-  console.log(conv_array[selected[5]][selected[4]]);
+  console.log(conv_array[selected[5]-1][fromLetters(selected[4])-1]);
+
+  item_row = document.createElement('div');
+  item_row.id = 'row_' + toolbar_array.length;
+  item_row.className = 'toolbar_row';
+
+  $('div#toolbar').append(item_row);
+
+  item_label = document.createElement('input');
+  item_label.id = 'toolbar_item_' + toolbar_array.length;
+  item_label.type = 'text';
+  item_label.className = 'toolbar_label';
+  //item_label.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+
+  $('row_' + toolbar_array.length).append(item_label);
+
+  //conv_array[x], conv_array[_][y], conv_array[x][y],
+  toolbar_array.push([selected[5]-1,fromLetters(selected[4])-1,conv_array[selected[5]-1][fromLetters(selected[4])-1]]);
+
 }
 
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
@@ -475,4 +503,18 @@ function close_contextmenu_handler()
   {
     $('div#contextmenu').remove();
   }
+}
+
+function fromLetters(str)
+{
+  var out = 0,
+      len = str.length,
+      pos = len;
+
+  while (--pos > -1)
+  {
+    out += (str.charCodeAt(pos) - 64) * Math.pow(26, len - 1 - pos);
+  }
+
+  return out;
 }
