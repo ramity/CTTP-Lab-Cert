@@ -33,8 +33,13 @@ function conv_js_string($input)
     <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
     <link rel="stylesheet" type="text/css" href="http://localhost/css/create.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
     <script src="http://localhost/js/keydrown.min.js"></script>
     <script src="http://localhost/js/create.js"></script>
+
     <!--icon links-->
     <link rel="icon" href="http://localhost/img/caliper.ico">
 
@@ -263,6 +268,7 @@ function conv_js_string($input)
         </div>
         <div id="menubar">
           <div id="menubar_mouse">x 0 : y 0</div>
+          <div id="menubar_selection_mode">Selection mode : 1</div>
         </div>
       </div>
       <?php

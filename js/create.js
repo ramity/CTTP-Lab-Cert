@@ -2,20 +2,21 @@ window.conv_array=[];
 
 window.keystatus=[];
 window.keytoggled=[];
+
 window.keystatus['K']=false;
-  window.keytoggled['K']=false;
+window.keytoggled['K']=false;
 
 window.keystatus['T']=false;
-  window.keytoggled['T']=false;
+window.keytoggled['T']=false;
 
 window.keystatus['V']=false;
-  window.keytoggled['V']=false;
+window.keytoggled['V']=false;
 
 window.keystatus['LMOUSE']=false;
-  window.keytoggled['LMOUSE']=false;
+window.keytoggled['LMOUSE']=false;
 
 window.keystatus['CTRL']=false;
-  window.keytoggled['CTRL']=false;
+window.keytoggled['CTRL']=false;
 
 window.selected=[];
 
@@ -56,6 +57,8 @@ kd.ENTER.down(function(){});
 //ONLOAD FUNCTION
 $(function()
 {
+  $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
+
   //ON MOUSEMOVE FUNCTIONS / VALUES
   $('canvas#container').on('mousemove',function(e)
   {
@@ -225,6 +228,19 @@ function draw()
 
         $('div#col_header_'+selected[4]).css('background-color','#ddd');
         $('div#row_header_'+selected[5]).css('background-color','#ddd');
+
+        if(window.selection_mode)
+        {
+          if(window.selection_type=='xl')
+          {
+            $(window.selection_to).val('['+t_col+','+t_row+']');
+          }
+          else if (window.selection_type=='val')
+          {
+            $(window.selection_to).val(conv_array[selected[5]-1][fromLetters(selected[4])-1]);
+          }
+          toggle_selection_mode();
+        }
       }
     }
   }
@@ -474,6 +490,8 @@ function open_contextmenu(e)
 }
 
 window.toolbar_array=[];
+window.selection_mode=0;
+window.selection_to='';
 //PUSH_TO_[OBJECT] FUNCTIONS
 function push_to_tools()
 {
@@ -486,17 +504,134 @@ function push_to_tools()
 
   $('div#toolbar').append(item_row);
 
-  item_label = document.createElement('input');
-  item_label.id = 'toolbar_item_' + toolbar_array.length;
-  item_label.type = 'text';
-  item_label.className = 'toolbar_label';
-  //item_label.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+  //label
+  label = conv_array[selected[5]-1][fromLetters(selected[4])-1][0];
+  //name
+  name = label.toLowerCase();
+  name = name.replace(/[^a-z\d\s]+/gi,"");
+  name = name.replace(/\s+/g,"_");
+  //
 
-  $('row_' + toolbar_array.length).append(item_label);
+  /* LABEL */
+  item_label = document.createElement('input');
+  item_label.id = 'toolbar_label_' + toolbar_array.length;
+  item_label.type = 'text';
+  item_label.className = 'toolbar_input';
+  item_label.name = 'toolbar_label_' + toolbar_array.length;
+  item_label.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+  item_label.title = 'Label';
+
+  /* DESCRIPTION */
+  item_descr = document.createElement('input');
+  item_descr.id = 'toolbar_descr_' + toolbar_array.length;
+  item_descr.type = 'text';
+  item_descr.className = 'toolbar_input';
+  item_descr.name = 'toolbar_descr_' + toolbar_array.length;
+  item_descr.placeholder = 'Description';
+  item_descr.title = 'Description';
+
+  /* TAG */
+  item_tag = document.createElement('select');
+  item_tag.id = 'toolbar_tag_' + toolbar_array.length;
+  item_tag.className = 'toolbar_select';
+  item_tag.name = 'toolbar_tag_' + toolbar_array.length;
+  item_tag.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+  item_tag.title = 'Tag';
+
+  /* PLACEHOLDER */
+  item_placeholder = document.createElement('input');
+  item_placeholder.id = 'toolbar_placeholder_' + toolbar_array.length;
+  item_placeholder.type = 'text';
+  item_placeholder.className = 'toolbar_input';
+  item_placeholder.name = 'toolbar_placeholder_' + toolbar_array.length;
+  item_placeholder.placeholder = 'Placeholder';
+  item_placeholder.title = 'Placeholder';
+
+  /* NAME */
+  item_name = document.createElement('input');
+  item_name.id = 'toolbar_name_' + toolbar_array.length;
+  item_name.type = 'text';
+  item_name.className = 'toolbar_input';
+  item_name.name = 'toolbar_name_' + toolbar_array.length;
+  item_name.value = name;
+  item_name.title = 'Name';
+
+  /* SQL */
+  item_sql = document.createElement('input');
+  item_sql.id = 'toolbar_sql_' + toolbar_array.length;
+  item_sql.type = 'text';
+  item_sql.className = 'toolbar_input';
+  item_sql.name = 'toolbar_sql_' + toolbar_array.length;
+  item_sql.value = '`' + name + '` text COLLATE utf8_bin NOT NULL' ;
+  item_sql.title = 'SQL';
+
+  /* REQUIRED */
+  item_req = document.createElement('input');
+  item_req.id = 'toolbar_req_' + toolbar_array.length;
+  item_req.type = 'text';
+  item_req.className = 'toolbar_input';
+  item_req.name = 'toolbar_req_' + toolbar_array.length;
+  item_req.value = 'true';
+  item_req.title = 'Required';
+
+  /* XL */
+  item_xl = document.createElement('input');
+  item_xl.id = 'toolbar_xl_' + toolbar_array.length;
+  item_xl.type = 'text';
+  item_xl.className = 'toolbar_input';
+  item_xl.name = 'toolbar_xl_' + toolbar_array.length;
+  item_xl.value = '[' + selected[4] + ',' + selected[5] + ']';
+  item_xl.title = 'Excel';
+
+  /* VALUE */
+  item_value = document.createElement('input');
+  item_value.id = 'toolbar_value_' + toolbar_array.length;
+  item_value.type = 'text';
+  item_value.className = 'toolbar_input';
+  item_value.name = 'toolbar_value_' + toolbar_array.length;
+  item_value.title = 'Value';
+
+  $(('div#row_' + toolbar_array.length)).append(item_label,item_descr,item_tag,item_placeholder,item_name,item_sql,item_req,item_xl,item_value);
+
+  $(('select#toolbar_tag_' + toolbar_array.length)).append('<option selected>Text</option>');
+
+  $('input#toolbar_xl_' + toolbar_array.length).on('dblclick',function()
+  {
+    $(this).val('[select new value]');
+
+    window.selection_to = 'input#' + $(this).attr('id');
+    window.selection_type = 'xl';
+
+    toggle_selection_mode();
+  });
+
+  $('input#toolbar_value_' + toolbar_array.length).on('dblclick',function()
+  {
+    $(this).val('[select new value]');
+
+    window.selection_to = 'input#' + $(this).attr('id');
+    window.selection_type = 'val';
+
+    toggle_selection_mode();
+  });
 
   //conv_array[x], conv_array[_][y], conv_array[x][y],
   toolbar_array.push([selected[5]-1,fromLetters(selected[4])-1,conv_array[selected[5]-1][fromLetters(selected[4])-1]]);
 
+}
+
+function toggle_selection_mode()
+{
+  if(window.selection_mode)
+  {
+    window.selection_mode = 0;
+  }
+  else
+  {
+    window.selection_mode = 1;
+  }
+
+  $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 }
 
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
