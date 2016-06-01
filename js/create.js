@@ -495,6 +495,8 @@ window.selection_to='';
 //PUSH_TO_[OBJECT] FUNCTIONS
 function push_to_tools()
 {
+  close_contextmenu_handler();
+
   console.log(window.selected);
   console.log(conv_array[selected[5]-1][fromLetters(selected[4])-1]);
 
@@ -506,11 +508,14 @@ function push_to_tools()
 
   //label
   label = conv_array[selected[5]-1][fromLetters(selected[4])-1][0];
+  label = label.replace(':','');
   //name
   name = label.toLowerCase();
+  name = name.replace("#","number");
   name = name.replace(/[^a-z\d\s]+/gi,"");
   name = name.replace(/\s+/g,"_");
-  //
+
+  /* SELECTS */
 
   /* LABEL */
   item_label = document.createElement('input');
@@ -518,7 +523,7 @@ function push_to_tools()
   item_label.type = 'text';
   item_label.className = 'toolbar_input';
   item_label.name = 'toolbar_label_' + toolbar_array.length;
-  item_label.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+  item_label.value = label;
   item_label.title = 'Label';
 
   /* DESCRIPTION */
@@ -571,7 +576,7 @@ function push_to_tools()
   item_req.type = 'text';
   item_req.className = 'toolbar_input';
   item_req.name = 'toolbar_req_' + toolbar_array.length;
-  item_req.value = 'true';
+  item_req.value = '1';
   item_req.title = 'Required';
 
   /* XL */
@@ -591,7 +596,24 @@ function push_to_tools()
   item_value.name = 'toolbar_value_' + toolbar_array.length;
   item_value.title = 'Value';
 
-  $(('div#row_' + toolbar_array.length)).append(item_label,item_descr,item_tag,item_placeholder,item_name,item_sql,item_req,item_xl,item_value);
+  /* REORDER */
+  item_reorder = document.createElement('select');
+  item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
+
+  inputs=
+  [
+    item_label,
+    item_descr,
+    item_tag,
+    item_placeholder,
+    item_name,
+    item_sql,
+    item_req,
+    item_xl,
+    item_value
+  ]
+
+  $(('div#row_' + toolbar_array.length)).append(inputs);
 
   $(('select#toolbar_tag_' + toolbar_array.length)).append('<option selected>Text</option>');
 
@@ -625,10 +647,12 @@ function toggle_selection_mode()
   if(window.selection_mode)
   {
     window.selection_mode = 0;
+    $('div#menubar_selection_mode').css('color','#000');
   }
   else
   {
     window.selection_mode = 1;
+    $('div#menubar_selection_mode').css('color','#2ecc71');
   }
 
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
