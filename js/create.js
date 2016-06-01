@@ -278,7 +278,6 @@ function explode(delimiter,string,limit=null)
 
 function toLetters(num)
 {
-  "use strict";
   var mod = num % 26,
     pow = num / 26 | 0,
     out = mod ? String.fromCharCode(64 + mod) : (--pow, 'Z');
@@ -341,68 +340,71 @@ window.toolbar_resizebar_clicked=false;
 window.toolbar_array=[];
 
 //OPEN_[OBJECT] FUNCTIONS
-function open_toolbar()
+function toggle_toolbar()
 {
-  if(toolbar_open)
+  if(window.toolbar_open)
   {
     window.toolbar_open=false;
-    $('div#toolbar')
+    $('div#toolbar').remove();
+
+    close_contextmenu_handler();
+
+    draw();
   }
   else
   {
     window.toolbar_open=true;
+
+    close_contextmenu_handler();
+
+    draw();
+
+    toolbar=document.createElement('div');
+    toolbar.id='toolbar';
+
+    toolbar_resizebar=document.createElement('div');
+    toolbar_resizebar.id='toolbar_resizebar';
+
+    toolbar_holder=document.createElement('div');
+    toolbar_holder.id=toolbar_holder;
+
+    $('div#spreadsheet_main').append(toolbar);
+    $('div#toolbar').append(toolbar_resizebar);
+
+    //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
+    $('div#toolbar_resizebar').on('mousedown',function()
+    {
+      window.toolbar_resizebar_clicked=true;
+
+      window.toolbar_resizing_y_start=window.screen_mouse_y;
+    });
+
+    $('div#toolbar_resizebar').on('mouseleave',function()
+    {
+      if(window.toolbar_resizebar_clicked)
+      {
+        window.toolbar_resizing=true;
+
+        window.toolbar_resizebar_clicked=false;
+      }
+    });
+
+    $(document).mouseup(function()
+    {
+      if(window.toolbar_resizing)
+      {
+        window.toolbar_resizing_y_end=window.screen_mouse_y;
+
+        window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
+
+        $('div#toolbar').css('height',window.toolbar_h);
+
+        window.toolbar_resizing=false;
+
+        draw();
+      }
+    });
   }
-
-  close_contextmenu_handler();
-
-  draw();
-
-  toolbar=document.createElement('div');
-  toolbar.id='toolbar';
-
-  toolbar_resizebar=document.createElement('div');
-  toolbar_resizebar.id='toolbar_resizebar';
-
-  toolbar_holder=document.createElement('div');
-  toolbar_holder.id=toolbar_holder;
-
-  $('div#spreadsheet_main').append(toolbar);
-  $('div#toolbar').append(toolbar_resizebar);
-
-  //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
-  $('div#toolbar_resizebar').on('mousedown',function()
-  {
-    window.toolbar_resizebar_clicked=true;
-
-    window.toolbar_resizing_y_start=window.screen_mouse_y;
-  });
-
-  $('div#toolbar_resizebar').on('mouseleave',function()
-  {
-    if(window.toolbar_resizebar_clicked)
-    {
-      window.toolbar_resizing=true;
-
-      window.toolbar_resizebar_clicked=false;
-    }
-  });
-
-  $(document).mouseup(function()
-  {
-    if(window.toolbar_resizing)
-    {
-      window.toolbar_resizing_y_end=window.screen_mouse_y;
-
-      window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
-
-      $('div#toolbar').css('height',window.toolbar_h);
-
-      window.toolbar_resizing=false;
-
-      draw();
-    }
-  });
-
 }
 
 function open_contextmenu(e)
@@ -437,6 +439,7 @@ function open_contextmenu(e)
   {
     temp=[1,'Push to toolbar','ctmi_push_tools','push_to_tools'];
     contextmenu_items.push(temp);
+    contextmenu_items[3][1] = 'Close toolbar';
   }
 
   $('div#spreadsheet_holder').append(contextmenu);
@@ -450,7 +453,7 @@ function open_contextmenu(e)
       //for safest practice - declaring function as defined rather than string->function conversion
       if(contextmenu_items[z][3]=='open_toolbar')
       {
-        $('div#'+contextmenu_items[z][2]).on('click',function(){open_toolbar()});
+        $('div#'+contextmenu_items[z][2]).on('click',function(){toggle_toolbar()});
       }
       if(contextmenu_items[z][3]=='push_to_tools')
       {
