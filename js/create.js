@@ -69,7 +69,7 @@ window.onbeforeunload = function(event)
 {
   if(keystatus['SHIFT'])
   {
-    exit;
+    return;
   }
   else
   {
@@ -79,7 +79,7 @@ window.onbeforeunload = function(event)
     }
     else
     {
-      exit;
+      return;
     }
   }
 }
