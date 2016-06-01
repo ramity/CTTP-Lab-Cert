@@ -646,6 +646,24 @@ function push_to_tools()
   item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
   item_reorder.className = 'toolbar_select';
 
+  /* DELETE */
+  item_delete = document.createElement('div');
+  item_delete.id = 'toolbar_delete_' + toolbar_array.length;
+  item_delete.className = 'delete_button';
+  item_delete.innerHTML = 'x';
+
+  /* UP ARROW */
+  item_up = document.createElement('div');
+  item_up.id = 'toolbar_reorder_up_' + toolbar_array.length;
+  item_up.className = 'up_button';
+  item_up.innerHTML = '&#8679;';
+
+  /* DOWN ARROW */
+  item_down = document.createElement('div');
+  item_down.id = 'toolbar_reorder_down_' + toolbar_array.length;
+  item_down.className = 'down_button';
+  item_down.innerHTML = '&#8681;';
+
   inputs=
   [
     item_label,
@@ -656,7 +674,10 @@ function push_to_tools()
     item_sql,
     item_req,
     item_xl,
-    item_value
+    item_value,
+    item_delete,
+    item_up,
+    item_down
   ]
 
   $(('div#row_' + toolbar_array.length)).append(inputs);
@@ -683,8 +704,21 @@ function push_to_tools()
     toggle_selection_mode(1);
   });
 
+  $('div.delete_button').on('click',function()
+  {
+    bits = explode('toolbar_delete_',$(this).attr('id'));
+
+    id = bits[1];
+
+    $('div#row_' + id).remove();
+
+    toolbar_array.splice(id,1);
+
+    console.log(id);
+  });
+
   //conv_array[x], conv_array[_][y], conv_array[x][y],
-  toolbar_array.push([selected[5]-1,fromLetters(selected[4])-1,conv_array[selected[5]-1][fromLetters(selected[4])-1]]);
+  toolbar_array.push([selected[5]-1,fromLetters(selected[4])-1,conv_array[selected[5]-1][fromLetters(selected[4])-1][0]]);
 
 }
 
@@ -692,16 +726,16 @@ function toggle_selection_mode(int=-1)
 {
   if(int==-1)
   {
-  if(window.selection_mode !== window.selection_modes[window.selection_modes.length-1])
-  {
-    window.selection_mode++;
-    $('div#menubar_selection_mode').css('color','#2ecc71');
-  }
-  else
-  {
-    window.selection_mode=0;
-    $('div#menubar_selection_mode').css('color','#000');
-  }
+    if(window.selection_mode !== window.selection_modes[window.selection_modes.length-1])
+    {
+      window.selection_mode++;
+      $('div#menubar_selection_mode').css('color','#2ecc71');
+    }
+    else
+    {
+      window.selection_mode=0;
+      $('div#menubar_selection_mode').css('color','#000');
+    }
   }
   else
   {

@@ -306,13 +306,13 @@ div#menubar_selection_mode
 div.delete_button
 {
   width:25px;
-  height:25px;
+  height:20px;
+  margin:10px 5px 5px 10px;
+  line-height:20px;
   background-color:#e74c3c;
+  border-bottom:5px solid #c0392b;
   color:#fff;
-}
-select.reorder
-{
-
+  cursor:pointer;
 }
 div#toolbar_button
 {
@@ -324,4 +324,15 @@ div#toolbar_button
   background-position:center;
   background-repeat:no-repeat;
   border-right:1px solid #c0c0c0;
+}
+div.up_button,div.down_button
+{
+  width:25px;
+  height:20px;
+  margin:10px 5px 5px 10px;
+  line-height:20px;
+  background-color:#ecf0f1;
+  border-bottom:5px solid #bdc3c7;
+  color:#666;
+  cursor:pointer;
 }
