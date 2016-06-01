@@ -302,3 +302,24 @@ div#menubar_selection_mode
   text-align:left;
   border-right:1px solid #c0c0c0;
 }
+div.delete_button
+{
+  width:25px;
+  height:25px;
+  background-color:#e74c3c;
+  color:#fff;
+}
+select.reorder
+{
+
+}
+div#toolbar_button
+{
+  width:25px;
+  height:25px;
+  cursor:pointer;
+  background-image:url(http://localhost/img/nav.png);
+  background-size:17px 17px;
+  background-position:center;
+  background-repeat:no-repeat;
+}

@@ -71,6 +71,11 @@ $(function()
     window.screen_mouse_y=e.clientY;
   });
 
+  $('div#toolbar_button').on('click',function()
+  {
+    toggle_toolbar();
+  });
+
   //ON CLICK FUNCTIONS / VALUES
   $('canvas#container').click(function(e)
   {
@@ -361,7 +366,8 @@ function toggle_toolbar()
   if(window.toolbar_open)
   {
     window.toolbar_open=false;
-    $('div#toolbar').remove();
+
+    $('div#toolbar').css('display','none');
 
     close_contextmenu_handler();
 
@@ -375,51 +381,58 @@ function toggle_toolbar()
 
     draw();
 
-    toolbar=document.createElement('div');
-    toolbar.id='toolbar';
-
-    toolbar_resizebar=document.createElement('div');
-    toolbar_resizebar.id='toolbar_resizebar';
-
-    toolbar_holder=document.createElement('div');
-    toolbar_holder.id=toolbar_holder;
-
-    $('div#spreadsheet_main').append(toolbar);
-    $('div#toolbar').append(toolbar_resizebar);
-
-    //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
-    $('div#toolbar_resizebar').on('mousedown',function()
+    if($('div#toolbar').length)
     {
-      window.toolbar_resizebar_clicked=true;
-
-      window.toolbar_resizing_y_start=window.screen_mouse_y;
-    });
-
-    $('div#toolbar_resizebar').on('mouseleave',function()
+      $('div#toolbar').css('display','block');
+    }
+    else
     {
-      if(window.toolbar_resizebar_clicked)
+      toolbar=document.createElement('div');
+      toolbar.id='toolbar';
+
+      toolbar_resizebar=document.createElement('div');
+      toolbar_resizebar.id='toolbar_resizebar';
+
+      toolbar_holder=document.createElement('div');
+      toolbar_holder.id=toolbar_holder;
+
+      $('div#spreadsheet_main').append(toolbar);
+      $('div#toolbar').append(toolbar_resizebar);
+
+      //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
+      $('div#toolbar_resizebar').on('mousedown',function()
       {
-        window.toolbar_resizing=true;
+        window.toolbar_resizebar_clicked=true;
 
-        window.toolbar_resizebar_clicked=false;
-      }
-    });
+        window.toolbar_resizing_y_start=window.screen_mouse_y;
+      });
 
-    $(document).mouseup(function()
-    {
-      if(window.toolbar_resizing)
+      $('div#toolbar_resizebar').on('mouseleave',function()
       {
-        window.toolbar_resizing_y_end=window.screen_mouse_y;
+        if(window.toolbar_resizebar_clicked)
+        {
+          window.toolbar_resizing=true;
 
-        window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
+          window.toolbar_resizebar_clicked=false;
+        }
+      });
 
-        $('div#toolbar').css('height',window.toolbar_h);
+      $(document).mouseup(function()
+      {
+        if(window.toolbar_resizing)
+        {
+          window.toolbar_resizing_y_end=window.screen_mouse_y;
 
-        window.toolbar_resizing=false;
+          window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
 
-        draw();
-      }
-    });
+          $('div#toolbar').css('height',window.toolbar_h);
+
+          window.toolbar_resizing=false;
+
+          draw();
+        }
+      });
+    }
   }
 }
 
@@ -444,18 +457,14 @@ function open_contextmenu(e)
     //FORMAT:
     //active, text, id, onclick function//
     [1,'Copy','ctmi_copy',0],
-    [0,'Add selection to keys','ctmi_add_sel_keys',0],
-    [0,'Add selection to values','ctmi_add_sel_vals',0],
     [1,'Open toolbar','ctmi_open_toolbar','open_toolbar'],
-    [1,'Open key overlay','ctmi_open_key_overlay',0],
-    [1,'Open value overlay','ctmi_open_val_overlay',0]
   ];
 
   if(window.toolbar_open)
   {
     temp=[1,'Push to toolbar','ctmi_push_tools','push_to_tools'];
     contextmenu_items.push(temp);
-    contextmenu_items[3][1] = 'Close toolbar';
+    contextmenu_items[1][1] = 'Close toolbar';
   }
 
   $('div#spreadsheet_holder').append(contextmenu);
@@ -599,6 +608,7 @@ function push_to_tools()
   /* REORDER */
   item_reorder = document.createElement('select');
   item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
+  item_reorder.className = 'toolbar_select';
 
   inputs=
   [

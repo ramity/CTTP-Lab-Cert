@@ -269,6 +269,7 @@ function conv_js_string($input)
         <div id="menubar">
           <div id="menubar_mouse">x 0 : y 0</div>
           <div id="menubar_selection_mode">Selection mode : 1</div>
+          <div id="toolbar_button"></div>
         </div>
       </div>
       <?php
