@@ -301,6 +301,7 @@ div#menubar_selection_mode
   padding:0px 5px;
   text-align:left;
   border-right:1px solid #c0c0c0;
+  cursor:pointer;
 }
 div.delete_button
 {
@@ -322,4 +323,5 @@ div#toolbar_button
   background-size:17px 17px;
   background-position:center;
   background-repeat:no-repeat;
+  border-right:1px solid #c0c0c0;
 }

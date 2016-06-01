@@ -18,6 +18,9 @@ window.keytoggled['LMOUSE']=false;
 window.keystatus['CTRL']=false;
 window.keytoggled['CTRL']=false;
 
+window.keystatus['STATUS']=false;
+window.keytoggled['STATUS']=false;
+
 window.selected=[];
 
 window.toolbar_open=false;
@@ -52,12 +55,44 @@ kd.V.up(function(){window.keystatus['V']=false;});
 kd.T.down(function(){window.keystatus['T']=true;});
 kd.T.up(function(){window.keystatus['T']=false;});
 
-kd.ENTER.down(function(){});
+kd.SHIFT.down(function(){window.keystatus['SHIFT']=true;});
+kd.SHIFT.up(function(){window.keystatus['SHIFT']=false;});
+
+window.selection_modes=
+[
+  0,  //standard selection
+  1,  //selection to fill a specified element
+  2   //selection to push to toolbar
+];
+
+window.onbeforeunload = function(event)
+{
+  if(keystatus['SHIFT'])
+  {
+    exit;
+  }
+  else
+  {
+    if(toolbar_array.length)
+    {
+      return "If you reload this page, you will lose all unsaved data.";
+    }
+    else
+    {
+      exit;
+    }
+  }
+}
 
 //ONLOAD FUNCTION
 $(function()
 {
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
+
+  $('div#menubar_selection_mode').on('click',function()
+  {
+    toggle_selection_mode();
+  });
 
   //ON MOUSEMOVE FUNCTIONS / VALUES
   $('canvas#container').on('mousemove',function(e)
@@ -234,7 +269,7 @@ function draw()
         $('div#col_header_'+selected[4]).css('background-color','#ddd');
         $('div#row_header_'+selected[5]).css('background-color','#ddd');
 
-        if(window.selection_mode)
+        if(window.selection_mode==1)
         {
           if(window.selection_type=='xl')
           {
@@ -244,7 +279,11 @@ function draw()
           {
             $(window.selection_to).val(conv_array[selected[5]-1][fromLetters(selected[4])-1]);
           }
-          toggle_selection_mode();
+          toggle_selection_mode(0);
+        }
+        else if(window.selection_mode==2)
+        {
+          push_to_tools();
         }
       }
     }
@@ -506,9 +545,6 @@ function push_to_tools()
 {
   close_contextmenu_handler();
 
-  console.log(window.selected);
-  console.log(conv_array[selected[5]-1][fromLetters(selected[4])-1]);
-
   item_row = document.createElement('div');
   item_row.id = 'row_' + toolbar_array.length;
   item_row.className = 'toolbar_row';
@@ -634,7 +670,7 @@ function push_to_tools()
     window.selection_to = 'input#' + $(this).attr('id');
     window.selection_type = 'xl';
 
-    toggle_selection_mode();
+    toggle_selection_mode(1);
   });
 
   $('input#toolbar_value_' + toolbar_array.length).on('dblclick',function()
@@ -644,7 +680,7 @@ function push_to_tools()
     window.selection_to = 'input#' + $(this).attr('id');
     window.selection_type = 'val';
 
-    toggle_selection_mode();
+    toggle_selection_mode(1);
   });
 
   //conv_array[x], conv_array[_][y], conv_array[x][y],
@@ -652,19 +688,33 @@ function push_to_tools()
 
 }
 
-function toggle_selection_mode()
+function toggle_selection_mode(int=-1)
 {
-  if(window.selection_mode)
+  if(int==-1)
   {
-    window.selection_mode = 0;
-    $('div#menubar_selection_mode').css('color','#000');
+  if(window.selection_mode !== window.selection_modes[window.selection_modes.length-1])
+  {
+    window.selection_mode++;
+    $('div#menubar_selection_mode').css('color','#2ecc71');
   }
   else
   {
-    window.selection_mode = 1;
-    $('div#menubar_selection_mode').css('color','#2ecc71');
+    window.selection_mode=0;
+    $('div#menubar_selection_mode').css('color','#000');
   }
-
+  }
+  else
+  {
+    window.selection_mode=int;
+    if(int==0)
+    {
+      $('div#menubar_selection_mode').css('color','#000');
+    }
+    else
+    {
+      $('div#menubar_selection_mode').css('color','#2ecc71');
+    }
+  }
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 }
 
