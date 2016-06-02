@@ -65,6 +65,16 @@ window.selection_modes=
   2   //selection to push to toolbar
 ];
 
+
+
+
+
+
+
+
+
+
+
 window.onbeforeunload = function(event)
 {
   if(keystatus['SHIFT'])
@@ -83,6 +93,16 @@ window.onbeforeunload = function(event)
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 //ONLOAD FUNCTION
 $(function()
@@ -131,6 +151,16 @@ $(function()
 
   draw();
 });
+
+
+
+
+
+
+
+
+
+
 
 //CANVAS DRAW FUNTION
 function draw()
@@ -292,12 +322,32 @@ function draw()
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 //CANVAS RESET/CLEAR FUNCTION(S)
 function reset()
 {
   canvas.attr('height','0px');
   canvas.attr('width','0px');
 }
+
+
+
+
+
+
+
+
+
+
 
 //MISC FUNCTIONS
 function decode(input)
@@ -306,6 +356,16 @@ function decode(input)
   txt.innerHTML = input;
   return txt.value;
 }
+
+
+
+
+
+
+
+
+
+
 
 function explode(delimiter,string,limit=null)
 {
@@ -338,6 +398,16 @@ function explode(delimiter,string,limit=null)
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 function toLetters(num)
 {
   var mod = num % 26,
@@ -346,11 +416,31 @@ function toLetters(num)
   return pow ? toLetters(pow) + out : out;
 }
 
+
+
+
+
+
+
+
+
+
+
 //ON_[EVEN]_HANDLER FUNCTIONS
 $(window).resize(function()
 {
   draw();
 });
+
+
+
+
+
+
+
+
+
+
 
 function on_scroll_handler(elm)
 {
@@ -370,6 +460,16 @@ function on_scroll_handler(elm)
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 function on_mousemove_handler(elm,e)
 {
   area=elm.getBoundingClientRect();
@@ -379,6 +479,16 @@ function on_mousemove_handler(elm,e)
 
   $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
 }
+
+
+
+
+
+
+
+
+
+
 
 function on_click_canvas_handler()
 {
@@ -391,6 +501,16 @@ function on_click_canvas_handler()
 
   draw();
 }
+
+
+
+
+
+
+
+
+
+
 
 window.toolbar_resizing_y_start=0;
 window.toolbar_resizing_y_end=0;
@@ -477,6 +597,16 @@ function toggle_toolbar()
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 function open_contextmenu(e)
 {
   window.canvas_clicked=true;
@@ -538,6 +668,16 @@ function open_contextmenu(e)
 
   return false;
 }
+
+
+
+
+
+
+
+
+
+
 
 window.toolbar_array=[];
 window.selection_mode=0;
@@ -818,6 +958,16 @@ function push_to_tools()
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 function toggle_selection_mode(int=-1)
 {
   if(int==-1)
@@ -848,6 +998,16 @@ function toggle_selection_mode(int=-1)
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 }
 
+
+
+
+
+
+
+
+
+
+
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
 function close_contextmenu_handler()
 {
@@ -856,6 +1016,16 @@ function close_contextmenu_handler()
     $('div#contextmenu').remove();
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 function fromLetters(str)
 {
@@ -870,6 +1040,16 @@ function fromLetters(str)
 
   return out;
 }
+
+
+
+
+
+
+
+
+
+
 
 function array_switch(array,keya,keyb)
 {
@@ -886,6 +1066,16 @@ function array_switch(array,keya,keyb)
     return false;
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 function toolbar_render_elements()
 {
