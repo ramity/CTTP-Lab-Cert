@@ -241,9 +241,6 @@ function conv_js_string($input)
         echo 'window.canvas_height='.(count($sheetData)*25).';';
 
         echo '</script>';
-        //var_dump($cell_widths_max);
-        //echo '<br>';
-        //var_dump($cell_widths);
       ?>
       <div id="spreadsheet_main">
         <div id="spacer"></div>
@@ -272,7 +269,17 @@ function conv_js_string($input)
           <div id="toolbar_button"></div>
         </div>
         <div id="toolbar">
-          <div id="toolbar_resizebar"></div>
+          <div id="toolbar_tabs">
+            <div class="toolbar_tab_item">Create</div>
+            <div class="toolbar_tab_item">Debug</div>
+            <div class="toolbar_tab_item">Settings</div>
+            <div id="toolbar_resizebar"></div>
+          </div>
+          <div id="toolbar_holders">
+            <div class="toolbar_holder" id="toolbar_holder_create"></div>
+            <div class="toolbar_holder" id="toolbar_holder_debug"></div>
+            <div class="toolbar_holder" id="toolbar_holder_settings"></div>
+          </div>
         </div>
       </div>
       <?php

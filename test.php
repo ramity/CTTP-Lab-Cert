@@ -1,13 +1,17 @@
 <?php
- $array=array(10,20,10,50,80,100,40,10);
- $count=count($array);
- $max=max($array);
- $line='';
- foreach($array as $x=>$y)
- {
-  $line.="$x,$y ";
- }
- ?>
- <svg height="200px" width="200px" viewBox="0 0 <?=$count-1?> <?=$max?>" preserveAspectRatio="none">
-  <polyline style="stroke:red;stroke-width:1px;" points="<?=trim($line)?>">
- </svg>
+//rgb(x,y,z)
+for($z=0;$z<255;$z++)
+{
+  echo '<div style="float:left;width:425px">';
+  for($y=0;$y<255;$y++)
+  {
+    echo '<div style="float:left;">';
+    for($x=0;$x<255;$x++)
+    {
+      echo '<div style="width:25px;height:25px;float:left;background-color:rgb('.($x).','.($y).','.($z).')"></div>';
+    }
+    echo '</div>';
+  }
+  echo '</div>';
+}
+?>

@@ -251,18 +251,15 @@ div#toolbar
   position:fixed;
   bottom:25px;
   z-index:2;
-  overflow-y:auto;
+  overflow:hidden;
 }
 div#toolbar_resizebar
 {
-  width:100%;
-  height:10px;
+  width:auto;
+  height:23px;
+  float:none;
   cursor:row-resize;
-  background-color:#ddd;
-}
-div#toolbar_resizebar:hover
-{
-  background-color:#bbb;
+  overflow:hidden;
 }
 div#toolbar_holder
 {
@@ -336,4 +333,38 @@ div.up_button,div.down_button
   border-bottom:5px solid #bdc3c7;
   color:#666;
   cursor:pointer;
+}
+div#toolbar_tabs
+{
+  width:100%;
+  height:23px;
+  line-height:23px;
+  border-top:1px solid #bbb;
+  border-bottom:1px solid #bbb;
+  background-color:#f3f3f3;
+}
+div.toolbar_tab_item
+{
+  height:21px;
+  padding:0px 10px;
+  padding-bottom:2px;
+  border-right:1px solid #bbb;
+  cursor:pointer;
+}
+div.toolbar_tab_item:hover
+{
+  padding-bottom:0px;
+  background-color:#e3e3e3;
+  border-bottom:2px solid #3498db;
+}
+div#toolbar_holders
+{
+  width:100%;
+  overflow-y:auto;
+}
+div.toolbar_holder
+{
+  width:100%;
+  height:0px;
+  overflow:hidden;
 }

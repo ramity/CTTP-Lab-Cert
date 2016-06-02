@@ -25,7 +25,7 @@ window.selected=[];
 
 window.toolbar_open=false;
 //window.toolbar_w
-window.toolbar_h=200;
+window.toolbar_h=230;
 
 window.canvas_clicked=false;
 
@@ -39,6 +39,8 @@ window.contextmenu_open=false;
 
 window.scroll_x=0;
 window.scroll_y=0;
+
+window.toolbar_tab_open='create';
 
 //ALL VARAIBLE DEFININING KEYBOARD INPUT FUNCTIONS
 $(document).mousedown(function(){window.keystatus['LMOUSE']=true;});
@@ -105,6 +107,14 @@ $(function()
   {
     if(window.toolbar_resizebar_clicked)
     {
+      $('div#toolbar_holder_' + window.toolbar_tab_open).css(
+      {
+        '-webkit-user-select': 'none',
+        '-moz-user-select': 'none',
+        '-ms-user-select': 'none',
+        'user-select': 'none'
+      });
+
       window.toolbar_resizing=true;
 
       window.toolbar_resizebar_clicked=false;
@@ -121,12 +131,37 @@ $(function()
 
       $('div#toolbar').css('height',window.toolbar_h);
 
+      $('div#toolbar_holders').css('height',(window.toolbar_h - 25));
+      $('div#toolbar_holder_' + window.toolbar_tab_open).css('height','auto');
+
       window.toolbar_resizing=false;
 
       draw();
+      $('div#toolbar_holder_' + window.toolbar_tab_open).css(
+      {
+        '-webkit-user-select': 'all',
+        '-moz-user-select': 'all',
+        '-ms-user-select': 'all',
+        'user-select': 'all'
+      });
     }
   });
+
+  $('div.toolbar_tab_item').on('click',function()
+  {
+    name = $(this).text().toLowerCase();
+
+    $('div#toolbar_holders').children().css('height','0px');
+
+    $('div#toolbar_holders').css('height',(window.toolbar_h - 25));
+    $('div#toolbar_holder_' + name).css('height','auto');
+
+    window.toolbar_tab_open = name;
+  })
   //END TOOLBAR ON EVENTS
+
+  $('div#toolbar_holders').css('height',(window.toolbar_h - 25));
+  $('div#toolbar_holder_' + window.toolbar_tab_open).css('height','auto');
 
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 
@@ -582,7 +617,7 @@ function push_to_tools()
     item_row.id = 'row_' + toolbar_array.length;
     item_row.className = 'toolbar_row';
 
-    $('div#toolbar').append(item_row);
+    $('div#toolbar_holder_create').append(item_row);
 
     //label
     label = conv_array[selected[5]-1][fromLetters(selected[4])-1][0];
@@ -732,35 +767,33 @@ function push_to_tools()
       id = $(this).attr('id');
 
       bits = explode('toolbar_',id);
-      console.log(bits);
 
       bits = explode('_',bits[1]);
-      console.log(bits);
 
       obj = bits[0];
       row = bits[1];
 
       toolbar_array[row][obj]=$(this).val();
 
-      if(obj == 'label')
+      if(obj === 'label')
       {
         //name
         name = toolbar_array[row]['label'];
-        name = label.toLowerCase();
+        name = name.toLowerCase();
         name = name.replace("#","number");
         name = name.replace(/[^a-z\d\s]+/gi,"");
         name = name.replace(/\s+/g,"_");
         //update name array
         toolbar_array[row]['name'] = name;
         //update name display
-        $('input#toolbar_name_' + row).val(name);
+        $('input#toolbar_name_' + row).val(toolbar_array[row]['name']);
 
         //sql
-        sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
+        sql = '`' + toolbar_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
         //update sql array
         toolbar_array[row]['sql'] = sql;
       }
-      else if(obj == 'name')
+      else if(obj === 'name')
       {
         //name
         name = toolbar_array[row]['name'];
@@ -771,7 +804,7 @@ function push_to_tools()
         //update sql array
         toolbar_array[row]['sql'] = sql;
       }
-      else if(obj == 'required')
+      else if(obj === 'required')
       {
         //name
         name = toolbar_array[row]['name'];
