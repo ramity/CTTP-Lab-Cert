@@ -218,6 +218,7 @@ function draw()
               if(window.canvas_mouse_y > dy && window.canvas_mouse_y <= (parseInt(dy) + parseInt(cell_col_header_height)))
               {
                 selected=[dx,dy,parseInt(col_widths[x][0]),cell_col_header_height,toLetters(x+1),(y+1)];
+                window.canvas_clicked=false;
               }
             }
           }
@@ -285,6 +286,7 @@ function draw()
         {
           push_to_tools();
         }
+        selected=[];
       }
     }
   }
@@ -741,14 +743,21 @@ function push_to_tools()
   });
 
   temp =
-  [
-    selected[5]-1,
-    fromLetters(selected[4])-1,
-    conv_array[selected[5]-1][fromLetters(selected[4])-1][0]
-  ];
+  {
+    'row' : selected[5]-1,
+    'col' : fromLetters(selected[4])-1,
+    'label' : label,
+    'description' : description,
+    'tag' : tag,
+    'placeholder' : placeholder,
+    'name' : name,
+    'sql' : sql,
+    'req' : req,
+    'xl' : xl,
+    'value' : value
+  };
 
-  //conv_array[x], conv_array[_][y], conv_array[x][y],
-  toolbar_array.push();
+  toolbar_array.push(temp);
 
 }
 
