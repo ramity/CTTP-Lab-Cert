@@ -65,15 +65,8 @@ window.selection_modes=
   2   //selection to push to toolbar
 ];
 
-
-
-
-
-
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 window.onbeforeunload = function(event)
 {
@@ -93,11 +86,6 @@ window.onbeforeunload = function(event)
     }
   }
 }
-
-
-
-
-
 
 
 
@@ -151,11 +139,6 @@ $(function()
 
   draw();
 });
-
-
-
-
-
 
 
 
@@ -327,22 +310,12 @@ function draw()
 
 
 
-
-
-
-
-
 //CANVAS RESET/CLEAR FUNCTION(S)
 function reset()
 {
   canvas.attr('height','0px');
   canvas.attr('width','0px');
 }
-
-
-
-
-
 
 
 
@@ -356,11 +329,6 @@ function decode(input)
   txt.innerHTML = input;
   return txt.value;
 }
-
-
-
-
-
 
 
 
@@ -403,11 +371,6 @@ function explode(delimiter,string,limit=null)
 
 
 
-
-
-
-
-
 function toLetters(num)
 {
   var mod = num % 26,
@@ -421,21 +384,11 @@ function toLetters(num)
 
 
 
-
-
-
-
-
 //ON_[EVEN]_HANDLER FUNCTIONS
 $(window).resize(function()
 {
   draw();
 });
-
-
-
-
-
 
 
 
@@ -465,11 +418,6 @@ function on_scroll_handler(elm)
 
 
 
-
-
-
-
-
 function on_mousemove_handler(elm,e)
 {
   area=elm.getBoundingClientRect();
@@ -479,11 +427,6 @@ function on_mousemove_handler(elm,e)
 
   $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
 }
-
-
-
-
-
 
 
 
@@ -501,11 +444,6 @@ function on_click_canvas_handler()
 
   draw();
 }
-
-
-
-
-
 
 
 
@@ -602,11 +540,6 @@ function toggle_toolbar()
 
 
 
-
-
-
-
-
 function open_contextmenu(e)
 {
   window.canvas_clicked=true;
@@ -668,11 +601,6 @@ function open_contextmenu(e)
 
   return false;
 }
-
-
-
-
-
 
 
 
@@ -935,8 +863,6 @@ function push_to_tools()
       $('div#row_' + id).remove();
 
       toolbar_array.splice(id,1);
-
-      console.log(id);
     });
 
     temp =
@@ -957,11 +883,6 @@ function push_to_tools()
     toolbar_array.push(temp);
   }
 }
-
-
-
-
-
 
 
 
@@ -1003,11 +924,6 @@ function toggle_selection_mode(int=-1)
 
 
 
-
-
-
-
-
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
 function close_contextmenu_handler()
 {
@@ -1016,11 +932,6 @@ function close_contextmenu_handler()
     $('div#contextmenu').remove();
   }
 }
-
-
-
-
-
 
 
 
@@ -1046,11 +957,6 @@ function fromLetters(str)
 
 
 
-
-
-
-
-
 function array_switch(array,keya,keyb)
 {
   if(!typeof array[keya] === 'undefined' || !typeof array[keyb] === 'undefined')
@@ -1066,11 +972,6 @@ function array_switch(array,keya,keyb)
     return false;
   }
 }
-
-
-
-
-
 
 
 
