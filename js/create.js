@@ -774,3 +774,23 @@ function fromLetters(str)
 
   return out;
 }
+
+function switch(array,keya,keyb)
+{
+  if(!typeof array[keya] === 'undefined' || !typeof array[keyb] === 'undefined')
+  {
+    temp = array[keya];
+    array[keya] = array[keyb];
+    array[keyb] = temp;
+
+    return array;
+  }
+}
+
+function toolbar_render_elements()
+{
+  if(!typeof toolbar_array === 'undefined')
+  {
+    
+  }
+}
