@@ -762,6 +762,9 @@ function push_to_tools()
 
     $(('div#row_' + create_array.length)).append(inputs);
 
+
+    //fix this
+    //TODO
     $('input.toolbar_input, select.toolbar_select').on('change',function()
     {
       id = $(this).attr('id');
