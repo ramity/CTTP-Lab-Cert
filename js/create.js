@@ -554,11 +554,25 @@ function push_to_tools()
   //label
   label = conv_array[selected[5]-1][fromLetters(selected[4])-1][0];
   label = label.replace(':','');
+  //description
+  description = '';
+  //tag
+  tag = 'text';
+  //placeholder
+  placeholder = '';
   //name
   name = label.toLowerCase();
   name = name.replace("#","number");
   name = name.replace(/[^a-z\d\s]+/gi,"");
   name = name.replace(/\s+/g,"_");
+  //sql
+  sql = '`' + name + '` text COLLATE utf8_bin NOT NULL' ;
+  //required
+  req = 1;
+  //xl
+  xl = '[' + selected[4] + ',' + selected[5] + ']';
+  //value
+  value = '';
 
   /* SELECTS */
 
@@ -570,6 +584,7 @@ function push_to_tools()
   item_label.name = 'toolbar_label_' + toolbar_array.length;
   item_label.value = label;
   item_label.title = 'Label';
+  item_label.placeholder = 'Label';
 
   /* DESCRIPTION */
   item_descr = document.createElement('input');
@@ -579,6 +594,7 @@ function push_to_tools()
   item_descr.name = 'toolbar_descr_' + toolbar_array.length;
   item_descr.placeholder = 'Description';
   item_descr.title = 'Description';
+  item_descr.value = description;
 
   /* TAG */
   item_tag = document.createElement('select');
@@ -596,6 +612,7 @@ function push_to_tools()
   item_placeholder.name = 'toolbar_placeholder_' + toolbar_array.length;
   item_placeholder.placeholder = 'Placeholder';
   item_placeholder.title = 'Placeholder';
+  item_placeholder.value = placeholder;
 
   /* NAME */
   item_name = document.createElement('input');
@@ -605,6 +622,7 @@ function push_to_tools()
   item_name.name = 'toolbar_name_' + toolbar_array.length;
   item_name.value = name;
   item_name.title = 'Name';
+  item_name.placeholder = 'Name';
 
   /* SQL */
   item_sql = document.createElement('input');
@@ -612,8 +630,9 @@ function push_to_tools()
   item_sql.type = 'text';
   item_sql.className = 'toolbar_input';
   item_sql.name = 'toolbar_sql_' + toolbar_array.length;
-  item_sql.value = '`' + name + '` text COLLATE utf8_bin NOT NULL' ;
+  item_sql.value = sql;
   item_sql.title = 'SQL';
+  item_sql.placeholder = 'SQL';
 
   /* REQUIRED */
   item_req = document.createElement('input');
@@ -621,8 +640,9 @@ function push_to_tools()
   item_req.type = 'text';
   item_req.className = 'toolbar_input';
   item_req.name = 'toolbar_req_' + toolbar_array.length;
-  item_req.value = '1';
+  item_req.value = req;
   item_req.title = 'Required';
+  item_req.placeholder = 'Placeholder';
 
   /* XL */
   item_xl = document.createElement('input');
@@ -630,8 +650,9 @@ function push_to_tools()
   item_xl.type = 'text';
   item_xl.className = 'toolbar_input';
   item_xl.name = 'toolbar_xl_' + toolbar_array.length;
-  item_xl.value = '[' + selected[4] + ',' + selected[5] + ']';
+  item_xl.value = xl;
   item_xl.title = 'Excel';
+  item_xl.placeholder = 'Excel';
 
   /* VALUE */
   item_value = document.createElement('input');
@@ -639,7 +660,9 @@ function push_to_tools()
   item_value.type = 'text';
   item_value.className = 'toolbar_input';
   item_value.name = 'toolbar_value_' + toolbar_array.length;
+  item_value.value = value;
   item_value.title = 'Value';
+  item_value.placeholder = 'Value';
 
   /* REORDER */
   item_reorder = document.createElement('select');
@@ -682,7 +705,7 @@ function push_to_tools()
 
   $(('div#row_' + toolbar_array.length)).append(inputs);
 
-  $(('select#toolbar_tag_' + toolbar_array.length)).append('<option selected>Text</option>');
+  $(('select#toolbar_tag_' + toolbar_array.length)).append('<option value="text" selected>text</option>');
 
   $('input#toolbar_xl_' + toolbar_array.length).on('dblclick',function()
   {
@@ -717,8 +740,15 @@ function push_to_tools()
     console.log(id);
   });
 
+  temp =
+  [
+    selected[5]-1,
+    fromLetters(selected[4])-1,
+    conv_array[selected[5]-1][fromLetters(selected[4])-1][0]
+  ];
+
   //conv_array[x], conv_array[_][y], conv_array[x][y],
-  toolbar_array.push([selected[5]-1,fromLetters(selected[4])-1,conv_array[selected[5]-1][fromLetters(selected[4])-1][0]]);
+  toolbar_array.push();
 
 }
 
@@ -775,7 +805,7 @@ function fromLetters(str)
   return out;
 }
 
-function switch(array,keya,keyb)
+function array_switch(array,keya,keyb)
 {
   if(!typeof array[keya] === 'undefined' || !typeof array[keyb] === 'undefined')
   {
@@ -785,12 +815,192 @@ function switch(array,keya,keyb)
 
     return array;
   }
+  else
+  {
+    return false;
+  }
 }
 
 function toolbar_render_elements()
 {
-  if(!typeof toolbar_array === 'undefined')
+  if(!typeof toolbar_array === 'undefined' && $('div#toolbar').length)
   {
-    
+    toolbar_resizebar = $('div#toolbar_resizebar').detach();
+    $('div#toolbar').empty().append(toolbar_resizebar);
+
+    for(z=0;z<toolbar_array.length;z++)
+    {
+      item_row = document.createElement('div');
+      item_row.id = 'row_' + z;
+      item_row.className = 'toolbar_row';
+
+      $('div#toolbar').append(item_row);
+
+      //label
+      label = conv_array[selected[5]-1][fromLetters(selected[4])-1][0];
+      label = label.replace(':','');
+      //name
+      name = label.toLowerCase();
+      name = name.replace("#","number");
+      name = name.replace(/[^a-z\d\s]+/gi,"");
+      name = name.replace(/\s+/g,"_");
+
+      /* SELECTS */
+
+      /* LABEL */
+      item_label = document.createElement('input');
+      item_label.id = 'toolbar_label_' + toolbar_array.length;
+      item_label.type = 'text';
+      item_label.className = 'toolbar_input';
+      item_label.name = 'toolbar_label_' + toolbar_array.length;
+      item_label.value = label;
+      item_label.title = 'Label';
+
+      /* DESCRIPTION */
+      item_descr = document.createElement('input');
+      item_descr.id = 'toolbar_descr_' + toolbar_array.length;
+      item_descr.type = 'text';
+      item_descr.className = 'toolbar_input';
+      item_descr.name = 'toolbar_descr_' + toolbar_array.length;
+      item_descr.placeholder = 'Description';
+      item_descr.title = 'Description';
+
+      /* TAG */
+      item_tag = document.createElement('select');
+      item_tag.id = 'toolbar_tag_' + toolbar_array.length;
+      item_tag.className = 'toolbar_select';
+      item_tag.name = 'toolbar_tag_' + toolbar_array.length;
+      item_tag.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
+      item_tag.title = 'Tag';
+
+      /* PLACEHOLDER */
+      item_placeholder = document.createElement('input');
+      item_placeholder.id = 'toolbar_placeholder_' + toolbar_array.length;
+      item_placeholder.type = 'text';
+      item_placeholder.className = 'toolbar_input';
+      item_placeholder.name = 'toolbar_placeholder_' + toolbar_array.length;
+      item_placeholder.placeholder = 'Placeholder';
+      item_placeholder.title = 'Placeholder';
+
+      /* NAME */
+      item_name = document.createElement('input');
+      item_name.id = 'toolbar_name_' + toolbar_array.length;
+      item_name.type = 'text';
+      item_name.className = 'toolbar_input';
+      item_name.name = 'toolbar_name_' + toolbar_array.length;
+      item_name.value = name;
+      item_name.title = 'Name';
+
+      /* SQL */
+      item_sql = document.createElement('input');
+      item_sql.id = 'toolbar_sql_' + toolbar_array.length;
+      item_sql.type = 'text';
+      item_sql.className = 'toolbar_input';
+      item_sql.name = 'toolbar_sql_' + toolbar_array.length;
+      item_sql.value = '`' + name + '` text COLLATE utf8_bin NOT NULL' ;
+      item_sql.title = 'SQL';
+
+      /* REQUIRED */
+      item_req = document.createElement('input');
+      item_req.id = 'toolbar_req_' + toolbar_array.length;
+      item_req.type = 'text';
+      item_req.className = 'toolbar_input';
+      item_req.name = 'toolbar_req_' + toolbar_array.length;
+      item_req.value = '1';
+      item_req.title = 'Required';
+
+      /* XL */
+      item_xl = document.createElement('input');
+      item_xl.id = 'toolbar_xl_' + toolbar_array.length;
+      item_xl.type = 'text';
+      item_xl.className = 'toolbar_input';
+      item_xl.name = 'toolbar_xl_' + toolbar_array.length;
+      item_xl.value = '[' + selected[4] + ',' + selected[5] + ']';
+      item_xl.title = 'Excel';
+
+      /* VALUE */
+      item_value = document.createElement('input');
+      item_value.id = 'toolbar_value_' + toolbar_array.length;
+      item_value.type = 'text';
+      item_value.className = 'toolbar_input';
+      item_value.name = 'toolbar_value_' + toolbar_array.length;
+      item_value.title = 'Value';
+
+      /* REORDER */
+      item_reorder = document.createElement('select');
+      item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
+      item_reorder.className = 'toolbar_select';
+
+      /* DELETE */
+      item_delete = document.createElement('div');
+      item_delete.id = 'toolbar_delete_' + toolbar_array.length;
+      item_delete.className = 'delete_button';
+      item_delete.innerHTML = 'x';
+
+      /* UP ARROW */
+      item_up = document.createElement('div');
+      item_up.id = 'toolbar_reorder_up_' + toolbar_array.length;
+      item_up.className = 'up_button';
+      item_up.innerHTML = '&#8679;';
+
+      /* DOWN ARROW */
+      item_down = document.createElement('div');
+      item_down.id = 'toolbar_reorder_down_' + toolbar_array.length;
+      item_down.className = 'down_button';
+      item_down.innerHTML = '&#8681;';
+
+      inputs=
+      [
+        item_label,
+        item_descr,
+        item_tag,
+        item_placeholder,
+        item_name,
+        item_sql,
+        item_req,
+        item_xl,
+        item_value,
+        item_delete,
+        item_up,
+        item_down
+      ]
+
+      $(('div#row_' + toolbar_array.length)).append(inputs);
+
+      $(('select#toolbar_tag_' + toolbar_array.length)).append('<option selected>Text</option>');
+
+      $('input#toolbar_xl_' + toolbar_array.length).on('dblclick',function()
+      {
+        $(this).val('[select new value]');
+
+        window.selection_to = 'input#' + $(this).attr('id');
+        window.selection_type = 'xl';
+
+        toggle_selection_mode(1);
+      });
+
+      $('input#toolbar_value_' + toolbar_array.length).on('dblclick',function()
+      {
+        $(this).val('[select new value]');
+
+        window.selection_to = 'input#' + $(this).attr('id');
+        window.selection_type = 'val';
+
+        toggle_selection_mode(1);
+      });
+
+      $('div.delete_button').on('click',function()
+      {
+        bits = explode('toolbar_delete_',$(this).attr('id'));
+
+        id = bits[1];
+
+        $('div#row_' + id).remove();
+
+        toolbar_array.splice(id,1);
+
+        console.log(id);
+      });
+    }
   }
 }
