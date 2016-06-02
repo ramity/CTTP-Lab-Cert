@@ -271,6 +271,9 @@ function conv_js_string($input)
           <div id="menubar_selection_mode">Selection mode : 1</div>
           <div id="toolbar_button"></div>
         </div>
+        <div id="toolbar">
+          <div id="toolbar_resizebar"></div>
+        </div>
       </div>
       <?php
       }

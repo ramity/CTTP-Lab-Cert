@@ -87,14 +87,47 @@ window.onbeforeunload = function(event)
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //ONLOAD FUNCTION
 $(function()
 {
+  //START TOOLBAR ON EVENTS
+  $('div#toolbar_resizebar').on('mousedown',function()
+  {
+    window.toolbar_resizebar_clicked=true;
+
+    window.toolbar_resizing_y_start=window.screen_mouse_y;
+  });
+
+  $('div#toolbar_resizebar').on('mouseleave',function()
+  {
+    if(window.toolbar_resizebar_clicked)
+    {
+      window.toolbar_resizing=true;
+
+      window.toolbar_resizebar_clicked=false;
+    }
+  });
+
+  $(document).mouseup(function()
+  {
+    if(window.toolbar_resizing)
+    {
+      window.toolbar_resizing_y_end=window.screen_mouse_y;
+
+      window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
+
+      $('div#toolbar').css('height',window.toolbar_h);
+
+      window.toolbar_resizing=false;
+
+      draw();
+    }
+  });
+  //END TOOLBAR ON EVENTS
+
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 
   $('div#menubar_selection_mode').on('click',function()
@@ -140,10 +173,8 @@ $(function()
   draw();
 });
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //CANVAS DRAW FUNTION
 function draw()
@@ -197,7 +228,7 @@ function draw()
       font_size=15;
 
       ctx.lineWidth='1';
-      ctx.strokeStyle='#C0C0C0';
+      ctx.strokeStyle='#bbb';
       ctx.fillStyle='#fff';
       ctx.shadowBlur=0;
       ctx.font=font_size+'px Arial';
@@ -242,7 +273,7 @@ function draw()
 
           ctx.fillRect(dx,dy,col_widths[x],cell_col_header_height);
 
-          ctx.strokeStyle='#C0C0C0';
+          ctx.strokeStyle='#bbb';
 
           ctx.rect(dx,dy,col_widths[x],cell_col_header_height);
 
@@ -305,10 +336,8 @@ function draw()
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //CANVAS RESET/CLEAR FUNCTION(S)
 function reset()
@@ -317,10 +346,8 @@ function reset()
   canvas.attr('width','0px');
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //MISC FUNCTIONS
 function decode(input)
@@ -330,10 +357,8 @@ function decode(input)
   return txt.value;
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function explode(delimiter,string,limit=null)
 {
@@ -366,10 +391,8 @@ function explode(delimiter,string,limit=null)
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function toLetters(num)
 {
@@ -379,10 +402,8 @@ function toLetters(num)
   return pow ? toLetters(pow) + out : out;
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //ON_[EVEN]_HANDLER FUNCTIONS
 $(window).resize(function()
@@ -390,10 +411,8 @@ $(window).resize(function()
   draw();
 });
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function on_scroll_handler(elm)
 {
@@ -413,10 +432,8 @@ function on_scroll_handler(elm)
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function on_mousemove_handler(elm,e)
 {
@@ -428,10 +445,8 @@ function on_mousemove_handler(elm,e)
   $('div#menubar_mouse').text('x '+canvas_mouse_x+' : y '+canvas_mouse_y);
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function on_click_canvas_handler()
 {
@@ -445,10 +460,8 @@ function on_click_canvas_handler()
   draw();
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 window.toolbar_resizing_y_start=0;
 window.toolbar_resizing_y_end=0;
@@ -466,7 +479,7 @@ function toggle_toolbar()
   {
     window.toolbar_open=false;
 
-    $('div#toolbar').css('display','none');
+    $('div#toolbar').css('height','0px');
 
     close_contextmenu_handler();
 
@@ -482,63 +495,13 @@ function toggle_toolbar()
 
     if($('div#toolbar').length)
     {
-      $('div#toolbar').css('display','block');
-    }
-    else
-    {
-      toolbar=document.createElement('div');
-      toolbar.id='toolbar';
-
-      toolbar_resizebar=document.createElement('div');
-      toolbar_resizebar.id='toolbar_resizebar';
-
-      toolbar_holder=document.createElement('div');
-      toolbar_holder.id=toolbar_holder;
-
-      $('div#spreadsheet_main').append(toolbar);
-      $('div#toolbar').append(toolbar_resizebar);
-
-      //FUNCTIONS ATTACHED TO ALLOW FOR RESIZING OF TOOLBAR
-      $('div#toolbar_resizebar').on('mousedown',function()
-      {
-        window.toolbar_resizebar_clicked=true;
-
-        window.toolbar_resizing_y_start=window.screen_mouse_y;
-      });
-
-      $('div#toolbar_resizebar').on('mouseleave',function()
-      {
-        if(window.toolbar_resizebar_clicked)
-        {
-          window.toolbar_resizing=true;
-
-          window.toolbar_resizebar_clicked=false;
-        }
-      });
-
-      $(document).mouseup(function()
-      {
-        if(window.toolbar_resizing)
-        {
-          window.toolbar_resizing_y_end=window.screen_mouse_y;
-
-          window.toolbar_h = window.toolbar_h + (toolbar_resizing_y_start - toolbar_resizing_y_end);
-
-          $('div#toolbar').css('height',window.toolbar_h);
-
-          window.toolbar_resizing=false;
-
-          draw();
-        }
-      });
+      $('div#toolbar').css('height',toolbar_h);
     }
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function open_contextmenu(e)
 {
@@ -602,10 +565,8 @@ function open_contextmenu(e)
   return false;
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 window.toolbar_array=[];
 window.selection_mode=0;
@@ -884,10 +845,8 @@ function push_to_tools()
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function toggle_selection_mode(int=-1)
 {
@@ -919,10 +878,8 @@ function toggle_selection_mode(int=-1)
   $('div#menubar_selection_mode').text('Selection mode : ' + window.selection_mode);
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 //CLOSE_[OBJECT]_HANDLER FUNCTIONS
 function close_contextmenu_handler()
@@ -933,10 +890,8 @@ function close_contextmenu_handler()
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function fromLetters(str)
 {
@@ -952,10 +907,8 @@ function fromLetters(str)
   return out;
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function array_switch(array,keya,keyb)
 {
@@ -973,10 +926,8 @@ function array_switch(array,keya,keyb)
   }
 }
 
-
-
-
-
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function toolbar_render_elements()
 {
