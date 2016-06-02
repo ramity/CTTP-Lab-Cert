@@ -78,7 +78,7 @@ window.onbeforeunload = function(event)
   }
   else
   {
-    if(toolbar_array.length)
+    if(create_array.length)
     {
       return "If you reload this page, you will lose all unsaved data.";
     }
@@ -505,7 +505,7 @@ window.toolbar_resizing=false;
 
 window.toolbar_resizebar_clicked=false;
 
-window.toolbar_array=[];
+window.create_array=[];
 
 //OPEN_[OBJECT] FUNCTIONS
 function toggle_toolbar()
@@ -603,7 +603,7 @@ function open_contextmenu(e)
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
 
-window.toolbar_array=[];
+window.create_array=[];
 window.selection_mode=0;
 window.selection_to='';
 //PUSH_TO_[OBJECT] FUNCTIONS
@@ -614,7 +614,7 @@ function push_to_tools()
     close_contextmenu_handler();
 
     item_row = document.createElement('div');
-    item_row.id = 'row_' + toolbar_array.length;
+    item_row.id = 'row_' + create_array.length;
     item_row.className = 'toolbar_row';
 
     $('div#toolbar_holder_create').append(item_row);
@@ -646,102 +646,102 @@ function push_to_tools()
 
     /* LABEL */
     item_label = document.createElement('input');
-    item_label.id = 'toolbar_label_' + toolbar_array.length;
+    item_label.id = 'toolbar_label_' + create_array.length;
     item_label.type = 'text';
     item_label.className = 'toolbar_input';
-    item_label.name = 'toolbar_label_' + toolbar_array.length;
+    item_label.name = 'toolbar_label_' + create_array.length;
     item_label.value = label;
     item_label.title = 'Label';
     item_label.placeholder = 'Label';
 
     /* DESCRIPTION */
     item_description = document.createElement('input');
-    item_description.id = 'toolbar_descr_' + toolbar_array.length;
+    item_description.id = 'toolbar_descr_' + create_array.length;
     item_description.type = 'text';
     item_description.className = 'toolbar_input';
-    item_description.name = 'toolbar_description_' + toolbar_array.length;
+    item_description.name = 'toolbar_description_' + create_array.length;
     item_description.placeholder = 'Description';
     item_description.title = 'Description';
     item_description.value = description;
 
     /* TAG */
     item_tag = document.createElement('select');
-    item_tag.id = 'toolbar_tag_' + toolbar_array.length;
+    item_tag.id = 'toolbar_tag_' + create_array.length;
     item_tag.className = 'toolbar_select';
-    item_tag.name = 'toolbar_tag_' + toolbar_array.length;
+    item_tag.name = 'toolbar_tag_' + create_array.length;
     item_tag.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
     item_tag.title = 'Tag';
 
     /* PLACEHOLDER */
     item_placeholder = document.createElement('input');
-    item_placeholder.id = 'toolbar_placeholder_' + toolbar_array.length;
+    item_placeholder.id = 'toolbar_placeholder_' + create_array.length;
     item_placeholder.type = 'text';
     item_placeholder.className = 'toolbar_input';
-    item_placeholder.name = 'toolbar_placeholder_' + toolbar_array.length;
+    item_placeholder.name = 'toolbar_placeholder_' + create_array.length;
     item_placeholder.placeholder = 'Placeholder';
     item_placeholder.title = 'Placeholder';
     item_placeholder.value = placeholder;
 
     /* NAME */
     item_name = document.createElement('input');
-    item_name.id = 'toolbar_name_' + toolbar_array.length;
+    item_name.id = 'toolbar_name_' + create_array.length;
     item_name.type = 'text';
     item_name.className = 'toolbar_input';
-    item_name.name = 'toolbar_name_' + toolbar_array.length;
+    item_name.name = 'toolbar_name_' + create_array.length;
     item_name.value = name;
     item_name.title = 'Name';
     item_name.placeholder = 'Name';
 
     /* REQUIRED */
     item_required = document.createElement('input');
-    item_required.id = 'toolbar_req_' + toolbar_array.length;
+    item_required.id = 'toolbar_req_' + create_array.length;
     item_required.type = 'text';
     item_required.className = 'toolbar_input';
-    item_required.name = 'toolbar_req_' + toolbar_array.length;
+    item_required.name = 'toolbar_req_' + create_array.length;
     item_required.value = required;
     item_required.title = 'Required';
     item_required.placeholder = 'Placeholder';
 
     /* XL */
     item_xl = document.createElement('input');
-    item_xl.id = 'toolbar_xl_' + toolbar_array.length;
+    item_xl.id = 'toolbar_xl_' + create_array.length;
     item_xl.type = 'text';
     item_xl.className = 'toolbar_input';
-    item_xl.name = 'toolbar_xl_' + toolbar_array.length;
+    item_xl.name = 'toolbar_xl_' + create_array.length;
     item_xl.value = xl;
     item_xl.title = 'Excel';
     item_xl.placeholder = 'Excel';
 
     /* VALUE */
     item_value = document.createElement('input');
-    item_value.id = 'toolbar_value_' + toolbar_array.length;
+    item_value.id = 'toolbar_value_' + create_array.length;
     item_value.type = 'text';
     item_value.className = 'toolbar_input';
-    item_value.name = 'toolbar_value_' + toolbar_array.length;
+    item_value.name = 'toolbar_value_' + create_array.length;
     item_value.value = value;
     item_value.title = 'Value';
     item_value.placeholder = 'Value';
 
     /* REORDER */
     item_reorder = document.createElement('select');
-    item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
+    item_reorder.id = 'toolbar_reorder_' + create_array.length;
     item_reorder.className = 'toolbar_select';
 
     /* DELETE */
     item_delete = document.createElement('div');
-    item_delete.id = 'toolbar_delete_' + toolbar_array.length;
+    item_delete.id = 'toolbar_delete_' + create_array.length;
     item_delete.className = 'delete_button';
     item_delete.innerHTML = 'x';
 
     /* UP ARROW */
     item_up = document.createElement('div');
-    item_up.id = 'toolbar_reorder_up_' + toolbar_array.length;
+    item_up.id = 'toolbar_reorder_up_' + create_array.length;
     item_up.className = 'up_button';
     item_up.innerHTML = '&#8679;';
 
     /* DOWN ARROW */
     item_down = document.createElement('div');
-    item_down.id = 'toolbar_reorder_down_' + toolbar_array.length;
+    item_down.id = 'toolbar_reorder_down_' + create_array.length;
     item_down.className = 'down_button';
     item_down.innerHTML = '&#8681;';
 
@@ -760,7 +760,7 @@ function push_to_tools()
       item_down
     ]
 
-    $(('div#row_' + toolbar_array.length)).append(inputs);
+    $(('div#row_' + create_array.length)).append(inputs);
 
     $('input.toolbar_input, select.toolbar_select').on('change',function()
     {
@@ -773,44 +773,44 @@ function push_to_tools()
       obj = bits[0];
       row = bits[1];
 
-      toolbar_array[row][obj]=$(this).val();
+      create_array[row][obj]=$(this).val();
 
       if(obj === 'label')
       {
         //name
-        name = toolbar_array[row]['label'];
+        name = create_array[row]['label'];
         name = name.toLowerCase();
         name = name.replace("#","number");
         name = name.replace(/[^a-z\d\s]+/gi,"");
         name = name.replace(/\s+/g,"_");
         //update name array
-        toolbar_array[row]['name'] = name;
+        create_array[row]['name'] = name;
         //update name display
-        $('input#toolbar_name_' + row).val(toolbar_array[row]['name']);
+        $('input#toolbar_name_' + row).val(create_array[row]['name']);
 
         //sql
-        sql = '`' + toolbar_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
+        sql = '`' + create_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
         //update sql array
-        toolbar_array[row]['sql'] = sql;
+        create_array[row]['sql'] = sql;
       }
       else if(obj === 'name')
       {
         //name
-        name = toolbar_array[row]['name'];
+        name = create_array[row]['name'];
 
         //sql
         sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
 
         //update sql array
-        toolbar_array[row]['sql'] = sql;
+        create_array[row]['sql'] = sql;
       }
       else if(obj === 'required')
       {
         //name
-        name = toolbar_array[row]['name'];
+        name = create_array[row]['name'];
 
         //sql
-        if(toolbar_array[row]['required'])
+        if(create_array[row]['required'])
         {
           sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
         }
@@ -820,14 +820,14 @@ function push_to_tools()
         }
 
         //update sql array
-        toolbar_array[row]['sql'] = sql;
+        create_array[row]['sql'] = sql;
       }
     });
 
     //tag
-    $(('select#toolbar_tag_' + toolbar_array.length)).append('<option value="text" selected>text</option>');
+    $(('select#toolbar_tag_' + create_array.length)).append('<option value="text" selected>text</option>');
 
-    $('input#toolbar_xl_' + toolbar_array.length).on('dblclick',function()
+    $('input#toolbar_xl_' + create_array.length).on('dblclick',function()
     {
       $(this).val('[select new value]');
 
@@ -837,7 +837,7 @@ function push_to_tools()
       toggle_selection_mode(1);
     });
 
-    $('input#toolbar_value_' + toolbar_array.length).on('dblclick',function()
+    $('input#toolbar_value_' + create_array.length).on('dblclick',function()
     {
       $(this).val('[select new value]');
 
@@ -856,7 +856,7 @@ function push_to_tools()
 
       $('div#row_' + id).remove();
 
-      toolbar_array.splice(id,1);
+      create_array.splice(id,1);
     });
 
     temp =
@@ -874,7 +874,7 @@ function push_to_tools()
       'value' : value
     };
 
-    toolbar_array.push(temp);
+    create_array.push(temp);
   }
 }
 
@@ -964,12 +964,12 @@ function array_switch(array,keya,keyb)
 
 function toolbar_render_elements()
 {
-  if(!typeof toolbar_array === 'undefined' && $('div#toolbar').length)
+  if(!typeof create_array === 'undefined' && $('div#toolbar').length)
   {
     toolbar_resizebar = $('div#toolbar_resizebar').detach();
     $('div#toolbar').empty().append(toolbar_resizebar);
 
-    for(z=0;z<toolbar_array.length;z++)
+    for(z=0;z<create_array.length;z++)
     {
       item_row = document.createElement('div');
       item_row.id = 'row_' + z;
@@ -990,94 +990,94 @@ function toolbar_render_elements()
 
       /* LABEL */
       item_label = document.createElement('input');
-      item_label.id = 'toolbar_label_' + toolbar_array.length;
+      item_label.id = 'toolbar_label_' + create_array.length;
       item_label.type = 'text';
       item_label.className = 'toolbar_input';
-      item_label.name = 'toolbar_label_' + toolbar_array.length;
+      item_label.name = 'toolbar_label_' + create_array.length;
       item_label.value = label;
       item_label.title = 'Label';
 
       /* DESCRIPTION */
       item_descr = document.createElement('input');
-      item_descr.id = 'toolbar_descr_' + toolbar_array.length;
+      item_descr.id = 'toolbar_descr_' + create_array.length;
       item_descr.type = 'text';
       item_descr.className = 'toolbar_input';
-      item_descr.name = 'toolbar_descr_' + toolbar_array.length;
+      item_descr.name = 'toolbar_descr_' + create_array.length;
       item_descr.placeholder = 'Description';
       item_descr.title = 'Description';
 
       /* TAG */
       item_tag = document.createElement('select');
-      item_tag.id = 'toolbar_tag_' + toolbar_array.length;
+      item_tag.id = 'toolbar_tag_' + create_array.length;
       item_tag.className = 'toolbar_select';
-      item_tag.name = 'toolbar_tag_' + toolbar_array.length;
+      item_tag.name = 'toolbar_tag_' + create_array.length;
       item_tag.value = conv_array[selected[5]-1][fromLetters(selected[4])-1];
       item_tag.title = 'Tag';
 
       /* PLACEHOLDER */
       item_placeholder = document.createElement('input');
-      item_placeholder.id = 'toolbar_placeholder_' + toolbar_array.length;
+      item_placeholder.id = 'toolbar_placeholder_' + create_array.length;
       item_placeholder.type = 'text';
       item_placeholder.className = 'toolbar_input';
-      item_placeholder.name = 'toolbar_placeholder_' + toolbar_array.length;
+      item_placeholder.name = 'toolbar_placeholder_' + create_array.length;
       item_placeholder.placeholder = 'Placeholder';
       item_placeholder.title = 'Placeholder';
 
       /* NAME */
       item_name = document.createElement('input');
-      item_name.id = 'toolbar_name_' + toolbar_array.length;
+      item_name.id = 'toolbar_name_' + create_array.length;
       item_name.type = 'text';
       item_name.className = 'toolbar_input';
-      item_name.name = 'toolbar_name_' + toolbar_array.length;
+      item_name.name = 'toolbar_name_' + create_array.length;
       item_name.value = name;
       item_name.title = 'Name';
 
       /* REQUIRED */
       item_req = document.createElement('input');
-      item_req.id = 'toolbar_required_' + toolbar_array.length;
+      item_req.id = 'toolbar_required_' + create_array.length;
       item_req.type = 'text';
       item_req.className = 'toolbar_input';
-      item_req.name = 'toolbar_required_' + toolbar_array.length;
+      item_req.name = 'toolbar_required_' + create_array.length;
       item_req.value = '1';
       item_req.title = 'Required';
 
       /* XL */
       item_xl = document.createElement('input');
-      item_xl.id = 'toolbar_xl_' + toolbar_array.length;
+      item_xl.id = 'toolbar_xl_' + create_array.length;
       item_xl.type = 'text';
       item_xl.className = 'toolbar_input';
-      item_xl.name = 'toolbar_xl_' + toolbar_array.length;
+      item_xl.name = 'toolbar_xl_' + create_array.length;
       item_xl.value = '[' + selected[4] + ',' + selected[5] + ']';
       item_xl.title = 'Excel';
 
       /* VALUE */
       item_value = document.createElement('input');
-      item_value.id = 'toolbar_value_' + toolbar_array.length;
+      item_value.id = 'toolbar_value_' + create_array.length;
       item_value.type = 'text';
       item_value.className = 'toolbar_input';
-      item_value.name = 'toolbar_value_' + toolbar_array.length;
+      item_value.name = 'toolbar_value_' + create_array.length;
       item_value.title = 'Value';
 
       /* REORDER */
       item_reorder = document.createElement('select');
-      item_reorder.id = 'toolbar_reorder_' + toolbar_array.length;
+      item_reorder.id = 'toolbar_reorder_' + create_array.length;
       item_reorder.className = 'toolbar_select';
 
       /* DELETE */
       item_delete = document.createElement('div');
-      item_delete.id = 'toolbar_delete_' + toolbar_array.length;
+      item_delete.id = 'toolbar_delete_' + create_array.length;
       item_delete.className = 'delete_button';
       item_delete.innerHTML = 'x';
 
       /* UP ARROW */
       item_up = document.createElement('div');
-      item_up.id = 'toolbar_reorder_up_' + toolbar_array.length;
+      item_up.id = 'toolbar_reorder_up_' + create_array.length;
       item_up.className = 'up_button';
       item_up.innerHTML = '&#8679;';
 
       /* DOWN ARROW */
       item_down = document.createElement('div');
-      item_down.id = 'toolbar_reorder_down_' + toolbar_array.length;
+      item_down.id = 'toolbar_reorder_down_' + create_array.length;
       item_down.className = 'down_button';
       item_down.innerHTML = '&#8681;';
 
@@ -1096,11 +1096,11 @@ function toolbar_render_elements()
         item_down
       ]
 
-      $(('div#row_' + toolbar_array.length)).append(inputs);
+      $(('div#row_' + create_array.length)).append(inputs);
 
-      $(('select#toolbar_tag_' + toolbar_array.length)).append('<option selected>Text</option>');
+      $(('select#toolbar_tag_' + create_array.length)).append('<option selected>Text</option>');
 
-      $('input#toolbar_xl_' + toolbar_array.length).on('dblclick',function()
+      $('input#toolbar_xl_' + create_array.length).on('dblclick',function()
       {
         $(this).val('[select new value]');
 
@@ -1110,7 +1110,7 @@ function toolbar_render_elements()
         toggle_selection_mode(1);
       });
 
-      $('input#toolbar_value_' + toolbar_array.length).on('dblclick',function()
+      $('input#toolbar_value_' + create_array.length).on('dblclick',function()
       {
         $(this).val('[select new value]');
 
@@ -1128,7 +1128,7 @@ function toolbar_render_elements()
 
         $('div#row_' + id).remove();
 
-        toolbar_array.splice(id,1);
+        create_array.splice(id,1);
 
         console.log(id);
       });
