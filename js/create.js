@@ -606,6 +606,7 @@ function open_contextmenu(e)
 window.create_array=[];
 window.selection_mode=0;
 window.selection_to='';
+window.selection_onchange_set=false;
 //PUSH_TO_[OBJECT] FUNCTIONS
 function push_to_tools()
 {
@@ -763,69 +764,75 @@ function push_to_tools()
     $(('div#row_' + create_array.length)).append(inputs);
 
 
-    //fix this
-    //TODO
-    $('input.toolbar_input, select.toolbar_select').on('change',function()
+    //allows for the event listener to be
+    //set only once to prevent unnessacary
+    //interations of the on change code.
+    if(!window.selection_onchange_set)
     {
-      id = $(this).attr('id');
-
-      bits = explode('toolbar_',id);
-
-      bits = explode('_',bits[1]);
-
-      obj = bits[0];
-      row = bits[1];
-
-      create_array[row][obj]=$(this).val();
-
-      if(obj === 'label')
+      $('input.toolbar_input, select.toolbar_select').on('change',function()
       {
-        //name
-        name = create_array[row]['label'];
-        name = name.toLowerCase();
-        name = name.replace("#","number");
-        name = name.replace(/[^a-z\d\s]+/gi,"");
-        name = name.replace(/\s+/g,"_");
-        //update name array
-        create_array[row]['name'] = name;
-        //update name display
-        $('input#toolbar_name_' + row).val(create_array[row]['name']);
+        id = $(this).attr('id');
 
-        //sql
-        sql = '`' + create_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
-        //update sql array
-        create_array[row]['sql'] = sql;
-      }
-      else if(obj === 'name')
-      {
-        //name
-        name = create_array[row]['name'];
+        bits = explode('toolbar_',id);
 
-        //sql
-        sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
+        bits = explode('_',bits[1]);
 
-        //update sql array
-        create_array[row]['sql'] = sql;
-      }
-      else if(obj === 'required')
-      {
-        //name
-        name = create_array[row]['name'];
+        obj = bits[0];
+        row = bits[1];
 
-        //sql
-        if(create_array[row]['required'])
+        create_array[row][obj]=$(this).val();
+
+        if(obj === 'label')
         {
+          //name
+          name = create_array[row]['label'];
+          name = name.toLowerCase();
+          name = name.replace("#","number");
+          name = name.replace(/[^a-z\d\s]+/gi,"");
+          name = name.replace(/\s+/g,"_");
+          //update name array
+          create_array[row]['name'] = name;
+          //update name display
+          $('input#toolbar_name_' + row).val(create_array[row]['name']);
+
+          //sql
+          sql = '`' + create_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
+          //update sql array
+          create_array[row]['sql'] = sql;
+        }
+        else if(obj === 'name')
+        {
+          //name
+          name = create_array[row]['name'];
+
+          //sql
           sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
-        }
-        else
-        {
-          sql = '`' + name + '` text COLLATE utf8_bin NULL';
-        }
 
-        //update sql array
-        create_array[row]['sql'] = sql;
-      }
-    });
+          //update sql array
+          create_array[row]['sql'] = sql;
+        }
+        else if(obj === 'required')
+        {
+          //name
+          name = create_array[row]['name'];
+
+          //sql
+          if(create_array[row]['required'])
+          {
+            sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
+          }
+          else
+          {
+            sql = '`' + name + '` text COLLATE utf8_bin NULL';
+          }
+
+          //update sql array
+          create_array[row]['sql'] = sql;
+        }
+      });
+
+      window.selection_onchange_set = true;
+    }
 
     //tag
     $(('select#toolbar_tag_' + create_array.length)).append('<option value="text" selected>text</option>');
