@@ -278,7 +278,9 @@ function conv_js_string($input)
           <div id="toolbar_holders">
             <div class="toolbar_holder" id="toolbar_holder_create"></div>
             <div class="toolbar_holder" id="toolbar_holder_debug"></div>
-            <div class="toolbar_holder" id="toolbar_holder_settings"></div>
+            <div class="toolbar_holder" id="toolbar_holder_settings">
+              <div class="toolbar_"
+            </div>
           </div>
         </div>
       </div>

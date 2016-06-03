@@ -604,9 +604,14 @@ function open_contextmenu(e)
 //-------------------------------------------------------------------------------------------
 
 window.create_array=[];
+
 window.selection_mode=0;
 window.selection_to='';
-window.selection_onchange_set=false;
+window.selection_events_set=false;
+
+window.settings_xl_offset_x=0;
+window.settings_xl_offset_y=0;
+
 //PUSH_TO_[OBJECT] FUNCTIONS
 function push_to_tools()
 {
@@ -767,72 +772,87 @@ function push_to_tools()
     //allows for the event listener to be
     //set only once to prevent unnessacary
     //interations of the on change code.
-    if(!window.selection_onchange_set)
+    $('div.up_button').unbind();
+
+    $('div.up_button').on('click',function()
     {
-      $('input.toolbar_input, select.toolbar_select').on('change',function()
+      id = $(this).attr('id');
+
+      bits = explode('toolbar_reorder_up_',id);
+
+      row = parseInt(bits[1]);
+
+      if(row)
       {
-        id = $(this).attr('id');
+        //FIX
+        //conv_array = array_switch(conv_array,row,row - 1);
+        //$("div#row_" + row).before($("div#row_" + row - 1)[0]);
+      }
+    });
 
-        bits = explode('toolbar_',id);
+    $('input.toolbar_input, select.toolbar_select').unbind();
 
-        bits = explode('_',bits[1]);
+    $('input.toolbar_input, select.toolbar_select').on('change',function()
+    {
+      id = $(this).attr('id');
 
-        obj = bits[0];
-        row = bits[1];
+      bits = explode('toolbar_',id);
 
-        create_array[row][obj]=$(this).val();
+      bits = explode('_',bits[1]);
 
-        if(obj === 'label')
+      obj = bits[0];
+      row = bits[1];
+
+      create_array[row][obj]=$(this).val();
+
+      if(obj === 'label')
+      {
+        //name
+        name = create_array[row]['label'];
+        name = name.toLowerCase();
+        name = name.replace("#","number");
+        name = name.replace(/[^a-z\d\s]+/gi,"");
+        name = name.replace(/\s+/g,"_");
+        //update name array
+        create_array[row]['name'] = name;
+        //update name display
+        $('input#toolbar_name_' + row).val(create_array[row]['name']);
+
+        //sql
+        sql = '`' + create_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
+        //update sql array
+        create_array[row]['sql'] = sql;
+      }
+      else if(obj === 'name')
+      {
+        //name
+        name = create_array[row]['name'];
+
+        //sql
+        sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
+
+        //update sql array
+        create_array[row]['sql'] = sql;
+      }
+      else if(obj === 'required')
+      {
+        //name
+        name = create_array[row]['name'];
+
+        //sql
+        if(create_array[row]['required'])
         {
-          //name
-          name = create_array[row]['label'];
-          name = name.toLowerCase();
-          name = name.replace("#","number");
-          name = name.replace(/[^a-z\d\s]+/gi,"");
-          name = name.replace(/\s+/g,"_");
-          //update name array
-          create_array[row]['name'] = name;
-          //update name display
-          $('input#toolbar_name_' + row).val(create_array[row]['name']);
-
-          //sql
-          sql = '`' + create_array[row]['name'] + '` text COLLATE utf8_bin NOT NULL';
-          //update sql array
-          create_array[row]['sql'] = sql;
-        }
-        else if(obj === 'name')
-        {
-          //name
-          name = create_array[row]['name'];
-
-          //sql
           sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
-
-          //update sql array
-          create_array[row]['sql'] = sql;
         }
-        else if(obj === 'required')
+        else
         {
-          //name
-          name = create_array[row]['name'];
-
-          //sql
-          if(create_array[row]['required'])
-          {
-            sql = '`' + name + '` text COLLATE utf8_bin NOT NULL';
-          }
-          else
-          {
-            sql = '`' + name + '` text COLLATE utf8_bin NULL';
-          }
-
-          //update sql array
-          create_array[row]['sql'] = sql;
+          sql = '`' + name + '` text COLLATE utf8_bin NULL';
         }
-      });
 
-      window.selection_onchange_set = true;
-    }
+        //update sql array
+        create_array[row]['sql'] = sql;
+      }
+    });
 
     //tag
     $(('select#toolbar_tag_' + create_array.length)).append('<option value="text" selected>text</option>');
@@ -890,6 +910,17 @@ function push_to_tools()
 
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
+
+
+function debug(input)
+{
+  $('div#toolbar_holder_debug').append('<br>' + input + (new Error).stack.split("\n")[4]);
+}
+
+
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function toggle_selection_mode(int=-1)
 {
