@@ -1,5 +1,8 @@
-<?php require_once('C:/wamp/www/bend/modules/auth.php');?>
+<?php
+require_once('config.php');
 
+require_once(generate_path('bend/modules/auth.php'));
+?>
 <!DOCTYPE>
 <html>
     <head>
