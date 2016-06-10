@@ -1,7 +1,7 @@
 <?php
 $secure_auth=false;
 $secure_username;
-require_once(generate_path("../pass.php"));
+require_once(generate_path("bend/pass.php"));
 if(isset($_COOKIE['AUTH'])&&!empty($_COOKIE['AUTH']))
 {
   try

@@ -4,6 +4,18 @@ function generate_path($rel)
   return __DIR__ . '/' . $rel;
 }
 
+function generate_url($rel,$echo = true)
+{
+  if($echo)
+  {
+    echo 'http://clc.localhost.com/' . $rel;
+  }
+  else
+  {
+    return 'http://clc.localhost.com/' . $rel;
+  }
+}
+
 function get_config($askfor,$section)
 {
   if(file_exists( __DIR__ . '/bend/clc.cfg'))
@@ -36,5 +48,17 @@ function get_config($askfor,$section)
   {
     die('No known configuration files listed');
   }
+}
+
+function getIncludedFiles()
+{
+  $filenames = get_included_files();
+
+  for($z=0;$z<count($filenames);$z++)
+  {
+    $filenames[$z] = str_replace(__DIR__,'',$filenames[$z]);
+  }
+
+  return $filenames;
 }
 ?>

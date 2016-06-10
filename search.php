@@ -1,9 +1,11 @@
 <?php
-require_once('C:/wamp/www/bend/pass.php');
-require_once('C:/wamp/www/bend/modules/auth.php');
-require_once('C:/wamp/www/bend/modules/protected.php');
-require_once('C:/wamp/www/bend/modules/forms.php');
-require_once('C:/wamp/www/bend/modules/input_functions.php');
+require_once('config.php')
+
+require_once(generate_path('bend/pass.php'));
+require_once(generate_path('bend/modules/auth.php'));
+require_once(generate_path('bend/modules/protected.php'));
+require_once(generate_path('bend/modules/forms.php'));
+require_once(generate_path('bend/modules/input_functions.php'));
 
 $view_table=true;
 $error=false;
@@ -20,9 +22,9 @@ else
   <head>
     <title>CTTP Calibration Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="http://localhost/css/inputform.css"/>
-    <link rel="stylesheet" type="text/css" href="http://localhost/css/view.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/inputform.css');?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/view.css"');?>/>
     <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <!--JQuery UI-->
@@ -30,18 +32,18 @@ else
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   </head>
   <body>
-    <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
-    <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
+    <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
+    <?php require_once(generate_path('bend/blocks/banner.php'));?>
     <div id="container">
       <div id="containerinr">
         <?php
         if(isset($_GET['alpha'])&&!empty($_GET['alpha'])&&$_GET['alpha'])
         {
-          echo '<form class="searchmodule" action="http://localhost/search.php?alpha=true" method="post">';
+          echo '<form class="searchmodule" action="' . generate_url('search.php?alpha=true') . '" method="post">';
         }
         else
         {
-          echo '<form class="searchmodule" action="http://localhost/search.php?alpha=true" method="post">';
+          echo '<form class="searchmodule" action="' . generate_url('search.php?alpha=true') . '" method="post">';
         }
 
           $search_status=false;
@@ -268,7 +270,7 @@ else
             }
             ?>
             <!--ALPHA SEARCH MODULE-->
-            <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="http://localhost/search.php?alpha=true">Click here to enable auto-complete search [alpha]</a></div>
+            <div class="searchmoduleheader">Calibration Search Engine <a style="float:right" href="<?php generate_url('search.php?alpha=true', false);?>">Click here to enable auto-complete search [alpha]</a></div>
 
             <?php
             echo '<div class="searchmodulelabel">Equipment ID</div>';
@@ -403,7 +405,7 @@ else
           {
             ?>
             <!--STANDARD SEARCH MODULE-->
-            <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="http://localhost/search.php?alpha=true">Click here to enable auto-complete search [alpha]</a></div>
+            <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="<?php generate_url('search.php?alpha=true');?>">Click here to enable auto-complete search [alpha]</a></div>
             <div class="searchmodulelabel">Equipment ID</div>
             <input class="searchmodule" type="text" name="equipment_id" value="<?php
               if(isset($_POST['equipment_id'])&&!empty($_POST['equipment_id']))
@@ -554,13 +556,13 @@ else
                     }
 
                     echo '<td>';
-                      echo '<a href="http://localhost/view.php?viewitem='.$ref['main_id'].'&table='.$t_tn.'">View</a>';
-                      echo '<a href="http://localhost/view.php?edititem='.$ref['main_id'].'&table='.$t_tn.'">Edit</a>';
+                      echo '<a href="<?php generate_url('view.php?viewitem='.$ref['main_id'].'&table='.$t_tn.'">View</a>';
+                      echo '<a href="<?php generate_url('view.php?edititem='.$ref['main_id'].'&table='.$t_tn.'">Edit</a>';
 
                       if($ref['display'])
-                        echo '<a href="http://localhost/view.php?removeitem='.$ref['main_id'].'&table='.$t_tn.'">Remove</a>';
+                        echo '<a href="<?php generate_url('view.php?removeitem='.$ref['main_id'].'&table='.$t_tn.'">Remove</a>';
                       else
-                        echo '<a href="http://localhost/view.php?undoitem='.$ref['main_id'].'&table='.$t_tn.'">Undo</a>';
+                        echo '<a href="<?php generate_url('view.php?undoitem='.$ref['main_id'].'&table='.$t_tn.'">Undo</a>';
 
                     echo '</td>';
                     echo '</tr>';

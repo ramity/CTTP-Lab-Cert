@@ -1,4 +1,6 @@
 <?php
+die('This url is no longer supported');
+
 require_once('C:/wamp/www/bend/pass.php');
 require_once('C:/wamp/www/bend/modules/auth.php');
 require_once('C:/wamp/www/bend/modules/protected.php');

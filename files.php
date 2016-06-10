@@ -1,15 +1,17 @@
 <?php
-require_once('C:/wamp/www/bend/modules/auth.php');
-require_once('C:/wamp/www/bend/modules/protected.php');
+require_once('config.php');
+
+require_once(generate_path('bend/modules/auth.php'));
+require_once(generate_path('bend/modules/protected.php'));
 
 if(isset($_GET['b'])&&!empty($_GET['b']))
 {
-    $fileurl="C:/wamp/www/bend/file_storage/".html_entity_decode($_GET['b'])."/";
+    $fileurl=generate_path('bend/file_storage/'.html_entity_decode($_GET['b']).'/');
     $addb=false;
 }
 else
 {
-    $fileurl="C:/wamp/www/bend/file_storage/";
+    $fileurl=generate_path('bend/file_storage/');
     $addb=true;
 }
 ?>
@@ -18,15 +20,15 @@ else
     <head>
         <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css">
+        <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
     </head>
     <body>
-        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
+        <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
+        <?php require_once(generate_path('bend/blocks/banner.php'));?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">
-                    <form action="http://localhost/view.php" method="get" id="viewsearch">
+                    <form action="<?php generate_url('view.php');?>" method="get" id="viewsearch">
                         <input type="text" class="viewsearch" placeholder="Currently not implemented" name="b_search" disabled>
                         <input type="submit" class="viewsubmit" name="viewsubmit" disabled>
                     </form>
@@ -45,7 +47,7 @@ else
                             if(is_dir("$fileurl$oitem")&&$oitem!=='.'&&$oitem!=='..')
                             {
                                 echo '<a href="';
-                                echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                generate_url('files.php');
                                 if($addb)
                                     echo '?b=';
                                 else
