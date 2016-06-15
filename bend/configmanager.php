@@ -1,21 +1,4 @@
 <?php
-function generate_path($rel)
-{
-  return __DIR__ . '/' . $rel;
-}
-
-function generate_url($rel,$echo = true)
-{
-  if($echo)
-  {
-    echo 'http://clc.localhost.com/' . $rel;
-  }
-  else
-  {
-    return 'http://clc.localhost.com/' . $rel;
-  }
-}
-
 function get_config($askfor,$section)
 {
   if(file_exists( __DIR__ . '/bend/clc.cfg'))

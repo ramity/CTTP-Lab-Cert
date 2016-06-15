@@ -1,22 +1,21 @@
 <?php
-require_once('config.php');
-
 //START DEFINED POST VARIABLES
-require_once(generate_path('bend/pass.php'));
-require_once(generate_path('bend/modules/auth.php'));
-require_once(generate_path('bend/modules/protected.php'));
-require_once(generate_path('bend/modules/forms.php'));
-require_once(generate_path('bend/modules/input_functions.php'));
+require_once('bend/configmanager.php');
+require_once('bend/pass.php');
+require_once('bend/modules/auth.php');
+require_once('bend/modules/protected.php');
+require_once('bend/modules/forms.php');
+require_once('bend/modules/input_functions.php');
 //END DEFINED POST VARIABLES
 function width($text,$xl)
 {
   if(empty($text))
   {
-    $box = imagettfbbox(15,0,generate_path('font/arial.ttf',0),$xl);
+    $box = imagettfbbox(15,0,'font/arial.ttf',$xl);
     return $text_width = $box[0] + $box[2];
   }
   {
-    $box = imagettfbbox(15,0,generate_path('font/arial.ttf',0),$text);
+    $box = imagettfbbox(15,0,'font/arial.ttf',$text);
     return $text_width = $box[0] + $box[2];
   }
 }
@@ -32,24 +31,24 @@ function conv_js_string($input)
   <head>
     <title>CTTP Calibration Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
-    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/create.css');?>">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/create.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-    <script src="<?php generate_url('js/keydrown.min.js');?>"></script>
-    <script src="<?php generate_url('js/create.js');?>"></script>
+    <script src="js/keydrown.min.js"></script>
+    <script src="js/create.js"></script>
 
     <!--icon links-->
-    <link rel="icon" href="<?php generate_url('img/caliper.ico');?>">
+    <link rel="icon" href="img/caliper.ico">
 
   </head>
   <body>
-    <?php require_once(generate_path('bend/blocks/banner.php'));?>
+    <?php require_once('bend/blocks/banner.php');?>
     <div id="container-touch">
-      <form id="filebar" action="<?php generate_url('create.php');?>" method="post">
+      <form id="filebar" action="create.php" method="post">
         <?php
         echo '<select class="plate" name="file_year">';
         echo '<option disabled selected value>Year</option>';
@@ -93,7 +92,7 @@ function conv_js_string($input)
         {
           $path="bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/".$_POST['file_name'];
           echo '<select class="plate" name="sheet_selection">';
-          require_once(generate_path('bend/PHPExcelReader/PHPExcel/IOFactory.php'));
+          require_once('bend/PHPExcelReader/PHPExcel/IOFactory.php');
           try
           {
             $objPHPExcel = PHPExcel_IOFactory::load($path);
@@ -122,7 +121,7 @@ function conv_js_string($input)
         <?php
         if(isset($_POST['file_year'])&&!empty($_POST['file_year']))
         {
-          echo '<a href="'.generate_url('create.php', false).'"><div class="clearbutton">Reset Query</div></a>';
+          echo '<a href="create.php"><div class="clearbutton">Reset Query</div></a>';
         }
         ?>
       </form>

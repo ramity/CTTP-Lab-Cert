@@ -1,32 +1,31 @@
 <?php
-require_once('config.php');
-
-require_once(generate_path('bend/modules/auth.php'));
-require_once(generate_path('bend/modules/protected.php'));
-require_once(generate_path('bend/modules/forms.php'));
+require_once('bend/configmanager.php');
+require_once('bend/modules/auth.php');
+require_once('bend/modules/protected.php');
+require_once('bend/modules/forms.php');
 ?>
 <!DOCTYPE>
 <html>
     <head>
         <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
-        <link rel="stylesheet" type="text/css" href="<?php generate_url('css/import.css');?>">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/import.css">
     </head>
     <body>
-        <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
-        <?php require_once(generate_path('bend/blocks/banner.php'));?>
+        <?php require_once('bend/blocks/sidebar.php');?>
+        <?php require_once('bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">
-                    <form id="uploadmodule" action="<?php generate_url('import.php');?>" method="post">
+                    <form id="uploadmodule" action="import.php" method="post">
                         <div id="uploadheader">Select file for conversion</div>
                         <div id="uploadbar">
                           <?php
                           echo '<div class="label">Select a year</div>';
                           echo '<select class="plate" name="file_year">';
                           echo '<option disabled selected value> -- select an option -- </option>';
-                          foreach($o=scandir(generate_path("bend/file_storage/AMRL Equipment Calibrations/")) as $oitem)
+                          foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/") as $oitem)
                           {
                             if(strpos($oitem,'Equipment Calibrations')!==false)
                             {
@@ -47,7 +46,7 @@ require_once(generate_path('bend/modules/forms.php'));
                             echo '<div class="label">Select a file</div>';
                             echo '<select class="plate" name="file_name">';
                             echo '<option disabled selected value> -- select an option -- </option>';
-                            foreach($o=scandir(generate_path("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/")) as $oitem)
+                            foreach($o=scandir("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/") as $oitem)
                             {
                               if($oitem!=='.'&&$oitem!=='..')
                               {
@@ -65,10 +64,10 @@ require_once(generate_path('bend/modules/forms.php'));
                           }
                           if(isset($_POST['file_name'])&&!empty($_POST['file_name']))
                           {
-                            $path = generate_path("bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/".$_POST['file_name']);
+                            $path = "bend/file_storage/AMRL Equipment Calibrations/".$_POST['file_year']." Equipment Calibrations/".$_POST['file_name'];
                             echo '<div class="label">Select a sheet</div>';
                             echo '<select class="plate" name="sheet_selection">';
-                            require_once(generate_path('bend/PHPExcelReader/PHPExcel/IOFactory.php'));
+                            require_once('bend/PHPExcelReader/PHPExcel/IOFactory.php');
                             try
                             {
                               $objPHPExcel = PHPExcel_IOFactory::load($path);

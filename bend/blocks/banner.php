@@ -9,7 +9,7 @@
   -->
     <div id="bannerinr">
         <div id="bannerlogo">
-            <a href="<?php generate_url('');?>">
+            <a href="index.php">
                 CTTP Calibration Application
             </a>
         </div>
@@ -25,7 +25,7 @@
         else
         {
         ?>
-        <a href="<?php generate_url('login.php');?>">
+        <a href="login.php">
             <div id="bannerlogin">
                 login
             </div>

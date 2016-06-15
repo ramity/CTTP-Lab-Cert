@@ -1,12 +1,11 @@
 <?php
-require_once('config.php');
-
 //START DEFINED POST VARIABLES
-require_once(generate_path('bend/pass.php'));
-require_once(generate_path('bend/modules/auth.php'));
-require_once(generate_path('bend/modules/protected.php'));
-require_once(generate_path('bend/modules/forms.php'));
-require_once(generate_path('bend/modules/input_functions.php'));
+require_once('bend/configmanager.php');
+require_once('bend/pass.php');
+require_once('bend/modules/auth.php');
+require_once('bend/modules/protected.php');
+require_once('bend/modules/forms.php');
+require_once('bend/modules/input_functions.php');
 //END DEFINED POST VARIABLES
 
 //START CONDITIONAL VARIABLE DECLARATION
@@ -97,7 +96,7 @@ for($z=1;$z<count($form);$z++)
         $st=$db->prepare("INSERT INTO `$z`($keys) VALUES($list)");
         $st->execute($locked);
 
-        header("Location: " . generate_url('view.php'));
+        header('Location: view.php');
       }
       catch(PDOException $e)
       {
@@ -118,13 +117,13 @@ for($z=1;$z<count($form);$z++)
   <head>
     <title>CTTP Calibration Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
-    <link rel="stylesheet" type="text/css" href="<?php generate_url('css/inputform.css');?>">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/inputform.css">
     <?php
     if(check_get('form'))
     {
     ?>
-      <script src="<?php generate_url('js/' . $_GET['form'] . '.js');?>"></script>
+      <script src="js/<?php echo $_GET['form'];?>.js"></script>
       <!--JQuery-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
       <!--JQuery UI-->
@@ -144,8 +143,8 @@ for($z=1;$z<count($form);$z++)
     ?>
   </head>
   <body>
-    <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
-    <?php require_once(generate_path('bend/blocks/banner.php'));?>
+    <?php require_once('bend/blocks/sidebar.php');?>
+    <?php require_once('bend/blocks/banner.php');?>
     <div id="container">
       <div id="containerinr">
         <?php
@@ -170,7 +169,7 @@ for($z=1;$z<count($form);$z++)
                   foreach($sr as $data)
                   {
                     echo '<div class="inputrow">';
-                      echo '<a href="' . generate_url('input.php?form=' . $data['id'], false) . '">';
+                      echo '<a href="input.php?form=' . $data['id'] . '">';
                         echo '<div class="selectionlabel">'.$data['name'].'</div>';
                       echo '</a>';
                     echo '</div>';
@@ -200,7 +199,7 @@ for($z=1;$z<count($form);$z++)
                   foreach($sr as $data)
                   {
                     echo '<div class="inputrow">';
-                      echo '<a href="' . generate_url('input.php?form=' . $data['id'], false) . '">';
+                      echo '<a href="input.php?form=' . $data['id'] . '">';
                         echo '<div class="selectionlabel">'.$data['name'].'</div>';
                       echo '</a>';
                     echo '</div>';
@@ -384,7 +383,7 @@ for($z=1;$z<count($form);$z++)
         }
         else
         {
-          echo '<a href="' . generate_url('input.php', false) . '"><div id="backbutton">Back to form selection</div></a>';
+          echo '<a href="input.php"><div id="backbutton">Back to form selection</div></a>';
           //START FORM=# COND
           generate_form($_GET['form'],$form[$_GET['form']],$error,$error_array);
         }

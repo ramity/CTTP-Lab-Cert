@@ -2,37 +2,37 @@
     <div id="sidebarpadding"></div>
     <div class="sidebarheader">Actions</div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('amrl/index.php');?>">
+        <a href="amrl/index.php">
             AMRL
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('create.php');?>">
+        <a href="create.php">
             Create
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('files.php');?>">
+        <a href="files.php">
             Files
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('import.php');?>">
+        <a href="import.php">
             Import
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('input.php');?>">
+        <a href="input.php">
             Input
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('search.php');?>">
+        <a href="search.php">
             Search
         </a>
     </div>
     <div class="sidebaritem">
-        <a href="<?php generate_url('view.php');?>">
+        <a href="view.php">
             View
         </a>
     </div>

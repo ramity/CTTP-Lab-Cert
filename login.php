@@ -1,7 +1,7 @@
 <?php
-require_once('config.php');
-require_once(generate_path('bend/pass.php'));
-require_once(generate_path('bend/modules/auth.php'));
+require_once('bend/configmanager.php');
+require_once('bend/pass.php');
+require_once('bend/modules/auth.php');
 
 if(isset($_POST['login_subm'])&&!empty($_POST['login_subm']))
 {
@@ -34,8 +34,9 @@ function test_input()
     {
       if(password_verify($_POST['login_pass'],$rs[0]['hash']))
       {
-        setcookie('AUTH',$rs[0]['id'].'+'.$rs[0]['hash'],time()+(60*60*24*31),'',generate_url('',false),0);
-        header('Location: ' . generate_url('',false));
+        setcookie('AUTH',$rs[0]['id'].'+'.$rs[0]['hash'],time()+(60*60*24*31),'/','',0,1);
+
+        header('Location: index.php');
         exit;
       }
       else
@@ -59,15 +60,15 @@ function test_input()
   <head>
       <title>CTTP Calibration Application</title>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
+      <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
-    <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
-    <?php require_once(generate_path('bend/blocks/banner.php'));?>
+    <?php require_once('bend/blocks/sidebar.php');?>
+    <?php require_once('bend/blocks/banner.php');?>
     <div id="container">
       <div id="containerinr">
         <div class="containerobj">
-          <form action="<?php generate_url('login.php');?>" method="post" id="login">
+          <form action="login.php" method="post" id="login">
             <input type="text" class="logininput" name="login_name" placeholder="Username" autocomplete="off">
             <input type="password" class="logininput" name="login_pass" placeholder="Password">
             <div class="loginrow">

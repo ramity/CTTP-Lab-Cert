@@ -317,7 +317,7 @@ div#toolbar_button
   width:25px;
   height:25px;
   cursor:pointer;
-  background-image:url(http://localhost/img/nav.png);
+  background-image:url(../img/nav.png);
   background-size:17px 17px;
   background-position:center;
   background-repeat:no-repeat;

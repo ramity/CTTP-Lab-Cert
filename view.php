@@ -1,9 +1,11 @@
 <?php
-require_once('C:/wamp/www/bend/pass.php');
-require_once('C:/wamp/www/bend/modules/auth.php');
-require_once('C:/wamp/www/bend/modules/protected.php');
-require_once('C:/wamp/www/bend/modules/forms.php');
-require_once('C:/wamp/www/bend/modules/input_functions.php');
+require_once('bend/configmanager.php');
+require_once('bend/pass.php');
+require_once('bend/modules/auth.php');
+
+require_once('bend/modules/protected.php');
+require_once('bend/modules/forms.php');
+require_once('bend/modules/input_functions.php');
 
 $view_table=true;
 $error=false;
@@ -20,10 +22,10 @@ else
     <head>
         <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/main.css"/>
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/inputform.css"/>
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/view.css"/>
-        <link rel="stylesheet" type="text/css" href="http://localhost/css/display.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="css/inputform.css"/>
+        <link rel="stylesheet" type="text/css" href="css/view.css"/>
+        <link rel="stylesheet" type="text/css" href="css/display.css"/>
         <!--JQuery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <!--JQuery UI-->
@@ -60,21 +62,21 @@ else
           echo '<style>div#attach-'.$_GET['viewitem'].'_wrapper{width:100%;}</style>';
         }
         if(check_get('edititem')&&check_get('table'))
-          echo '<script src="http://localhost/js/'.$_GET['table'].'.js"></script>';
+          echo '<script src="js/'.$_GET['table'].'.js"></script>';
         ?>
     </head>
     <body>
-        <?php require_once('C:/wamp/www/bend/blocks/sidebar.html');?>
-        <?php require_once('C:/wamp/www/bend/blocks/banner.php');?>
+        <?php require_once('bend/blocks/sidebar.php');?>
+        <?php require_once('bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
               <?php
               if($view_table)
               {
               ?>
-              <form class="searchmodule" action="http://localhost/search.php" method="post">
+              <form class="searchmodule" action="search.php" method="post">
                 <!--STANDARD SEARCH MODULE-->
-                <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="http://localhost/search.php?alpha=true">Click here to enable auto-complete search [alpha]</a></div>
+                <div class="searchmoduleheader">Calibration Search Engine <a style="float:right;" href="search.php?alpha=true">Click here to enable auto-complete search [alpha]</a></div>
                 <div class="searchmodulelabel">Equipment ID</div>
                 <input class="searchmodule" type="text" name="equipment_id" value="<?php
                   if(isset($_POST['equipment_id'])&&!empty($_POST['equipment_id']))
@@ -203,13 +205,13 @@ else
                         echo '<td>Deleted</td>';
 
                       echo '<td>';
-                      echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                      echo '<a href="http://localhost/view.php?edititem='.$t_id.'&table='.$t_tn.'">Edit</a>';
+                      echo '<a href="view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
+                      echo '<a href="view.php?edititem='.$t_id.'&table='.$t_tn.'">Edit</a>';
 
                       if($sr[0]['display'])
-                        echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
+                        echo '<a href="view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
                       else
-                        echo '<a href="http://localhost/view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
+                        echo '<a href="view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
 
                       echo '</td>';
                       echo '</tr>';
@@ -283,9 +285,9 @@ else
                         echo '<td>'.$cal_int.' days</td>';
 
                         echo '<td>';
-                        echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                        echo '<a href="http://localhost/input.php?form='.$t_tn.'">Create</a>';
-                        echo '<a href="http://localhost/view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
+                        echo '<a href="view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
+                        echo '<a href="input.php?form='.$t_tn.'">Create</a>';
+                        echo '<a href="view.php?removeitem='.$t_id.'&table='.$t_tn.'">Remove</a>';
                         echo '</td>';
                         echo '</tr>';
                       }
@@ -328,18 +330,20 @@ else
                       if(!empty($sr))
                       {
                         echo '<tr class="item">';
-                        if($sr[0]['result'])
-                          echo '<td class="pass">P</td>';
-                        else
-                          echo '<td class="fail">F</td>';
-                        echo '<td>'.$t_id.'</td>';
-                        echo '<td>'.$sr[0]['equipment_id'].'</td>';
-                        echo '<td>'.$sr[0]['calibration_date'].'</td>';
-                        echo '<td>'.$sr[0]['performed_by'].'</td>';
-                        echo '<td>';
-                        echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
-                        echo '<a href="http://localhost/view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
-                        echo '</td>';
+
+                          if($sr[0]['result'])
+                            echo '<td class="pass">P</td>';
+                          else
+                            echo '<td class="fail">F</td>';
+
+                          echo '<td>'.$t_id.'</td>';
+                          echo '<td>'.$sr[0]['equipment_id'].'</td>';
+                          echo '<td>'.$sr[0]['calibration_date'].'</td>';
+                          echo '<td>'.$sr[0]['performed_by'].'</td>';
+                          echo '<td>';
+                            echo '<a href="view.php?viewitem='.$t_id.'&table='.$t_tn.'">View</a>';
+                            echo '<a href="view.php?undoitem='.$t_id.'&table='.$t_tn.'">Undo</a>';
+                          echo '</td>';
                         echo '</tr>';
                       }
                     }
@@ -417,7 +421,7 @@ else
                   $st=$db->prepare("SELECT * FROM `$t_tn` WHERE main_id=$t_id");
                   $st->execute();
                   $data=$st->fetchAll();
-                  echo '<a href="http://localhost/view.php?viewitem='.$t_id.'&table='.$t_tn.'"><div id="backbutton">Back to view</div></a>';
+                  echo '<a href="view.php?viewitem='.$t_id.'&table='.$t_tn.'"><div id="backbutton">Back to view</div></a>';
                   if($update)
                     echo '<div class="noticemessage">Update successful</div>';
                   generate_edit_form($_GET['edititem'],$_GET['table'],$form[$_GET['table']],$error,$error_array,$data);
@@ -429,7 +433,7 @@ else
                   $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                   $st=$db->prepare("UPDATE `$t_tn` SET display=0 WHERE main_id=$t_id");
                   $st->execute();
-                  header('Location:http://localhost/view.php');
+                  header('Location:view.php');
                 }
                 elseif(check_get('undoitem')&&check_get('table'))
                 {
@@ -438,7 +442,7 @@ else
                   $db=new PDO("mysql:host=localhost;dbname=calibration_data",$GLOBALS['user'],$GLOBALS['pass']);
                   $st=$db->prepare("UPDATE `$t_tn` SET display=1 WHERE main_id=$t_id");
                   $st->execute();
-                  header('Location:http://localhost/view.php');
+                  header('Location:view.php');
                 }
               }
               ?>

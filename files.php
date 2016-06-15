@@ -1,18 +1,19 @@
 <?php
-require_once('config.php');
+die('Application is deprecated');
 
-require_once(generate_path('bend/modules/auth.php'));
-require_once(generate_path('bend/modules/protected.php'));
+require_once('bend/configmanager.php');
+require_once('bend/modules/auth.php');
+require_once('bend/modules/protected.php');
 
-if(isset($_GET['b'])&&!empty($_GET['b']))
+if(isset($_GET['b']) && !empty($_GET['b']))
 {
-    $fileurl=generate_path('bend/file_storage/'.html_entity_decode($_GET['b']).'/');
-    $addb=false;
+    $fileurl = 'bend/file_storage/'.html_entity_decode($_GET['b']).'/';
+    $addb = false;
 }
 else
 {
-    $fileurl=generate_path('bend/file_storage/');
-    $addb=true;
+    $fileurl = 'bend/file_storage/';
+    $addb = true;
 }
 ?>
 <!DOCTYPE>
@@ -20,15 +21,15 @@ else
     <head>
         <title>CTTP Calibration Application</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="<?php generate_url('css/main.css');?>">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
-        <?php require_once(generate_path('bend/blocks/sidebar.php'));?>
-        <?php require_once(generate_path('bend/blocks/banner.php'));?>
+        <?php require_once('bend/blocks/sidebar.php');?>
+        <?php require_once('bend/blocks/banner.php');?>
         <div id="container">
             <div id="containerinr">
                 <div class="containerobj">
-                    <form action="<?php generate_url('view.php');?>" method="get" id="viewsearch">
+                    <form action="view.php" method="get" id="viewsearch">
                         <input type="text" class="viewsearch" placeholder="Currently not implemented" name="b_search" disabled>
                         <input type="submit" class="viewsubmit" name="viewsubmit" disabled>
                     </form>
@@ -46,13 +47,9 @@ else
                         {
                             if(is_dir("$fileurl$oitem")&&$oitem!=='.'&&$oitem!=='..')
                             {
-                                echo '<a href="';
-                                generate_url('files.php');
-                                if($addb)
-                                    echo '?b=';
-                                else
-                                    echo '/';
-                                echo htmlentities($oitem);
+                                echo '<a href="files.php';
+                                  echo '?b=';
+                                  echo htmlentities($oitem);
                                 echo '">';
                             }
                             echo '<div class="containerlistrow">';
