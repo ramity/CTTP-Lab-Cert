@@ -44,11 +44,11 @@ In its current build, this repo is funnctional whilst sitting on top of a proper
 .gitignore
 ```
 
-#PHP utilities
+# PHP utilities
 * PHPExcelReader
 * PHPMyAdmin
 * PDO
 
-#Javascript utilities
+# Javascript utilities
 * JQuery
 
